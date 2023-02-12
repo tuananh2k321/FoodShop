@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Splash from './screen/Splash'
+import Welcome from './screen/Welcome'
 
 const App = () => {
   return (
-    <Splash/>
+    <Welcome/>
   )
 }
 
