@@ -4,7 +4,8 @@ export const COLOR = {
     primary: '#FF5E00',
     title: '#7F4E1D',
     description: '#7F4E1D',
-    buttonDisabled: '#DDDDDD'
+    buttonDisabled: '#DDDDDD',
+    iconNotFocused: '#6D3805'
 }
 
 export const SIZES = {
@@ -18,7 +19,11 @@ export const SIZES = {
 }
 
 export const ICON = {
-    
+    shop: require('../assets/icon/icons8-home-page-50.png'),
+    explore: require('../assets/icon/icons8-search-50.png'),
+    cart: require('../assets/icon/icons8-shopping-cart-50.png'),
+    favorites: require('../assets/icon/icons8-favorite-50.png'),
+    account: require('../assets/icon/icons8-user-50.png'),
 }
 
 export const IMAGES = {
