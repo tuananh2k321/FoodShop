@@ -49,7 +49,8 @@ export default BottomTab = () => {
                             tintColor: focused ? COLOR.primary : COLOR.iconNotFocused
                           }}/>
               <Text style = {{
-                color : focused ? COLOR.primary : COLOR.iconNotFocused
+                color : focused ? COLOR.primary : COLOR.iconNotFocused,
+                
               }}>{label}</Text>
             </View>;
           },

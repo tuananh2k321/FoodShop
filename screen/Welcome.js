@@ -8,6 +8,7 @@ const Welcome = () => {
       style={{
         flex: 1,
         padding: 10,
+        
       }}>
       <View
         style={{
