@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
-const Login = () => {
-
+const Login = (props) => {
+  const {navigation} = props
 
   const [getPasswordVisible, setPasswordVisible] = useState(false)
   const [PasswordUser, setPasswordUser] = useState('');
@@ -14,10 +14,15 @@ const Login = () => {
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         {/* Header */}
-        <Image source={require('../assets/IconArrow.png')} />
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('Welcome')
+        }}>
+          <Image source={require('../assets/img/IconArrow.png')} />
+        </TouchableOpacity>
+        
         <View style={styles.header}>
           <Text style={styles.title}>Sign In</Text>
-          <Image style={styles.image} source={require('../assets/img/background.png')} />
+          <Image style={styles.image} source={require('../assets/img/backgroundLogin.png')} />
         </View>
         <Text style={styles.text}>
           Enter your phone number and{'\n'}
@@ -84,11 +89,12 @@ export default Login
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    marginTop: 29,
+  
     backgroundColor: 'white'
   },
   container: {
-    bacgroundColor: "#fff",
+    marginTop: 10,
+    backgroundColor: "#fff",
     marginHorizontal: 17,
     // borderColor: 'black',
     // borderWidth: 2,
@@ -142,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 20,
   },
 
 

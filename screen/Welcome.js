@@ -2,7 +2,8 @@ import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-na
 import React from 'react'
 import {COLOR} from '../contants/Themes.tsx'
 import UIBtnPrimary from '../components/UIBtnPrimary'
-const Welcome = () => {
+const Welcome = (props) => {
+  const {navigation} = props
   return (
     <SafeAreaView
       style={{
@@ -61,7 +62,11 @@ const Welcome = () => {
           marginTop: 15,
           borderWidth: 1,
           borderColor: COLOR.primary
-        }}>
+        }}
+        onPress = {() => {
+          navigation.navigate('Login')
+        }}
+        >
           
           <Text style = {{
             fontSize: 17,
