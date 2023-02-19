@@ -10,7 +10,19 @@ import Favorites from './Favorites';
 import Account from './Account';
 import {ICON, COLOR} from '../../contants/Themes.tsx'
 
+import Favorites2 from './Favorites2';
+
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const StackFavorites = () => {
+  return (
+    <Stack.Navigator initialRouteName="Favorites" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Favorites" component={Favorites} />
+        <Stack.Screen name="Favorites2" component={Favorites2} />
+    </Stack.Navigator>
+  )
+}
 
 export default BottomTab = () => {
     return (
@@ -33,7 +45,7 @@ export default BottomTab = () => {
               iconName = focused ? ICON.account : ICON.account;
               label = 'Account'
             }
-            else if (route.name === 'Favorites') {
+            else if (route.name === 'StackFavorites') {
                 iconName = focused ? ICON.favorites : ICON.favorites;
                 label = 'Favorites'
             }
@@ -64,7 +76,7 @@ export default BottomTab = () => {
         <Tab.Screen name="Shop" component={Shop} />
         <Tab.Screen name="Explore" component={Explore} />
         <Tab.Screen name="Cart" component={Cart} />
-        <Tab.Screen name="Favorites" component={Favorites} />
+        <Tab.Screen name="StackFavorites" component={StackFavorites} />
         <Tab.Screen name="Account" component={Account} />
       </Tab.Navigator>
     );
