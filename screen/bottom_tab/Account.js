@@ -1,11 +1,18 @@
-import { View, Text,Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import {COLOR} from '../../contants/Themes'
+import { COLOR } from '../../contants/Themes'
 
-const Account = () => {
+const Account = (props) => {
+  const { navigation } = props;
+  const goToOrder = () => {
+    navigation.navigate("Order")
+  }
+  const goToAddress = () => {
+    navigation.navigate("Address")
+  }
   return (
-    <SafeAreaView style={{flex: 1, padding: 15}}>
+    <SafeAreaView style={{ flex: 1, padding: 15 }}>
       <View>
         <TouchableOpacity>
           <Image source={require('../../assets/img/IconArrow.png')} />
@@ -43,7 +50,7 @@ const Account = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={goToOrder}>
           <View
             style={{
               flexDirection: 'row',
@@ -65,7 +72,8 @@ const Account = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={goToAddress}>
           <View
             style={{
               flexDirection: 'row',

@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from './screen/Welcome'
 import BottomTab from './screen/bottom_tab/BottomTab';
 import Login from './screen/Login';
+import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +22,7 @@ const App = () => {
 
       </Stack.Navigator>
     </NavigationContainer>
+
   )
 }
 
