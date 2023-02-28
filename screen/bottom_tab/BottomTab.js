@@ -8,7 +8,7 @@ import Cart from './Cart';
 import Explore from './Explore';
 import Favorites from './Favorites';
 import Account from './Account';
-import { ICON, COLOR } from '../../contants/Themes.tsx'
+import { ICON, COLOR } from '../../contants/Themes.js'
 
 import Favorites2 from './Favorites2';
 import Order from './AccountTabs/Order';

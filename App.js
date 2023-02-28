@@ -6,7 +6,8 @@ import Welcome from './screen/Welcome'
 import BottomTab from './screen/bottom_tab/BottomTab';
 import Login from './screen/Login';
 import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
-
+import {Provider} from 'react-redux'
+import Redux from './redux/Store';
 
 
 
@@ -14,14 +15,17 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <Provider store={Redux.store}>
+      <NavigationContainer>
       <Stack.Navigator initialRouteName="BottomTab" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="Login" component={Login} />
 
-      </Stack.Navigator>
+      </Stack.Navigator>  
     </NavigationContainer>
+    </Provider>
+    
 
   )
 }

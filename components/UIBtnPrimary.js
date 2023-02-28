@@ -1,6 +1,6 @@
 import { View, Text, Pressable, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {COLOR} from '../contants/Themes.tsx'
+import {COLOR} from '../contants/Themes.js'
 
 const UIBtnPrimary = (props) => {
     const {title, onPress} = props
