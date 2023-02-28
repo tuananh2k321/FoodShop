@@ -1,20 +1,26 @@
-import { StyleSheet, Text, Image, View } from 'react-native'
+import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import OnGoing from './OnGoing';
 import HistoryOrder from './HistoryOrder';
+import { COLOR } from '../../../contants/Themes';
+import { TabActions } from '@react-navigation/native';
 
 const TopTab = createMaterialTopTabNavigator();
 
-const Order = () => {
+const Order = ({navigation}) => {
    
     return (
         <SafeAreaView style={styles.main} >
             <View style={styles.container}>
                 {/* Header */}
+                
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Account')}>
                     <Image source={require('../../../assets/img/IconArrow.png')} />
+                        </TouchableOpacity>
+                    
                     <Text></Text>
 
                 </View>
@@ -28,13 +34,19 @@ const Order = () => {
         
          <TopTab.Navigator initialRouteName='A' screenOptions={{
 
-            tabBarActiveTintColor: 'black',
-            tabBarLabelStyle: { fontSize: 12 },
-            tabBarStyle: { backgroundColor: 'white', marginHorizontal: 50, fontWeight: 'bold', marginTop: 10 },
+            tabBarActiveTintColor: COLOR.primary,
+            tabBarInactiveTintColor: COLOR.title,
+            tabBarPressColor: COLOR.primary,
+            
+            tabBarLabelStyle: { fontSize: 20, textTransform: 'capitalize' },
+            tabBarStyle: { backgroundColor: 'white', marginHorizontal: 50, fontWeight: 'bold', marginTop: 10,shadowColor: 0 },
             tabBarItemStyle: {
+                
                 borderRadius: 10,
-                borderBottomColor:'#FF5E00'
-            }
+                borderBottomColor:COLOR.primary,
+            },
+            tabBarIndicatorStyle: {backgroundColor: COLOR.primary}
+            
 
         }}>
             <TopTab.Screen name="OnGoing" component={OnGoing} />
@@ -53,7 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     container: {
-        marginHorizontal: 32,
+        padding: 15,
         marginTop: 14,
         backgroundColor: 'white'
     },
