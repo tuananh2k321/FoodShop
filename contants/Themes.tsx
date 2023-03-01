@@ -25,6 +25,10 @@ export const ICON = {
     favorites: require('../assets/icon/icons8-favorite-50.png'),
     account: require('../assets/icon/icons8-user-50.png'),
     visit: require('../assets/icon/icons8-visit-50.png'),
+
+
+
+    flagVietNam :  require('../assets/ImageFlag/vietnam.png'),
 }
 
 export const IMAGES = {

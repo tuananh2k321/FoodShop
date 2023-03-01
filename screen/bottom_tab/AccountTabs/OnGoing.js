@@ -1,5 +1,6 @@
 import { StyleSheet, Text, Image, View, SafeAreaView } from 'react-native'
 import React from 'react'
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const OnGoing = () => {
     return (
@@ -20,17 +21,28 @@ const OnGoing = () => {
                 {/* Process */}
                 <View style={styles.OnGoing}>
                     <View style={styles.boxStep}>
-                        <Image source={require('../../../assets/icon/IconCheckActive.png')}></Image>
+                        <BouncyCheckbox
+                            isChecked={true}
+                            size={20}
+                            fillColor="#5EC401"
+                            unfillColor="#FFFFFF" />
                         <Image source={require('../../../assets/img/PackOfStuff.png')}></Image>
                         <Text style={styles.textStep}>We are packin your items...</Text>
                     </View>
                     <View style={styles.boxStep}>
-                        <Image source={require('../../../assets/icon/IconCheckActive.png')}></Image>
+                        <BouncyCheckbox
+                            isChecked={true}
+                            size={20}
+                            fillColor="#5EC401"
+                            unfillColor="#FFFFFF" />
                         <Image source={require('../../../assets/img/ScooterDelivery.png')}></Image>
                         <Text style={styles.textStep}>We are packin your items...</Text>
                     </View>
                     <View style={styles.boxStep}>
-                        <Image source={require('../../../assets/icon/IconUnCheck.png')}></Image>
+                        <BouncyCheckbox
+                            size={20}
+                            fillColor="#5EC401"
+                            unfillColor="#FFFFFF" />
                         <Image source={require('../../../assets/img/HandAndStuff.png')}></Image>
                         <Text style={styles.textStep}>We are packin your items...</Text>
                     </View>
@@ -74,7 +86,7 @@ const styles = StyleSheet.create({
         marginTop: 50, marginLeft: 2, marginRight: 5,
     },
     boxStep: {
-        marginBottom:50,
+        marginBottom: 50,
 
         flexDirection: 'row',
         justifyContent: "space-between",

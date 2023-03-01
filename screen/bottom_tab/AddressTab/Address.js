@@ -6,8 +6,12 @@ const Address = (props) => {
     const goNewAddress = () => {
         navigation.navigate("NewAddress")
     }
-    const Back=()=>{
+    const Back = () => {
         navigation.pop(1)
+    }
+    const goEditAddress = () => {
+        navigation.navigate("EditAddress")
+
     }
     return (
         <SafeAreaView style={styles.main}>
@@ -29,27 +33,32 @@ const Address = (props) => {
 
                 {/* Address */}
                 <View style={styles.Address}>
-                    <View style={styles.itemAddress}>
-                        <View style={[styles.itemAddress, { marginBottom: 1 }]}>
-                            <Image source={require('../../../assets/icon/IconHome.png')} />
-                            <View style={{ marginLeft: 8 }}>
-                                <Text style={styles.textNameAddress}>Home</Text>
-                                <Text style={styles.textPosition}>Lungangen 6, 41722</Text>
+                    <TouchableOpacity onPress={goEditAddress}>
+                        <View style={styles.itemAddress}>
+                            <View style={[styles.itemAddress, { marginBottom: 1 }]}>
+                                <Image source={require('../../../assets/icon/IconHome.png')} />
+                                <View style={{ marginLeft: 8 }}>
+                                    <Text style={styles.textNameAddress}>Home</Text>
+                                    <Text style={styles.textPosition}>Lungangen 6, 41722</Text>
+                                </View>
                             </View>
+                            <Image source={require('../../../assets/icon/IconArrowRight.png')} />
                         </View>
-                        <Image source={require('../../../assets/icon/IconArrowRight.png')} />
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={styles.itemAddress}>
-                        <View style={[styles.itemAddress, { marginBottom: 1 }]}>
-                            <Image source={require('../../../assets/icon/IconBag.png')} />
-                            <View style={{ marginLeft: 8 }}>
-                                <Text style={styles.textNameAddress}>Office</Text>
-                                <Text style={styles.textPosition}>Lungangen 6, 41722</Text>
+                    <TouchableOpacity onPress={goEditAddress}>
+                        <View style={styles.itemAddress}>
+                            <View style={[styles.itemAddress, { marginBottom: 1 }]}>
+                                <Image source={require('../../../assets/icon/IconBag.png')} />
+                                <View style={{ marginLeft: 8 }}>
+                                    <Text style={styles.textNameAddress}>Office</Text>
+                                    <Text style={styles.textPosition}>Lungangen 6, 41722</Text>
+                                </View>
                             </View>
+                            <Image source={require('../../../assets/icon/IconArrowRight.png')} />
                         </View>
-                        <Image source={require('../../../assets/icon/IconArrowRight.png')} />
-                    </View>
+                    </TouchableOpacity>
+
                 </View>
 
             </View>

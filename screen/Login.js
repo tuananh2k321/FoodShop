@@ -1,16 +1,18 @@
 import { View, Text, TextInput, SafeAreaView, Image, Dimensions, CheckBox, Button, Pressable, Touchable, TouchableOpacity } from 'react-native'
 import { StyleSheet, } from 'react-native'
 import React, { useState } from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
 const Login = (props) => {
-  const {navigation} = props
+  const { navigation } = props
 
   const [getPasswordVisible, setPasswordVisible] = useState(false)
   const [PasswordUser, setPasswordUser] = useState('');
-
+  
   return (
+    <KeyboardAwareScrollView>
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         {/* Header */}
@@ -19,7 +21,7 @@ const Login = (props) => {
         }}>
           <Image source={require('../assets/img/IconArrow.png')} />
         </TouchableOpacity>
-        
+
         <View style={styles.header}>
           <Text style={styles.title}>Sign In</Text>
           <Image style={styles.image} source={require('../assets/img/backgroundLogin.png')} />
@@ -32,13 +34,13 @@ const Login = (props) => {
         {/* Text Input */}
         <View>
           <TextInput
-            style={[styles.input,{paddingLeft:94}]}
+            style={[styles.input, { paddingLeft: 94 }]}
             placeholder='Phone Number'
           />
           <TouchableOpacity style={styles.CountryFlag}>
             <View style={{ flexDirection: 'row' }}>
               <Image resizeMode='contain' source={require('../assets/img/SewdenFlag.png')}></Image>
-              <Image style={{ marginLeft: 12,top:10 }} resizeMode='contain' source={require('../assets/img/MultipleFlag.png')}></Image>
+              <Image style={{ marginLeft: 12, top: 10 }} resizeMode='contain' source={require('../assets/img/MultipleFlag.png')}></Image>
             </View>
           </TouchableOpacity>
         </View>
@@ -46,7 +48,7 @@ const Login = (props) => {
         <View>
           <TextInput
             style={styles.input}
-            placeholder='Password'/>
+            placeholder='Password' />
           <TouchableOpacity style={styles.visible}
             onPress={() => {
               setPasswordVisible(!getPasswordVisible)
@@ -81,6 +83,8 @@ const Login = (props) => {
 
       </View>
     </SafeAreaView>
+    </KeyboardAwareScrollView>
+
   )
 }
 
@@ -89,7 +93,7 @@ export default Login
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-  
+
     backgroundColor: 'white'
   },
   container: {

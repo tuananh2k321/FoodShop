@@ -16,6 +16,7 @@ import OnGoing from './AccountTabs/OnGoing';
 import HistoryOrder from './AccountTabs/HistoryOrder';
 import Address from './AddressTab/Address';
 import NewAddress from './AddressTab/NewAddress';
+import EditAddress from './AddressTab/EditAddress';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -37,6 +38,8 @@ const AccountTabs = () => {
       <Stack.Screen name="HistoryOrder" component={HistoryOrder} />
       <Stack.Screen name="Address" component={Address} />
       <Stack.Screen name="NewAddress" component={NewAddress} />
+      <Stack.Screen name="EditAddress" component={EditAddress} />
+
 
 
 

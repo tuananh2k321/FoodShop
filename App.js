@@ -6,8 +6,8 @@ import Welcome from './screen/Welcome'
 import BottomTab from './screen/bottom_tab/BottomTab';
 import Login from './screen/Login';
 import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
-
-
+import Test from './screen/Test'
+import EditAddress from './screen/bottom_tab/AddressTab/EditAddress'
 
 
 const Stack = createNativeStackNavigator();
