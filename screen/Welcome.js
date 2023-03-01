@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
-import {COLOR} from '../contants/Themes.tsx'
+import {COLOR} from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
 const Welcome = (props) => {
   const {navigation} = props
