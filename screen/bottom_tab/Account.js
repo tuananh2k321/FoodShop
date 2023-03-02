@@ -11,6 +11,9 @@ const Account = (props) => {
   const goToAddress = () => {
     navigation.navigate("Address")
   }
+  const goToPayment = () => {
+    navigation.navigate("Payment")
+  }
   return (
     <SafeAreaView style={{ flex: 1, padding: 15 }}>
       <View>

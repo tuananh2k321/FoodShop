@@ -65,13 +65,6 @@ const NewAddress = (props) => {
                             placeholder='Name Surname'
                             placeholderTextColor="#AC8E71" />
 
-
-
-
-
-
-
-
                         {renderCity()}
                         <Dropdown
                             style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -95,10 +88,6 @@ const NewAddress = (props) => {
                                 setIsFocus(false);
                             }}
                         />
-
-
-
-
 
                         <TextInput
                             style={[styles.input, {}]}
