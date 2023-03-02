@@ -71,7 +71,7 @@ const Explore = () => {
                 <Text style={styles.textCategories}> Categories </Text>
             </View>
             <View style={styles.inputContainer}>
-                <Image style={styles.imgSearch} source={require('../img/search.png')} />
+                <Image style={styles.imgSearch} source={require('../../assets/img/search.png')} />
                 <TextInput style={styles.textSearch} placeholder='Search' />
             </View>
             <View style={styles.container}>
