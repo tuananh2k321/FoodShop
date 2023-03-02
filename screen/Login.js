@@ -10,79 +10,85 @@ const Login = (props) => {
 
   const [getPasswordVisible, setPasswordVisible] = useState(false)
   const [PasswordUser, setPasswordUser] = useState('');
-  
+
   return (
     <KeyboardAwareScrollView>
-    <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        {/* Header */}
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('Welcome')
-        }}>
-          <Image source={require('../assets/img/IconArrow.png')} />
-        </TouchableOpacity>
+      <SafeAreaView style={styles.main}>
+        <View style={styles.container}>
+          {/* Header */}
+          <TouchableOpacity onPress={() => {
+            navigation.navigate('Welcome')
+          }}>
+            <Image source={require('../assets/img/IconArrow.png')} />
+          </TouchableOpacity>
 
-        <View style={styles.header}>
-          <Text style={styles.title}>Sign In</Text>
-          <Image style={styles.image} source={require('../assets/img/backgroundLogin.png')} />
-        </View>
-        <Text style={styles.text}>
-          Enter your phone number and{'\n'}
-          password to access your account
-        </Text>
+          <View style={styles.header}>
+            <Text style={styles.title}>Sign In</Text>
+            <Image style={styles.image} source={require('../assets/img/backgroundLogin.png')} />
+          </View>
+          <Text style={styles.text}>
+            Enter your phone number and{'\n'}
+            password to access your account
+          </Text>
 
-        {/* Text Input */}
-        <View>
-          <TextInput
-            style={[styles.input, { paddingLeft: 94 }]}
-            placeholder='Phone Number'
-          />
-          <TouchableOpacity style={styles.CountryFlag}>
-            <View style={{ flexDirection: 'row' }}>
-              <Image resizeMode='contain' source={require('../assets/img/SewdenFlag.png')}></Image>
-              <Image style={{ marginLeft: 12, top: 10 }} resizeMode='contain' source={require('../assets/img/MultipleFlag.png')}></Image>
+          {/* Text Input */}
+          <View>
+            <TextInput
+              style={[styles.input, { paddingLeft: 94 }]}
+              placeholder='Phone Number'
+              keyboardType="numeric"
+            />
+            <TouchableOpacity style={styles.CountryFlag}>
+              <View style={{ flexDirection: 'row' }}>
+                <Image resizeMode='contain' source={require('../assets/img/SewdenFlag.png')}></Image>
+                <Image style={{ marginLeft: 12, top: 10 }} resizeMode='contain' source={require('../assets/img/MultipleFlag.png')}></Image>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TextInput
+              style={styles.input}
+              autoCapitalize={false}
+              secureTextEntry={getPasswordVisible ? false : true}
+              onChangeText={setPasswordUser}
+              placeholder='Password' />
+            <TouchableOpacity style={styles.visible}
+              onPress={() => {
+                setPasswordVisible(!getPasswordVisible)
+              }}>
+              {
+                getPasswordVisible ?
+                  <Image resizeMode='contain' source={require('../assets/img/IconEye.png')}></Image>
+                  :
+                  <Image resizeMode='contain' source={require('../assets/img/IconEye.png')}></Image>
+              }
+            </TouchableOpacity>
+          </View>
+          <View style={{ marginTop: 6, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text> </Text>
+            <TouchableOpacity>
+              <Text style={[styles.text, { fontSize: 14, color: '#FF5E00', paddingRight: 10 }]}>Forgote Password</Text>
+
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.btnLogin}>
+              <Pressable>
+                <Text style={[styles.text, { color: 'white', fontWeight: 'bold', fontSize: 20, }]}>
+                  Sign In
+                </Text>
+              </Pressable>
+            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 13 }}>
+              <Text style={[styles.text, { fontSize: 16, }]}>Don’t have an account? </Text>
+              <TouchableOpacity>
+                <Text style={[styles.text, { fontSize: 16, color: '#FF5E00' }]}>Sign Up</Text>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </View>
-
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder='Password' />
-          <TouchableOpacity style={styles.visible}
-            onPress={() => {
-              setPasswordVisible(!getPasswordVisible)
-            }}>
-            {
-              getPasswordVisible ?
-                <Image resizeMode='contain' source={require('../assets/img/IconEye.png')}></Image>
-                :
-                <Image resizeMode='contain' source={require('../assets/img/IconEye.png')}></Image>
-            }
-          </TouchableOpacity>
-        </View>
-        <View style={{ marginTop: 6, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text> </Text>
-
-          <Text style={[styles.text, { fontSize: 14, color: '#FF5E00', paddingRight: 10 }]}>Forgote Password</Text>
-        </View>
-        <View>
-          <TouchableOpacity style={styles.btnLogin}>
-            <Pressable>
-              <Text style={[styles.text, { color: 'white', fontWeight: 'bold', fontSize: 20, }]}>
-                Sign In
-              </Text>
-            </Pressable>
-          </TouchableOpacity>
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 13 }}>
-            <Text style={[styles.text, { fontSize: 16, }]}>Don’t have an account? </Text>
-            <Text style={[styles.text, { fontSize: 16, color: '#FF5E00' }]}>Sign Up</Text>
           </View>
         </View>
-
-
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
     </KeyboardAwareScrollView>
 
   )

@@ -16,7 +16,7 @@ const Account = (props) => {
   }
   
   return (
-    <SafeAreaView style={{ flex: 1, padding: 15 }}>
+    <SafeAreaView style={{ flex: 1, padding: 15 ,backgroundColor:'white'}}>
       <View>
         <TouchableOpacity>
           <Image source={require('../../assets/img/IconArrow.png')} />

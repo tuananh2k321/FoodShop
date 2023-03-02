@@ -66,7 +66,7 @@ const Explore = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, padding: 10 }}>
+        <SafeAreaView style={{ flex: 1, padding: 10 ,backgroundColor:'white'}}>
             <View style={styles.selectContainer}>
                 <Text style={styles.textCategories}> Categories </Text>
             </View>

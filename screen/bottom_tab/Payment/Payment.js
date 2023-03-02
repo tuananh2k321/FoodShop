@@ -17,6 +17,9 @@ const Payment = (props) => {
     }
     const [pickUpShow, setpickUpShow] = useState(false)
 
+    const goTPEditAddress = () => {
+        navigation.navigate('EditAddress')
+    }
 
 
     return (
@@ -35,80 +38,8 @@ const Payment = (props) => {
                             </View>
                             <Text></Text>
                         </View>
-                        {/* Location  */}
-                        <View style={styles.boxLocation}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, }}>
-                                <Text style={styles.tilte2}>Delivery Location</Text>
-                                <TouchableOpacity>
-                                    <Text style={[styles.Text, { color: '#FF5E00' }]}>Change</Text>
-
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image style={{}} source={require('../../../assets/icon/IconLocation.png')} />
-
-                                <Text style={{ fontSize: 14, color: '#6D3805', lineHeight: 17, marginLeft: 18 }}>Floor 4, Kartini Tower No 43 {'\n'}
-                                    Lumajang, Jawa Timur</Text>
-                            </View>
-                        </View>
-                        {/* date time expected */}
-                        <View style={styles.boxLocation}>
-                            <Text style={styles.tilte2}>Expected date & Time</Text>
-                            <TouchableOpacity onPress={() => setOpen(true)} >
-                                <View style={styles.DateTimeBox}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Image source={require('../../../assets/icon/IconCalendar2.png')} />
-                                        <Text style={{ fontSize: 16, color: '#6D3805A3', marginLeft: 18, }} placeholder='Select Date' >Select Date</Text>
-                                    </View>
-
-                                    <Image source={require('../../../assets/icon/IconArrowDown.png')} />
-                                </View>
-                            </TouchableOpacity>
-
-                            <DatePicker
-                                modal
-                                open={open}
-                                date={date}
-                                onConfirm={(date) => {
-                                    setOpen(false)
-                                    setDate(date)
-                                }}
-                                onCancel={() => {
-                                    setOpen(false)
-                                }}
-                            />
 
 
-                            {/* Time */}
-                            <View style={styles.boxTimeExpected}>
-                                <View style={{ flexDirection: 'row', }}>
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>8 AM - 11 AM</Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>11 AM - 13 PM</Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>13 PM - 15 PM</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ flexDirection: 'row', marginTop: 16, }}>
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>15 PM - 17 PM</Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>17 PM - 19 PM</Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity style={styles.itemTime}>
-                                        <Text style={styles.TextTime}>19 PM - 21 PM</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
                         {/* In-Store Pick Up */}
                         <View style={{ marginHorizontal: 6, marginTop: 40 }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -159,7 +90,86 @@ const Payment = (props) => {
 
                                         </View>
                                     </View>
-                                ) : null
+                                ) : (
+                                    <View>
+
+                                        {/* Location  */}
+                                        <View style={styles.boxLocation}>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, }}>
+                                                <Text style={styles.tilte2}>Delivery Location</Text>
+                                                <TouchableOpacity
+                                                    onPress={goTPEditAddress}>
+                                                    <Text style={[styles.Text, { color: '#FF5E00' }]}>Change</Text>
+
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Image style={{}} source={require('../../../assets/icon/IconLocation.png')} />
+
+                                                <Text style={{ fontSize: 14, color: '#6D3805', lineHeight: 17, marginLeft: 18 }}>Floor 4, Kartini Tower No 43 {'\n'}
+                                                    Lumajang, Jawa Timur</Text>
+                                            </View>
+                                        </View>
+                                        {/* date time expected */}
+                                        <View style={styles.boxLocation}>
+                                            <Text style={styles.tilte2}>Expected date & Time</Text>
+                                            <TouchableOpacity onPress={() => setOpen(true)} >
+                                                <View style={styles.DateTimeBox}>
+                                                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                                        <Image source={require('../../../assets/icon/IconCalendar2.png')} />
+                                                        <Text style={{ fontSize: 16, color: '#6D3805A3', marginLeft: 18, }} placeholder='Select Date' >Select Date</Text>
+                                                    </View>
+
+                                                    <Image source={require('../../../assets/icon/IconArrowDown.png')} />
+                                                </View>
+                                            </TouchableOpacity>
+
+                                            <DatePicker
+                                                modal
+                                                open={open}
+                                                date={date}
+                                                onConfirm={(date) => {
+                                                    setOpen(false)
+                                                    setDate(date)
+                                                }}
+                                                onCancel={() => {
+                                                    setOpen(false)
+                                                }}
+                                            />
+
+
+                                            {/* Time */}
+                                            <View style={styles.boxTimeExpected}>
+                                                <View style={{ flexDirection: 'row', }}>
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>8 AM - 11 AM</Text>
+                                                    </TouchableOpacity>
+
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>11 AM - 13 PM</Text>
+                                                    </TouchableOpacity>
+
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>13 PM - 15 PM</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                                <View style={{ flexDirection: 'row', marginTop: 16, }}>
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>15 PM - 17 PM</Text>
+                                                    </TouchableOpacity>
+
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>17 PM - 19 PM</Text>
+                                                    </TouchableOpacity>
+
+                                                    <TouchableOpacity style={styles.itemTime}>
+                                                        <Text style={styles.TextTime}>19 PM - 21 PM</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </View>
+                                )
                             }
 
                         </View>
