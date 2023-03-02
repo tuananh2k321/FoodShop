@@ -27,10 +27,16 @@ const App = () => {
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="Login" component={Login} />
 
+
       </Stack.Navigator>  
     </NavigationContainer>
     </Provider>
-    
+
+
+
+
+
+
 
   )
 }
