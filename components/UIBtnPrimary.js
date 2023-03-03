@@ -1,12 +1,13 @@
-import { View, Text, Pressable, TouchableOpacity } from 'react-native'
+import { View, Text, Pressable, Dimensions,TouchableOpacity } from 'react-native'
 import React from 'react'
 import {COLOR} from '../contants/Themes.js'
+const windowWIdth = Dimensions.get('window').width;
 
 const UIBtnPrimary = (props) => {
     const {title, onPress} = props
   return (
     <TouchableOpacity style ={{
-        width: 343,
+        width: windowWIdth-30,
         height: 50,
         borderRadius: 30,
         backgroundColor: COLOR.primary,
