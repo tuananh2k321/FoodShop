@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
 
@@ -61,6 +63,8 @@ const EditAddress = (props) => {
     return null;
   };
   return (
+    <KeyboardAwareScrollView>
+
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <View style={styles.header}>
@@ -150,6 +154,7 @@ const EditAddress = (props) => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    </KeyboardAwareScrollView>
   )
 }
 

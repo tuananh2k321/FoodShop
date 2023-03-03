@@ -49,6 +49,7 @@ const AccountTabs = () => {
   )
 }
 
+
 const StackExplore = () => {
   return (
     <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
@@ -58,6 +59,10 @@ const StackExplore = () => {
     </Stack.Navigator>
   )
 }
+
+      
+
+
 
 const StackShop = () => {
   return (
