@@ -1,96 +1,73 @@
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput } from 'react-native'
 import React, { useState } from 'react'
-
-const DATA = [
-    {
-        id: '1',
-        image: require('../../assets/img/cake.png'),
-    },
-    {
-        id: '2',
-        image: require('../../assets/img/Ice.png'),
-    },
-    {
-        id: '3',
-        image: require('../../assets/img/egg.png'),
-    },
-    {
-        id: '4',
-        image: require('../../assets/img/juice.png'),
-    },
-    {
-        id: '5',
-        image: require('../../assets/img/seaFood.png'),
-    },
-    {
-        id: '6',
-        image: require('../../assets/img/Fish2.png'),
-    },
-    {
-        id: '7',
-        image: require('../../assets/img/Meat2.png'),
-    },
-    {
-        id: '8',
-        image: require('../../assets/img/Vegetable.png'),
-    },
-    {
-        id: '9',
-        image: require('../../assets/img/Fruits.png'),
-    },
-    {
-        id: '10',
-        image: require('../../assets/img/cake.png'),
-    },
-    {
-        id: '11',
-        image: require('../../assets/img/Ice.png'),
-    },
-    {
-        id: '12',
-        image: require('../../assets/img/egg.png'),
-    },
+import ItemCategories from '../../components/ItemCategories'
 
 
-]
+const Explore = ({navigation}) => {
+    const [category, setCategory] = useState([
+        {
+          name: 'Fruits',
+          image: require('../../assets/img/nho.png'),
+          backGround: '#EDD0FF'
+        },
+        {
+          name: 'Vegetables',
+          image: require('../../assets/img/bi_ngo.png'),
+          backGround: '#FFD9BA'
+        },
+        {
+          name: 'Meat',
+          image: require('../../assets/img/meat.png'),
+          backGround: '#FACCCC'
+        },
+        {
+          name: 'Fish',
+          image: require('../../assets/img/fish.png'),
+          backGround: '#FBC1BD'
+        },
+      ])
 
-const Explore = () => {
-    const [listItiem, setListItiem] = useState(DATA);
-
-    const ItiemView = ({ item }) => {
-        return (
-            <View style={styles.item}>
-                <Image style={styles.img} source={item.image} />
-            </View>
-        )
-    }
+    
 
     return (
-        <SafeAreaView style={{ flex: 1, padding: 10 ,backgroundColor:'white'}}>
-            <View style={styles.selectContainer}>
-                <Text style={styles.textCategories}> Categories </Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <Image style={styles.imgSearch} source={require('../../assets/img/search.png')} />
-                <TextInput style={styles.textSearch} placeholder='Search' />
-            </View>
-            <View style={styles.container}>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    numColumns={'3'}
-                    data={listItiem}
-                    renderItem={ItiemView}
-                    keyExtractor={(item, index) => index.toString()} />
-            </View>
-        </SafeAreaView>
-    )
+      <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
+        <View style={styles.selectContainer}>
+          <Text style={styles.textCategories}> Categories </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Image
+            style={styles.imgSearch}
+            source={require('../../assets/img/search.png')}
+          />
+          <TextInput style={styles.textSearch} placeholder="Search" />
+        </View>
+        <View style={styles.container}>
+          <FlatList
+          
+          numColumns={3}
+            showsHorizontalScrollIndicator={false}
+            vertical
+            data={category}
+            renderItem={({item}) => <ItemCategories category={item} 
+              onPress = {() => {
+                 navigation.navigate('Fruit')
+                
+              }}
+            />}
+            keyExtractor={eachCategory => eachCategory.name}
+          />
+        </View>
+      </SafeAreaView>
+    );
 }
 
 export default Explore
 
 const styles = StyleSheet.create({
     selectContainer: {
+        
         alignItems: 'center',
+        
     },
     selectContainer: {
         alignItems: 'center',
@@ -127,8 +104,8 @@ const styles = StyleSheet.create({
     },
     container: {
         justifyContent: 'center',
-        flex: 1,
-        margin: 15,
+        alignItems: 'center',
+        marginTop: 15
     },
     item: {
         marginRight: 8,

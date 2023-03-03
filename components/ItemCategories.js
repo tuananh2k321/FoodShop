@@ -4,8 +4,11 @@ import {COLOR, ICON} from '../contants/Themes'
 const ItemCategories = (props) => {
     const {category} = props
     const {name, image, backGround} = category
+    const {onPress} = props
   return (
-    <TouchableOpacity style = {{alignItems: 'center', justifyContent: 'center', marginRight: 10}}>
+    <TouchableOpacity
+    onPress={onPress}
+    style = {{alignItems: 'center', justifyContent: 'center', margin:10}}>
         <View style = {{
           width: 100,
           height: 100,

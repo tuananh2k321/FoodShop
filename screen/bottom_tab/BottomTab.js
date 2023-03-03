@@ -22,6 +22,7 @@ import CartDetail from './CartDetail'
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Oders from './Oders';
+import Fruit from './Fruit'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -44,11 +45,25 @@ const AccountTabs = () => {
       <Stack.Screen name="NewAddress" component={NewAddress} />
       <Stack.Screen name="EditAddress" component={EditAddress} />
       <Stack.Screen name="Payment" component={Payment} />
+    </Stack.Navigator>
+  )
+}
 
+const StackExplore = () => {
+  return (
+    <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Explore1" component={Explore} />
+      <Stack.Screen name="Fruit" component={Fruit} />
+      
+    </Stack.Navigator>
+  )
+}
 
-
-
-
+const StackShop = () => {
+  return (
+    <Stack.Navigator initialRouteName="Shop1" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Shop1" component={Shop} />
+      <Stack.Screen name="Fruit" component={Fruit} />
     </Stack.Navigator>
   )
 }
@@ -103,8 +118,8 @@ export default BottomTab = () => {
           },
         })}
     >
-      <Tab.Screen name="Shop" component={Shop} />
-      <Tab.Screen name="Explore" component={Explore} />
+      <Tab.Screen name="Shop" component={StackShop} />
+      <Tab.Screen name="Explore" component={StackExplore} />
       <Tab.Screen name="Cart" component={CartDetail} />
       <Tab.Screen name="StackFavorites" component={StackFavorites} />
       <Tab.Screen name="AccountTabs" component={AccountTabs} />

@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import UserReducer from '../../redux/reducer/UserReducer'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 import ItemDemo from '../../components/ItemDemo'
-const Shop = () => {
+const Shop = ({navigation}) => {
   const list = useSelector(state => state.UserReducer.listUser)
   const disPatch = useDispatch()
   const [category, setCategory] = useState([
@@ -156,7 +156,12 @@ const Shop = () => {
             showsHorizontalScrollIndicator={false}
             horizontal
             data={category}
-            renderItem={({item}) => <ItemCategories category={item} />}
+            renderItem={({item}) => <ItemCategories category={item} 
+                onPress = {() => {
+                  navigation.navigate('Fruit')
+                
+                }}
+            />}
             keyExtractor={eachCategory => eachCategory.name}
           />
         </View>
@@ -194,6 +199,7 @@ const Shop = () => {
               marginBottom: 20,
             }}>
             <FlatList
+            
               showsHorizontalScrollIndicator={false}
               horizontal
               data={deals}
