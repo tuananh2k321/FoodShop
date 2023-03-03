@@ -18,6 +18,10 @@ import Address from './AddressTab/Address';
 import NewAddress from './AddressTab/NewAddress';
 import EditAddress from './AddressTab/EditAddress';
 import Payment from './Payment/Payment'
+import CartDetail from './CartDetail'
+import Profile from './Profile';
+import EditProfile from './EditProfile';
+import Oders from './Oders';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -101,7 +105,7 @@ export default BottomTab = () => {
     >
       <Tab.Screen name="Shop" component={Shop} />
       <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen name="Cart" component={CartDetail} />
       <Tab.Screen name="StackFavorites" component={StackFavorites} />
       <Tab.Screen name="AccountTabs" component={AccountTabs} />
     </Tab.Navigator>
