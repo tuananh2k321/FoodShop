@@ -10,10 +10,11 @@ import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
 import Test from './screen/Test'
 import EditAddress from './screen/bottom_tab/AddressTab/EditAddress'
 
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import Redux from './redux/Store';
 import Payment from './screen/bottom_tab/Payment/Payment';
-
+import ItemOrderHistory from './components/ItemOrderHistory';
+import HistoryOrder from './screen/bottom_tab/AccountTabs/HistoryOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,14 +23,12 @@ const App = () => {
     <Provider store={Redux.store}>
 
       <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomTab" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen name="Login" component={Login} />
-
-
-      </Stack.Navigator>  
-    </NavigationContainer>
+        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="BottomTab" component={BottomTab} />
+          <Stack.Screen name="Login" component={Login} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
 
 

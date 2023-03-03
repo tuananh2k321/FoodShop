@@ -14,6 +14,9 @@ const Account = (props) => {
   const goToPayment = () => {
     navigation.navigate("Payment")
   }
+  const goToProfile = () => {
+    navigation.navigate("Profile")
+  }
   
   return (
     <SafeAreaView style={{ flex: 1, padding: 15 ,backgroundColor:'white'}}>
@@ -32,7 +35,8 @@ const Account = (props) => {
           Account
         </Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={goToProfile}>
           <View
             style={{
               flexDirection: 'row',
