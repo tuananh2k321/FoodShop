@@ -18,7 +18,7 @@ import Address from './AddressTab/Address';
 import NewAddress from './AddressTab/NewAddress';
 import EditAddress from './AddressTab/EditAddress';
 import Payment from './Payment/Payment'
-import CartDetail from './cartdetail';
+import CartDetail from './CartDetail'
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Oders from './Oders';
