@@ -10,7 +10,7 @@ const ItemDeals = (props) => {
         <View
           style={{
             width: 150,
-            height: 189,
+            height: 200,
             backgroundColor: 'white',
             borderRadius: 20,
             shadowColor: '#C4C4C4',

@@ -56,7 +56,7 @@ const AccountTabs = () => {
 
 const StackExplore = () => {
   return (
-    <Stack.Navigator initialRouteName="DealCategoryTab" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
       
