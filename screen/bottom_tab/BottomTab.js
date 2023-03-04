@@ -106,7 +106,8 @@ export default BottomTab = () => {
             return <View style={{
               flex: 1,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              width: 60
             }}>
               <Image source={iconName}
                 style={{
@@ -122,7 +123,7 @@ export default BottomTab = () => {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            height: 66,
+            height: 70,
           },
         })}
     >
