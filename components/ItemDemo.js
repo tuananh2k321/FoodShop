@@ -27,7 +27,7 @@ const ItemDeals = (props) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Image source={{uri: avatar}} style={{width: 130, height: 80, resizeMode: 'cover'}} />
+            <Image source={{uri: avatar}} style={{width: 130, height: 100, resizeMode: 'stretch'}} />
           </View>
           <View style={{
             paddingLeft: 10

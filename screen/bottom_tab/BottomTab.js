@@ -22,7 +22,8 @@ import CartDetail from './CartDetail'
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Oders from './Oders';
-import Fruit from './Fruit'
+import Fruit from '../DealsCategoryTab/Fruit'
+import DealCategoryTab from '../DealsCategoryTab/DealCategoryTab';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -55,9 +56,9 @@ const AccountTabs = () => {
 
 const StackExplore = () => {
   return (
-    <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="DealCategoryTab" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Explore1" component={Explore} />
-      <Stack.Screen name="Fruit" component={Fruit} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
       
     </Stack.Navigator>
   )
@@ -71,7 +72,7 @@ const StackShop = () => {
   return (
     <Stack.Navigator initialRouteName="Shop1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Shop1" component={Shop} />
-      <Stack.Screen name="Fruit" component={Fruit} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
     </Stack.Navigator>
   )
 }
