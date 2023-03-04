@@ -4,7 +4,7 @@ import {COLOR} from '../contants/Themes.js'
 const windowWIdth = Dimensions.get('window').width;
 
 const UIBtnPrimary = (props) => {
-    const {title, onPress} = props
+    const {title, onPress, disable} = props
   return (
     <TouchableOpacity style ={{
         width: windowWIdth-30,
@@ -13,7 +13,8 @@ const UIBtnPrimary = (props) => {
         backgroundColor: COLOR.primary,
         justifyContent: 'center',
       }}
-      onPress={onPress}>
+      onPress={onPress}
+      disabled = {disable}>
         
         <Text style = {{
           fontSize: 17,

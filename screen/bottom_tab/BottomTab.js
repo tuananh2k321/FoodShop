@@ -22,7 +22,8 @@ import CartDetail from './CartDetail'
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Oders from './Oders';
-import Fruit from './Fruit'
+import Fruit from '../DealsCategoryTab/Fruit'
+import DealCategoryTab from '../DealsCategoryTab/DealCategoryTab';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -57,7 +58,7 @@ const StackExplore = () => {
   return (
     <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Explore1" component={Explore} />
-      <Stack.Screen name="Fruit" component={Fruit} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
       
     </Stack.Navigator>
   )
@@ -71,7 +72,7 @@ const StackShop = () => {
   return (
     <Stack.Navigator initialRouteName="Shop1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Shop1" component={Shop} />
-      <Stack.Screen name="Fruit" component={Fruit} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
     </Stack.Navigator>
   )
 }
@@ -106,7 +107,8 @@ export default BottomTab = () => {
             return <View style={{
               flex: 1,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              width: 60
             }}>
               <Image source={iconName}
                 style={{
@@ -122,7 +124,7 @@ export default BottomTab = () => {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            height: 66,
+            height: 70,
           },
         })}
     >

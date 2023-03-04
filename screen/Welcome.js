@@ -53,7 +53,9 @@ const Welcome = (props) => {
                in as fast as 1 hour .
         </Text>
 
-        <UIBtnPrimary title="Sign Up"/>
+        <UIBtnPrimary title="Sign Up" onPress = {() => {
+          navigation.navigate('SignUp')
+        }}/>
 
         <Pressable style ={{
           width: windowWIdth-30,

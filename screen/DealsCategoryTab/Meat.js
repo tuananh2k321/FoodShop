@@ -1,30 +1,33 @@
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
+import ItemDealsUri from '../../components/ItemDealsUri';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+const TopTab = createMaterialTopTabNavigator();
 
-const Fruit = ({navigation}) => {
+const Meat = ({navigation}) => {
     const [deals, setDeals] = useState([
         {
-          name: 'Red Apple',
-          image: require('../../assets/img/tao.png'),
+          name: 'Turkey',
+          image: 'https://product.hstatic.net/1000104489/product/chim_bo_cau_ab532a833bae4fcf97a0b666fd1ff0a7.jpeg',
           weight: "1kg,priceg",
           price: '$ 4,99'
         },
         {
-          name: 'Orginal Banana',
-          image: require('../../assets/img/chuoi.png'),
+          name: 'Pork',
+          image: 'https://barefeetinthekitchen.com/wp-content/uploads/2018/10/visual-for-pork-cooking-temps.png',
           weight: "1kg",
           price: '$5,99'
         }, 
         {
-          name: 'strawberry',
-          image: require('../../assets/img/dau.png'),
+          name: 'Beef',
+          image: 'https://cdn.shopify.com/s/files/1/0096/3162/9359/collections/beef-image.png?v=1657175044',
           weight: "1kg",
           price: '$ 6'
         },
         {
-          name: 'Avocado Bowl',
-          image: require('../../assets/img/bo.png'),
+          name: 'Chicken',
+          image: 'https://fujimart.vn/image/cache/catalog/sanpham-tuoisong/thit%20uc%20ga%20nhat-502x502.png',
           weight: "1kg,priceg",
           price: '$3,99'
         },
@@ -32,25 +35,14 @@ const Fruit = ({navigation}) => {
       ])
 
     return (
-      <ScrollView>
-        <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={require('../../assets/img/IconArrow.png')} />
-        </TouchableOpacity>
-        <View style={styles.selectContainer}>
-          <Text style={styles.textCategories}> Fruit </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.imgSearch}
-            source={require('../../assets/img/search.png')}
-          />
-          <TextInput style={styles.textSearch} placeholder="Search" />
-        </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        
+        
         <View style={styles.container}>
           <View style = {{}}>
           {deals.map(eachDeal => (
-            <ItemDeals
+            <ItemDealsUri
               deals={eachDeal}
               key={eachDeal.name}
               onPress={() => {
@@ -69,7 +61,7 @@ const Fruit = ({navigation}) => {
                 marginVertical: 15
             }}/>
             {deals.map(eachDeal => (
-              <ItemDeals
+              <ItemDealsUri
                 deals={eachDeal}
                 key={eachDeal.name}
                 onPress={() => {
@@ -94,7 +86,7 @@ const Fruit = ({navigation}) => {
     );
 }
 
-export default Fruit
+export default Meat
 
 const styles = StyleSheet.create({
     selectContainer: {

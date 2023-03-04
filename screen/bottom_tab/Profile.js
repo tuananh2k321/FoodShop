@@ -101,8 +101,8 @@ const Profile = (props) => {
         <View style={styles.next1}>
           <Switch
 
-            style={{ transform: [{ scaleX: 1 }, { scaleY: 2 }] }}
-            trackColor={{ false: '#4CD964', true: '#FF5E00' }}
+            style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+            trackColor={{ false: '#804F1E', true: '#FF5E00' }}
             thumbColor={isEnabled ? '#FFFFFF' : '#FFFFFF'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
@@ -201,10 +201,9 @@ const styles = StyleSheet.create({
 
   },
   imuser: {
-    width: 20,
+    width: 24,
     height: 24,
-
-
+    resizeMode: 'stretch'
   },
   edit: {
     marginLeft: 10,

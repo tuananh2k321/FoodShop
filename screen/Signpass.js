@@ -1,33 +1,23 @@
 import { StyleSheet, Text, View, Image, TextInput, Pressable, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { isValidEmpty, isValidPass } from '../components/Isvalidation'
 const Signpass = ({navigation}) => {
+  //HIDDEN or SHOW
     const [isPass1, setIspass1] = useState (true)
     const [isPass2, setIspass2] = useState (true)
-    const [validatePass1, setValidatePass1] = useState (false) 
-    const [validatePass2, setValidatePass2] = useState (false) 
-    const validation = (text) => {
-        if (text === '') {
-            setValidatePass1(true)
-            
-        } else {
-            setValidatePass1(false)
-            
-        }
-    }
-    const validation2 = (text) => {
-        if (text === '') {
-            setValidatePass2(true)
-            
-        } else {
-            setValidatePass2(false)
-           
-        }
-    }
 
+  // VALIDATE
+    const [errorPass1, setErrorPass1] = useState ('') 
+    const [errorPass2, setErrorPass2] = useState ('') 
+
+    const [validatePass1, setValidatePass1] = useState ('') 
+    const [validatePass2, setValidatePass2] = useState ('')  
+    
+    const isValidationOK = () => isValidEmpty(validatePass1) && isValidEmpty(validatePass2)
     return (
         
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.goBack()} style = {{alignSelf: 'flex-start'}}>
           <Image source={require('../assets/img/IconArrow.png')} />
@@ -59,13 +49,20 @@ const Signpass = ({navigation}) => {
             source={require('../assets/img/iconLock.png')}
           />
           <TextInput style={styles.namsurname} placeholder="Password" secureTextEntry={isPass1}
-            onChangeText = {(text) => validation(text)}
+            onChangeText = {(text) => {
+              setValidatePass1(text)
+              if (isValidPass(text) == false) {
+                setErrorPass1('Mật khẩu phải lớn hơn 7 kí tự')
+              } else {
+                setErrorPass1('')
+              }
+            }}
           />
           <TouchableOpacity style={styles.eye} onPress = {() => setIspass1(!isPass1)}>
             <Image  source={require('../assets/img/eye.png')} />
           </TouchableOpacity>
         </View>
-        {validatePass1 == true && <Text style = {{color: 'red'}}>không được để trống</Text>}
+        <Text style = {{color: 'red'}}>{errorPass1}</Text>
         <View style={styles.imgContainer}>
           <Image
             style={styles.lock2}
@@ -73,7 +70,14 @@ const Signpass = ({navigation}) => {
           />
           <TextInput style={styles.passw} placeholder="Confirm Password" 
           secureTextEntry={isPass2}
-            onChangeText = {(text) => validation2(text)}
+            onChangeText = {(text) => {
+              setValidatePass2(text)
+              if (isValidEmpty(text) == false) {
+                setErrorPass2('không được để trống')
+              } else {
+                setErrorPass2('')
+              }
+            }}
           />
           
           <TouchableOpacity style={styles.eye} onPress = {() => setIspass2(!isPass2)}>
@@ -81,13 +85,17 @@ const Signpass = ({navigation}) => {
           </TouchableOpacity>
           
         </View>
-        {validatePass2 == true && <Text style = {{color: 'red'}}>không được để trống</Text>}
+       <Text style = {{color: 'red'}}>{errorPass2}</Text>
 
-        <Pressable style={styles.btnSignup}>
+        <TouchableOpacity style={styles.btnSignup} 
+          disabled = {isValidationOK() == false}
+          onPress = {() => navigation.navigate('SignCode')}
+        >
           <Text style={styles.btnText}>Next</Text>
-        </Pressable>
+          
+        </TouchableOpacity>
       </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
 }
 
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         lineHeight: 41,
         letterSpacing: 0.41,
-        marginTop: 10,
+        marginTop: 5,
         fontSize: 24,
         color: '#FF5E00',
         fontFamily: 'Klarna Text',
