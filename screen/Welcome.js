@@ -1,7 +1,8 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions } from 'react-native'
 import React from 'react'
 import {COLOR} from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
+const windowWIdth = Dimensions.get('window').width;
 const Welcome = (props) => {
   const {navigation} = props
   return (
@@ -55,7 +56,7 @@ const Welcome = (props) => {
         <UIBtnPrimary title="Sign Up"/>
 
         <Pressable style ={{
-          width: 343,
+          width: windowWIdth-30,
           height: 50,
           borderRadius: 30,
           justifyContent: 'center',

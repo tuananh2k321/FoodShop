@@ -6,7 +6,7 @@ import Welcome from './screen/Welcome'
 import BottomTab from './screen/bottom_tab/BottomTab';
 import Login from './screen/Login';
 import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
-
+import Signpass from './screen/Signpass';
 import Test from './screen/Test'
 import EditAddress from './screen/bottom_tab/AddressTab/EditAddress'
 
@@ -23,10 +23,11 @@ const App = () => {
     <Provider store={Redux.store}>
 
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="BottomTab" component={BottomTab} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signpass" component={Signpass} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
