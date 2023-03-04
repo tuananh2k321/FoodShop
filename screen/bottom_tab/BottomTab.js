@@ -45,6 +45,9 @@ const AccountTabs = () => {
       <Stack.Screen name="NewAddress" component={NewAddress} />
       <Stack.Screen name="EditAddress" component={EditAddress} />
       <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      
     </Stack.Navigator>
   )
 }
