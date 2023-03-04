@@ -1,10 +1,55 @@
-import { View, Image, Text,FlatList, Pressable, ScrollView, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Image, Text, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import ItemDeals from '../../components/ItemDeals'
+import React, { useState } from 'react'
+
 
 const CartDetail = () => {
-  return (
+  const [first, setfirst] = useState(0)
+  const tru = () => {
+    
+    if (first>0) {
+      setfirst(first-1)
+      console.log('tru', first);
+    }
+  }
+  const cong = () => {
+    setfirst(first+1)
+    console.log('cong', first);
+  }
+  const [deals, setDeals] = useState([
+    {
+      name: 'Red Apple',
+      image: require('../../assets/img/tao.png'),
+      weight: "1kg,priceg",
+      price: '$ 4,99'
+    },
+    {
+      name: 'Orginal Banana',
+      image: require('../../assets/img/chuoi.png'),
+      weight: "1kg",
+      price: '$5,99'
+    },
+    {
+      name: 'strawberry',
+      image: require('../../assets/img/dau.png'),
+      weight: "1kg",
+      price: '$ 6'
+    },
+    {
+      name: 'Avocado Bowl',
+      image: require('../../assets/img/bo.png'),
+      weight: "1kg,priceg",
+      price: '$3,99'
+    },
 
+  ])
+  return (
     <ScrollView style={magosheet.container}>
+      <Image
+        source={require('../../assets/img/prnev.png')}
+        style={magosheet.prnev}
+      />
+
       <Image
         source={require('../../assets/img/ticon.png')}
         style={magosheet.anh}
@@ -21,9 +66,32 @@ const CartDetail = () => {
       />
 
       <View style={magosheet.iputcontainer}>
-        <Image style={magosheet.imtru}
-          source={require('../../assets/img/soluong.png')}
-        />
+
+        <View style={magosheet.soluong}>
+
+          <TouchableOpacity style={magosheet.ipsl}
+            onPress={tru}
+            
+          > 
+            <Text
+              style={magosheet.ttru}
+            >-</Text>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 24, top: 8, left: 135, position: 'absolute' }}>
+            {first}
+          </Text>
+
+          <TouchableOpacity style={[magosheet.ipsl, { top: 5, left: 205 }]}
+            onPress={cong}
+              
+          >
+
+            <Text
+              style={magosheet.ttru}
+            >+</Text>
+          </TouchableOpacity>
+
+        </View>
         <Image style={magosheet.favorite}
           source={require('../../assets/img/favorit.png')}
         />
@@ -33,148 +101,126 @@ const CartDetail = () => {
       <Pressable style={magosheet.press}>
         <Text style={magosheet.add}>Add To cart</Text>
       </Pressable>
-      <Text style ={magosheet.need}>You may also need</Text>
-      <ScrollView horizontal={true} style = {magosheet.scr}>
-       <View style = {magosheet.item}>
-        <View style= {magosheet.iputitem}>
-        <Image style = {magosheet.imdau}
-         source={require('../../assets/img/dau.png')}
-        />
-        <Text style={magosheet.textStra}>Strawberry</Text>
-        <Text style = {magosheet.kg}>1kg</Text>
-        <View style = {magosheet.price}>
-          <Text style = {magosheet.gia}>$24.0</Text>
-          <Image style ={magosheet.add}
-          source = {require('../../assets/img/cong.png')}
+      <Text style={magosheet.need}>You may also need</Text>
+
+
+      <View>
+        <View
+          style={{
+            marginTop: 10,
+            marginBottom: 20,
+          }}>
+          <FlatList
+
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            data={deals}
+            renderItem={({ item }) => <ItemDeals deals={item} />}
+            keyExtractor={eachDeal => eachDeal.name}
           />
         </View>
-        </View>
-        </View>
-
-        <View style = {magosheet.item}>
-        <View style= {magosheet.iputitem}>
-        <Image style = {magosheet.imdau}
-         source={require('../../assets/img/dau.png')}
-        />
-        <Text style={magosheet.textStra}>Strawberry</Text>
-        <Text style = {magosheet.kg}>1kg</Text>
-        <View style = {magosheet.price}>
-          <Text style = {magosheet.gia}>$24.0</Text>
-          <Image style ={magosheet.add}
-          source = {require('../../assets/img/cong.png')}
-          />
-        </View>
-        </View>
-        </View>
-
-        <View style = {magosheet.item}>
-        <View style= {magosheet.iputitem}>
-        <Image style = {magosheet.imdau}
-         source={require('../../assets/img/dau.png')}
-        />
-        <Text style={magosheet.textStra}>Strawberry</Text>
-        <Text style = {magosheet.kg}>1kg</Text>
-        <View style = {magosheet.price}>
-          <Text style = {magosheet.gia}>$24.0</Text>
-          <Image style ={magosheet.add}
-          source = {require('../../assets/img/cong.png')}
-          />
-        </View>
-        </View>
-        </View>
-       </ScrollView>
-
-     
+      </View>
     </ScrollView>
 
   )
 }
 
+
 export default CartDetail
 const magosheet = StyleSheet.create({
-  scr: {
-  
+  ipsl: {
+    backgroundColor: 'white', width: 40, height: 40,
+    borderRadius: 20, top: 5, left: 5
   },
-  add:{
-  
-   
+  ttru: {
+    width: 40, height: 40,
+    fontSize: 30, textAlign: 'center',
+
+
   },
-  gia:{
-    marginTop:11,
-   marginLeft: 11,
-   width: 55,
-   height: 20,
-   fontSize: 18,
-   lineHeight: 22,
-   fontWeight :'700',
-   color: '#FF5E00'
+  prnev: {
+    width: 8.49,
+    height: 14,
+    marginLeft: 16,
+    color: '#FF5E00',
+    marginTop: 13
   },
-  price:{
-   flexDirection: 'row',
-   justifyContent : 'center',
-   alignItems: 'center'
-  
+  gia: {
+    marginTop: 11,
+    marginLeft: 11,
+    width: 55,
+    height: 20,
+    fontSize: 18,
+    lineHeight: 22,
+    fontWeight: '700',
+    color: '#FF5E00'
   },
-   kg:{
+  price: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+  kg: {
     width: 64,
-    height:14,
+    height: 14,
     lineHeight: 14,
     fontSize: 12,
     color: '#929292',
     marginLeft: 38,
 
-   },
-  textStra:{
-   width: 85,
-   height: 20,
-   fontSize: 15,
-   lineHeight:18,
-   color: '#6D3805',
-   marginLeft: 35,
-   marginTop:22
   },
-  imdau:{
-  width : 75,
-  height: 72,
-  marginLeft: 41,
-  
+  textStra: {
+    width: 85,
+    height: 20,
+    fontSize: 15,
+    lineHeight: 18,
+    color: '#6D3805',
+    marginLeft: 35,
+    marginTop: 22
   },
-  iputitem:{
+  imdau: {
+    width: 75,
+    height: 72,
+    marginLeft: 41,
 
   },
-  item:{
-  width: 150,
-  height:189,
-  marginLeft: 16,
-  backgroundColor: '#FFFFFF',
-  borderRadius: 20,
-  marginTop : 16
+  iputitem: {
+
   },
-  need:{
-  color: ' #6D3805',
-  fontWeight: '700',
-  fontSize: 18,
-  lineHeight : 22,
-  marginTop : 101,
-  marginLeft: 18
+  item: {
+    width: 150,
+    height: 189,
+    marginLeft: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    marginTop: 16
+  },
+  need: {
+    color: ' #6D3805',
+    fontWeight: '700',
+    fontSize: 18,
+    lineHeight: 22,
+    marginTop: 101,
+    marginLeft: 18
 
   },
   press: {
-    marginTop:19,
+    marginTop: 19,
     width: '90%',
     height: 50,
     backgroundColor: '#FF5E00',
     borderRadius: 30,
-    marginHorizontal:1,
+    marginHorizontal: 1,
     marginLeft: 18
-    
+
   },
   add: {
     textAlign: 'center',
     marginTop: 18,
-    fontSize : 18,
+    fontSize: 18,
     lineHeight: 18,
-    color :'#FFFFFF'
+    color: '#FFFFFF'
 
 
 
@@ -215,6 +261,14 @@ const magosheet = StyleSheet.create({
   },
   container: {
     flex: 1,
-   
+
+  },
+  soluong: {
+    width: 290,
+    height: 50,
+    backgroundColor: '#C0C0C0',
+    borderRadius: 30,
+    flexDirection: 'row',
+    position: 'relative'
   }
 })

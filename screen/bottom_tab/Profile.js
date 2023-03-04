@@ -32,7 +32,7 @@ const Profile = (props) => {
     }
     return null;
   };
-
+  
 
   return (
     <View style={styles.container}>
