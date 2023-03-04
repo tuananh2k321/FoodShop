@@ -14,6 +14,9 @@ const Profile = (props) => {
   const goToEditProfile = () => {
     navigation.navigate("EditProfile")
   }
+  const goToAcount = () =>{
+    navigation.navigate("Account")
+  }
 
   const [valueLanguge, setValueLanguge] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -33,7 +36,7 @@ const Profile = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => { navigation.pop(1) }}>
+      <TouchableOpacity onPress={goToAcount}>
 
         <Image style={styles.prnev}
           source={require('../../assets/img/prnev.png')}
@@ -44,8 +47,8 @@ const Profile = (props) => {
       <TouchableOpacity onPress={goToEditProfile}>
 
         <View style={styles.profile} >
-          <View style={styles.pro}>
-            <Image style={styles.imuser}
+          <View style={styles.pro} > 
+            <Image onPress = {() =>navigation.navigate("EditProfile")} style={styles.imuser} 
               source={require('../../assets/img/users.png')}
             />
             <Text style={styles.edit}>Edit Profile</Text>
