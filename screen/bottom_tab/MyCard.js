@@ -149,9 +149,9 @@ const MyCard = (props) => {
       </View>
 
       <Dialog.Container visible={visible}>
-        <Dialog.Title>Food delete</Dialog.Title>
+        <Dialog.Title>Warning</Dialog.Title>
         <Dialog.Description>
-          Do you want to delete this Food? You cannot undo this action.
+          Do you want to delete this Card? You cannot undo this action.
         </Dialog.Description>
         <Dialog.Button label="Cancel" onPress={handleCancel} />
         <Dialog.Button label="Delete" onPress={handleDelete} />
