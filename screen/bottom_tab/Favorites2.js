@@ -51,7 +51,7 @@ const Favorites2 = (props) => {
       };
 
   return (
-    <SafeAreaView style={{flex: 1, padding: 15}}>
+    <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
       <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
         <Image source={require('../../assets/img/IconArrow.png')} />
       </TouchableOpacity>
@@ -62,48 +62,49 @@ const Favorites2 = (props) => {
           color: COLOR.primary,
           lineHeight: 28.8,
           alignSelf: 'center',
+          marginBottom: 20
         }}>
         Favorites
       </Text>
 
-      <SwipeListView
-        data={deals}
-        renderItem={({item}) => <ItemFavorites favorites={item} />}
-        renderHiddenItem={(data, rowMap) => (
-          <TouchableOpacity
-            onPress={showDialog}
-            style={{
-              height: 80,
-              backgroundColor: '#A42B32',
-              marginTop: 10,
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-            }}>
-            <Image
-              source={require('../../assets/icon/recycle.png')}
+      <View style={{backgroundColor: 'white'}}>
+        <SwipeListView
+          data={deals}
+          renderItem={({item}) => <ItemFavorites favorites={item} />}
+          renderHiddenItem={(data, rowMap) => (
+            <TouchableOpacity
+              onPress={showDialog}
               style={{
-                width: 20,
-                height: 20,
-                tintColor: COLOR.primary,
-                marginRight: 30,
-                tintColor: 'white',
-              }}
-            />
-          </TouchableOpacity>
-        )}
-        rightOpenValue={-75}
-      />
+                height: 80,
+                backgroundColor: '#A42B32',
+                marginTop: 10,
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+              }}>
+              <Image
+                source={require('../../assets/icon/recycle.png')}
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: COLOR.primary,
+                  marginRight: 30,
+                  tintColor: 'white',
+                }}
+              />
+            </TouchableOpacity>
+          )}
+          rightOpenValue={-75}
+        />
+      </View>
 
-      
-        <Dialog.Container visible={visible}>
-          <Dialog.Title>Food delete</Dialog.Title>
-          <Dialog.Description>
-            Do you want to delete this Food? You cannot undo this action.
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" onPress={handleCancel} />
-          <Dialog.Button label="Delete" onPress={handleDelete} />
-        </Dialog.Container>
-     
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>Food delete</Dialog.Title>
+        <Dialog.Description>
+          Do you want to delete this Food? You cannot undo this action.
+        </Dialog.Description>
+        <Dialog.Button label="Cancel" onPress={handleCancel} />
+        <Dialog.Button label="Delete" onPress={handleDelete} />
+      </Dialog.Container>
     </SafeAreaView>
   );
 }

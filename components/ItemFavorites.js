@@ -15,11 +15,11 @@ const ItemFavorites = (props) => {
           height: 80,
           backgroundColor: 'white',
           paddingHorizontal: 10,
-          shadowColor: '#C4C4C4',
-            shadowOffset: {width: 0, height: 6},
-            shadowOpacity: 0.4,
-            shadowRadius: 2,
-            elevation: 10,
+          shadowColor: '#171717',
+          shadowOffset: {width: -2, peak: 4},
+          shadowOpacity: 0.2,
+          shadowRadius: 3,
+          elevation: 5,
         }}>
         <View style={{flexDirection: 'row'}}>
           <Image source={image} style = {{width: 70, resizeMode: 'stretch'}}/>

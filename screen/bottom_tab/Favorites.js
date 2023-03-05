@@ -4,7 +4,7 @@ import {COLOR} from '../../contants/Themes'
 import UIBtn from '../../components/UIBtnPrimary'
 const Favorites = ({navigation}) => {
   return (
-    <SafeAreaView style = {{flex: 1, padding: 15}}>
+    <SafeAreaView style = {{flex: 1, padding: 15, backgroundColor: 'white'}}>
       <TouchableOpacity>
       <Image source={require('../../assets/img/IconArrow.png')}/>
       </TouchableOpacity>
