@@ -24,6 +24,7 @@ import EditProfile from './EditProfile';
 import Oders from './Oders';
 import Fruit from '../DealsCategoryTab/Fruit'
 import DealCategoryTab from '../DealsCategoryTab/DealCategoryTab';
+import ChangePassword from './ChangePassword';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -48,7 +49,7 @@ const AccountTabs = () => {
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
-      
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   )
 }

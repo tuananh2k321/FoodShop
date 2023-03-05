@@ -37,72 +37,79 @@ const Profile = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={goToAcount}>
-
-        <Image style={styles.prnev}
+        <Image
+          style={styles.prnev}
           source={require('../../assets/img/prnev.png')}
         />
       </TouchableOpacity>
 
       <Text style={styles.title}> Profile</Text>
       <TouchableOpacity onPress={goToEditProfile}>
-
-        <View style={styles.profile} >
-          <View style={styles.pro} > 
-            <Image onPress = {() =>navigation.navigate("EditProfile")} style={styles.imuser} 
+        <View style={styles.profile}>
+          <View style={styles.pro}>
+            <Image
+              onPress={() => navigation.navigate('EditProfile')}
+              style={styles.imuser}
               source={require('../../assets/img/users.png')}
             />
             <Text style={styles.edit}>Edit Profile</Text>
-
           </View>
           <View style={styles.next}>
-            <Image style={styles.imnext}
+            <Image
+              style={styles.imnext}
               source={require('../../assets/img/next.png')}
             />
           </View>
         </View>
       </TouchableOpacity>
 
-      <View style={styles.profile} >
-        <View style={styles.pro}>
-          <Image style={styles.imuser}
-            source={require('../../assets/img/password.png')}
-          />
-          <Text style={styles.edit}>Change Password</Text>
-        </View>
+      <View style={styles.profile}>
+        <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}>
+          <View style={styles.pro}>
+            <Image
+              style={styles.imuser}
+              source={require('../../assets/img/password.png')}
+            />
+            <Text style={styles.edit}>Change Password</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.next}>
-          <Image style={styles.imnext}
+          <Image
+            style={styles.imnext}
             source={require('../../assets/img/next.png')}
           />
         </View>
       </View>
 
-      <View style={styles.profile} >
+      <View style={styles.profile}>
         <View style={styles.pro}>
-          <Image style={styles.imuser}
+          <Image
+            style={styles.imuser}
             source={require('../../assets/img/cards.png')}
           />
           <Text style={styles.edit}>My Cards</Text>
         </View>
         <View style={styles.next}>
-          <Image style={styles.imnext}
+          <Image
+            style={styles.imnext}
             source={require('../../assets/img/next.png')}
           />
         </View>
       </View>
       <Text style={styles.appseting}>App Settings</Text>
 
-      <View style={styles.profile} >
+      <View style={styles.profile}>
         <View style={styles.pro}>
-          <Image style={styles.imuser}
+          <Image
+            style={styles.imuser}
             source={require('../../assets/img/bell.png')}
           />
           <Text style={styles.edit}>Notifications</Text>
         </View>
         <View style={styles.next1}>
           <Switch
-
-            style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
-            trackColor={{ false: '#804F1E', true: '#FF5E00' }}
+            style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
+            trackColor={{false: '#804F1E', true: '#FF5E00'}}
             thumbColor={isEnabled ? '#FFFFFF' : '#FFFFFF'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
@@ -111,36 +118,38 @@ const Profile = (props) => {
         </View>
       </View>
 
-      <View style={styles.profile} >
+      <View style={styles.profile}>
         <View style={styles.pro}>
-          <Image style={styles.imuser}
+          <Image
+            style={styles.imuser}
             source={require('../../assets/img/language.png')}
           />
           <Text style={styles.edit}>Language</Text>
         </View>
         <View style={styles.next}>
-          <Image style={styles.imnext}
+          <Image
+            style={styles.imnext}
             source={require('../../assets/img/next.png')}
           />
         </View>
-
-
       </View>
-      <TouchableOpacity onPress={() => { navigation.popToTop() }}>
-        <View style={styles.profile} >
+      <TouchableOpacity
+        onPress={() => {
+          navigation.popToTop();
+        }}>
+        <View style={styles.profile}>
           <View style={styles.pro}>
-            <Image style={styles.imuser}
+            <Image
+              style={styles.imuser}
               source={require('../../assets/img/logout.png')}
             />
             <Text style={styles.edit}>Logout</Text>
           </View>
           <View style={styles.next}>
-            <Image style={styles.imnext}
-            />
+            <Image style={styles.imnext} />
           </View>
         </View>
       </TouchableOpacity>
-
 
       {/* {renderLanguge()}
         <Dropdown
@@ -165,12 +174,8 @@ const Profile = (props) => {
             setIsFocus(false);
           }}
         /> */}
-
-
     </View>
-
-
-  )
+  );
 }
 
 export default Profile
