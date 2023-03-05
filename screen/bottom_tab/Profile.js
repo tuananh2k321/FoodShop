@@ -82,13 +82,15 @@ const Profile = (props) => {
       </View>
 
       <View style={styles.profile}>
-        <View style={styles.pro}>
-          <Image
-            style={styles.imuser}
-            source={require('../../assets/img/cards.png')}
-          />
-          <Text style={styles.edit}>My Cards</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('MyCard')}>
+          <View style={styles.pro}>
+            <Image
+              style={styles.imuser}
+              source={require('../../assets/img/cards.png')}
+            />
+            <Text style={styles.edit}>My Cards</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.next}>
           <Image
             style={styles.imnext}

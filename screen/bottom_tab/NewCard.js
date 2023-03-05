@@ -7,28 +7,8 @@ import { COLOR } from '../../contants/Themes'
 import Dialog from 'react-native-dialog'
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
-const ChangePassword = ({navigation}) => {
-    const [visible, setVisible] = useState(false);
-
-      const showDialog = () => {
-        setVisible(true);
-      };
-
-      const handleCancel = () => {
-        setVisible(false);
-      };
-
-      const handleDelete = () => {
-        // The user has pressed the "Delete" button, so here you can do your own logic.
-        // ...Your logic
-        setVisible(false);
-      };
-
-  //HIDDEN or SHOW
-    const [isPass1, setIspass1] = useState (true)
-    const [isPass2, setIspass2] = useState (true)
-    const [isPass3, setIspass3] = useState (true)
-
+const NewCard = ({navigation}) => {
+   
   // VALIDATE
     const [errorPass1, setErrorPass1] = useState ('') 
     const [errorPass2, setErrorPass2] = useState ('') 
@@ -38,7 +18,7 @@ const ChangePassword = ({navigation}) => {
     const [validatePass2, setValidatePass2] = useState ('')  
     const [validatePass3, setValidatePass3] = useState ('')  
     
-    const isValidationOK = () => isValidEmpty(validatePass1) && isValidPass(validatePass2) && isValidEmpty(validatePass3)
+    const isValidationOK = () => isValidEmpty(validatePass1) && isValidEmpty(validatePass2) && isValidEmpty(validatePass3)
     return (
       <KeyboardAwareScrollView>
         <View style={styles.container}>
@@ -48,9 +28,19 @@ const ChangePassword = ({navigation}) => {
             <Image source={require('../../assets/img/IconArrow.png')} />
           </TouchableOpacity>
           <View style={styles.selectionContainer}>
-            <Text style={styles.selectionText}>Change Password</Text>
+            <Text style={styles.selectionText}>New Card</Text>
           </View>
 
+          <Text
+            style={{
+              color: COLOR.title,
+              fontSize: 18,
+              fontWeight: '700',
+              lineHeight: 21.6,
+              marginBottom: 5,
+            }}>
+            Card number
+          </Text>
           <View style={styles.imgContainer}>
             <Image
               style={styles.lock}
@@ -58,8 +48,8 @@ const ChangePassword = ({navigation}) => {
             />
             <TextInput
               style={styles.namsurname}
-              placeholder="Password"
-              secureTextEntry={isPass1}
+              placeholder="xxxx xxxx xxxx xxxx"
+             
               onChangeText={text => {
                 setValidatePass1(text);
                 if (isValidEmpty(text) == false) {
@@ -69,14 +59,20 @@ const ChangePassword = ({navigation}) => {
                 }
               }}
             />
-            <TouchableOpacity
-              style={styles.eye}
-              onPress={() => setIspass1(!isPass1)}>
-              <Image source={require('../../assets/img/eye.png')} />
-            </TouchableOpacity>
+           
           </View>
-          <Text style={{color: 'red', marginBottom: 30}}>{errorPass1}</Text>
+          <Text style={{color: 'red', marginBottom: 20}}>{errorPass1}</Text>
 
+          <Text
+            style={{
+              color: COLOR.title,
+              fontSize: 18,
+              fontWeight: '700',
+              lineHeight: 21.6,
+              marginBottom: 5,
+            }}>
+            Expiry Date
+          </Text>
           <View style={styles.imgContainer}>
             <Image
               style={styles.lock2}
@@ -84,26 +80,32 @@ const ChangePassword = ({navigation}) => {
             />
             <TextInput
               style={styles.passw}
-              placeholder="New Password"
-              secureTextEntry={isPass2}
+              placeholder="MM/YY"
+             
               onChangeText={text => {
                 setValidatePass2(text);
-                if (isValidPass(text) == false) {
-                  setErrorPass2('Mật khẩu phải lớn hơn 7 kí tự');
+                if (isValidEmpty(text) == false) {
+                  setErrorPass2('Không được để trống');
                 } else {
                   setErrorPass2('');
                 }
               }}
             />
 
-            <TouchableOpacity
-              style={styles.eye}
-              onPress={() => setIspass2(!isPass2)}>
-              <Image source={require('../../assets/img/eye.png')} />
-            </TouchableOpacity>
+            
           </View>
-          <Text style={{color: 'red'}}>{errorPass2}</Text>
+          <Text style={{color: 'red', marginBottom: 20}}>{errorPass2}</Text>
 
+          <Text
+            style={{
+              color: COLOR.title,
+              fontSize: 18,
+              fontWeight: '700',
+              lineHeight: 21.6,
+              marginBottom: 5,
+            }}>
+            CCV
+          </Text>
           <View style={styles.imgContainer}>
             <Image
               style={styles.lock}
@@ -111,8 +113,8 @@ const ChangePassword = ({navigation}) => {
             />
             <TextInput
               style={styles.namsurname}
-              placeholder="Confirm Password"
-              secureTextEntry={isPass3}
+              placeholder="****"
+              
               onChangeText={text => {
                 setValidatePass3(text);
                 if (isValidEmpty(text) == false) {
@@ -122,11 +124,7 @@ const ChangePassword = ({navigation}) => {
                 }
               }}
             />
-            <TouchableOpacity
-              style={styles.eye}
-              onPress={() => setIspass3(!isPass3)}>
-              <Image source={require('../../assets/img/eye.png')} />
-            </TouchableOpacity>
+            
           </View>
           <Text style={{color: 'red'}}>{errorPass3}</Text>
 
@@ -139,49 +137,22 @@ const ChangePassword = ({navigation}) => {
               <Text style={styles.btnText}>Confirm</Text>
             </TouchableOpacity> */}
 
-            <UIBtnPrimary title="Confirm" onPress={showDialog} disable={isValidationOK() == false}/>
+            <UIBtnPrimary
+              title="Add Card"
+              
+              disable={isValidationOK() == false}
+            />
 
-            <TouchableOpacity
-              style={{
-                width: windowWidth - 30,
-                height: 50,
-                borderRadius: 30,
-                justifyContent: 'center',
-                marginTop: 15,
-                borderWidth: 1,
-                borderColor: COLOR.primary,
-              }}
-              onPress={() => {
-                navigation.navigate('Login');
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  lineHeight: 22,
-                  textAlign: 'center',
-                  fontWeight: '500',
-                  color: COLOR.primary,
-                }}>
-                {' '}
-                Back To Sign In
-              </Text>
-            </TouchableOpacity>
+            
           </View>
 
-          <Dialog.Container visible={visible}>
-            <Dialog.Title>Notification</Dialog.Title>
-            <Dialog.Description>
-              Do you want to change this Password? You cannot undo this action.
-            </Dialog.Description>
-            <Dialog.Button label="Cancel" onPress={handleCancel} />
-            <Dialog.Button label="Delete" onPress={handleDelete} />
-          </Dialog.Container>
+         
         </View>
       </KeyboardAwareScrollView>
     );
 }
 
-export default ChangePassword
+export default NewCard
 
 const styles = StyleSheet.create({
     container: {
@@ -192,6 +163,7 @@ const styles = StyleSheet.create({
 
     selectionContainer: {
         alignItems: 'center',
+        marginBottom: 30
     },
 
     selectionText: {
@@ -237,7 +209,6 @@ const styles = StyleSheet.create({
     imgContainer: {
         position: 'relative',
         backgroundColor: '#F3F3F3',
-        marginTop: 16,
         borderRadius: 10,
         
     },
