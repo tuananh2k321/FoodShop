@@ -7,7 +7,7 @@ const ItemDeals = (props) => {
     const {name, weight, price, image,} = deals
     const {onPress} = props
   return (
-    <TouchableOpacity onPress={() => console.log('abcd')}>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={{
           width: 164,

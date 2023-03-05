@@ -60,7 +60,7 @@ const StackExplore = () => {
     <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
-      
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }
@@ -74,6 +74,7 @@ const StackShop = () => {
     <Stack.Navigator initialRouteName="Shop1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Shop1" component={Shop} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }
@@ -131,7 +132,7 @@ export default BottomTab = () => {
     >
       <Tab.Screen name="Shop" component={StackShop} />
       <Tab.Screen name="Explore" component={StackExplore} />
-      <Tab.Screen name="Cart" component={CartDetail} />
+      <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="StackFavorites" component={StackFavorites} />
       <Tab.Screen name="AccountTabs" component={AccountTabs} />
     </Tab.Navigator>

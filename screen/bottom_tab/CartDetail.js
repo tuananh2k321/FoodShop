@@ -3,7 +3,7 @@ import ItemDeals from '../../components/ItemDeals'
 import React, { useState } from 'react'
 
 
-const CartDetail = () => {
+const CartDetail = ({navigation}) => {
   const [first, setfirst] = useState(0)
   const tru = () => {
     
@@ -45,10 +45,12 @@ const CartDetail = () => {
   ])
   return (
     <ScrollView style={magosheet.container}>
-      <Image
-        source={require('../../assets/img/prnev.png')}
-        style={magosheet.prnev}
-      />
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image
+          source={require('../../assets/img/prnev.png')}
+          style={magosheet.prnev}
+        />
+      </TouchableOpacity>
 
       <Image
         source={require('../../assets/img/ticon.png')}
@@ -66,43 +68,30 @@ const CartDetail = () => {
       />
 
       <View style={magosheet.iputcontainer}>
-
         <View style={magosheet.soluong}>
-
-          <TouchableOpacity style={magosheet.ipsl}
-            onPress={tru}
-            
-          > 
-            <Text
-              style={magosheet.ttru}
-            >-</Text>
+          <TouchableOpacity style={magosheet.ipsl} onPress={tru}>
+            <Text style={magosheet.ttru}>-</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 24, top: 8, left: 135, position: 'absolute' }}>
+          <Text style={{fontSize: 24, top: 8, left: 135, position: 'absolute'}}>
             {first}
           </Text>
 
-          <TouchableOpacity style={[magosheet.ipsl, { top: 5, left: 205 }]}
-            onPress={cong}
-              
-          >
-
-            <Text
-              style={magosheet.ttru}
-            >+</Text>
+          <TouchableOpacity
+            style={[magosheet.ipsl, {top: 5, left: 205}]}
+            onPress={cong}>
+            <Text style={magosheet.ttru}>+</Text>
           </TouchableOpacity>
-
         </View>
-        <Image style={magosheet.favorite}
+        <Image
+          style={magosheet.favorite}
           source={require('../../assets/img/favorit.png')}
         />
-
       </View>
 
       <Pressable style={magosheet.press}>
         <Text style={magosheet.add}>Add To cart</Text>
       </Pressable>
       <Text style={magosheet.need}>You may also need</Text>
-
 
       <View>
         <View
@@ -111,18 +100,16 @@ const CartDetail = () => {
             marginBottom: 20,
           }}>
           <FlatList
-
             showsHorizontalScrollIndicator={false}
             horizontal
             data={deals}
-            renderItem={({ item }) => <ItemDeals deals={item} />}
+            renderItem={({item}) => <ItemDeals deals={item} />}
             keyExtractor={eachDeal => eachDeal.name}
           />
         </View>
       </View>
     </ScrollView>
-
-  )
+  );
 }
 
 
@@ -261,7 +248,7 @@ const magosheet = StyleSheet.create({
   },
   container: {
     flex: 1,
-
+    backgroundColor: 'white'
   },
   soluong: {
     width: 290,
