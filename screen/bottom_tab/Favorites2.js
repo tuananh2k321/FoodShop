@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {COLOR} from '../../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ItemFavorites from '../../components/ItemFavorites';
+import Dialog from 'react-native-dialog'
 const Favorites2 = (props) => {
     const{navigation} = props
     const [deals, setDeals] = useState([
@@ -33,6 +34,22 @@ const Favorites2 = (props) => {
         
       ])
 
+      const [visible, setVisible] = useState(false);
+
+      const showDialog = () => {
+        setVisible(true);
+      };
+
+      const handleCancel = () => {
+        setVisible(false);
+      };
+
+      const handleDelete = () => {
+        // The user has pressed the "Delete" button, so here you can do your own logic.
+        // ...Your logic
+        setVisible(false);
+      };
+
   return (
     <SafeAreaView style={{flex: 1, padding: 15}}>
       <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
@@ -51,32 +68,42 @@ const Favorites2 = (props) => {
 
       <SwipeListView
         data={deals}
-        renderItem={({item}) => <ItemFavorites favorites = {item}/>}
+        renderItem={({item}) => <ItemFavorites favorites={item} />}
         renderHiddenItem={(data, rowMap) => (
-          <TouchableOpacity style={{
-            height: 80,
-            backgroundColor: '#A42B32',
-            marginTop: 10,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-
-          }}>
-            
-              <Image
-                source={require('../../assets/icon/recycle.png')}
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: COLOR.primary,
-                  marginRight: 30,
-                  tintColor: 'white',
-                }}
-              />
-           
+          <TouchableOpacity
+            onPress={showDialog}
+            style={{
+              height: 80,
+              backgroundColor: '#A42B32',
+              marginTop: 10,
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+            }}>
+            <Image
+              source={require('../../assets/icon/recycle.png')}
+              style={{
+                width: 20,
+                height: 20,
+                tintColor: COLOR.primary,
+                marginRight: 30,
+                tintColor: 'white',
+              }}
+            />
           </TouchableOpacity>
         )}
         rightOpenValue={-75}
       />
+
+      
+        <Dialog.Container visible={visible}>
+          <Dialog.Title>Food delete</Dialog.Title>
+          <Dialog.Description>
+            Do you want to delete this Food? You cannot undo this action.
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" onPress={handleCancel} />
+          <Dialog.Button label="Delete" onPress={handleDelete} />
+        </Dialog.Container>
+     
     </SafeAreaView>
   );
 }

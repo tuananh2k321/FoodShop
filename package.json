@@ -30,6 +30,7 @@
     "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-date-picker": "^4.2.9",
     "react-native-datepicker": "^1.7.2",
+    "react-native-dialog": "^9.3.0",
     "react-native-element-dropdown": "^2.7.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-otp-textinput": "^1.0.0",
