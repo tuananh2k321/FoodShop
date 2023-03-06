@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import ItemCategories from '../../components/ItemCategories'
-
+import { COLOR } from '../../contants/Themes'
 
 const Explore = ({navigation}) => {
     const [category, setCategory] = useState([
@@ -50,7 +50,7 @@ const Explore = ({navigation}) => {
             data={category}
             renderItem={({item}) => <ItemCategories category={item} 
               onPress = {() => {
-                 navigation.navigate('Fruit')
+                 navigation.navigate('DealCategoryTab')
                 
               }}
             />}

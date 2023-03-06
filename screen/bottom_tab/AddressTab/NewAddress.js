@@ -113,11 +113,11 @@ export default NewAddress
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1,
+        height: windowHeight,
         backgroundColor: 'white'
     },
     container: {
-
+        height: '85%',
         bacgroundColor: "#fff",
         marginHorizontal: 16,
 
@@ -147,7 +147,8 @@ const styles = StyleSheet.create({
         color: "black"
     },
     btnAdd: {
-        marginTop: 180,
+        position: 'absolute',
+        bottom: 0,
         backgroundColor: '#FF5E00',
         width: windowWIdth - 40,
         height: 50,

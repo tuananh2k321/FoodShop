@@ -10,7 +10,7 @@ const ItemDeals = (props) => {
         <View
           style={{
             width: 150,
-            height: 189,
+            height: 200,
             backgroundColor: 'white',
             borderRadius: 20,
             shadowColor: '#C4C4C4',
@@ -27,7 +27,7 @@ const ItemDeals = (props) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Image source={{uri: avatar}} style={{width: 130, height: 80, resizeMode: 'cover'}} />
+            <Image source={{uri: avatar}} style={{width: 130, height: 100, resizeMode: 'stretch'}} />
           </View>
           <View style={{
             paddingLeft: 10

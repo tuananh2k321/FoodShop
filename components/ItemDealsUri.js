@@ -2,16 +2,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {COLOR, ICON} from '../contants/Themes'
 
-const ItemDeals = (props) => {
+const ItemDealsUri = (props) => {
     const {deals} = props
     const {name, weight, price, image,} = deals
     const {onPress} = props
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={() => console.log('abcd')}>
       <View
         style={{
           width: 164,
-          height: 194,
+          height: 220,
           backgroundColor: 'white',
           borderRadius: 20,
           shadowColor: '#171717',
@@ -28,7 +28,7 @@ const ItemDeals = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Image source={image} style={{}} />
+          <Image source={{uri : image}} style={{width: 130, height: 100, resizeMode: 'cover'}} />
         </View>
         <View
           style={{
@@ -88,6 +88,6 @@ const ItemDeals = (props) => {
   );
 }
 
-export default ItemDeals
+export default ItemDealsUri
 
 const styles = StyleSheet.create({})

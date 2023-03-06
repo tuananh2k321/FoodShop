@@ -72,9 +72,10 @@ const Welcome = (props) => {
         >
           
           <Text style = {{
-            fontSize: 17,
+            fontSize: 18,
             lineHeight: 22,
             textAlign: 'center',
+            fontWeight: '500',
             color: COLOR.primary
             
           }}> Sign In</Text>

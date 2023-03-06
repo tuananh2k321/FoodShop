@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {COLOR} from '../../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ItemFavorites from '../../components/ItemFavorites';
+import Dialog from 'react-native-dialog'
 const Favorites2 = (props) => {
     const{navigation} = props
     const [deals, setDeals] = useState([
@@ -33,8 +34,24 @@ const Favorites2 = (props) => {
         
       ])
 
+      const [visible, setVisible] = useState(false);
+
+      const showDialog = () => {
+        setVisible(true);
+      };
+
+      const handleCancel = () => {
+        setVisible(false);
+      };
+
+      const handleDelete = () => {
+        // The user has pressed the "Delete" button, so here you can do your own logic.
+        // ...Your logic
+        setVisible(false);
+      };
+
   return (
-    <SafeAreaView style={{flex: 1, padding: 15}}>
+    <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
       <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
         <Image source={require('../../assets/img/IconArrow.png')} />
       </TouchableOpacity>
@@ -45,23 +62,27 @@ const Favorites2 = (props) => {
           color: COLOR.primary,
           lineHeight: 28.8,
           alignSelf: 'center',
+          marginBottom: 20
         }}>
         Favorites
       </Text>
 
-      <SwipeListView
-        data={deals}
-        renderItem={({item}) => <ItemFavorites favorites = {item}/>}
-        renderHiddenItem={(data, rowMap) => (
-          <TouchableOpacity style={{
-            height: 80,
-            backgroundColor: '#A42B32',
-            marginTop: 10,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-
-          }}>
-            
+      <View style={{backgroundColor: 'white'}}>
+        <SwipeListView
+          data={deals}
+          renderItem={({item}) => <ItemFavorites favorites={item} 
+              onPress={() => navigation.navigate('CartDetail')}
+          />}
+          renderHiddenItem={(data, rowMap) => (
+            <TouchableOpacity
+              onPress={showDialog}
+              style={{
+                height: 80,
+                backgroundColor: '#A42B32',
+                marginTop: 10,
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+              }}>
               <Image
                 source={require('../../assets/icon/recycle.png')}
                 style={{
@@ -72,11 +93,20 @@ const Favorites2 = (props) => {
                   tintColor: 'white',
                 }}
               />
-           
-          </TouchableOpacity>
-        )}
-        rightOpenValue={-75}
-      />
+            </TouchableOpacity>
+          )}
+          rightOpenValue={-75}
+        />
+      </View>
+
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>Food delete</Dialog.Title>
+        <Dialog.Description>
+          Do you want to delete this Food? You cannot undo this action.
+        </Dialog.Description>
+        <Dialog.Button label="Cancel" onPress={handleCancel} />
+        <Dialog.Button label="Delete" onPress={handleDelete} />
+      </Dialog.Container>
     </SafeAreaView>
   );
 }

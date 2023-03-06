@@ -17,7 +17,7 @@ const UIBtnPrimary = (props) => {
       disabled = {disable}>
         
         <Text style = {{
-          fontSize: 17,
+          fontSize: 18,
           lineHeight: 22,
           textAlign: 'center',
           color: "white",

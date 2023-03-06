@@ -158,7 +158,7 @@ const Shop = ({navigation}) => {
             data={category}
             renderItem={({item}) => <ItemCategories category={item} 
                 onPress = {() => {
-                  navigation.navigate('Fruit')
+                  navigation.navigate('DealCategoryTab')
                 
                 }}
             />}
@@ -170,7 +170,7 @@ const Shop = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginTop: 40,
+            marginTop: 30,
           }}>
           <Text
             style={{
@@ -203,7 +203,12 @@ const Shop = ({navigation}) => {
               showsHorizontalScrollIndicator={false}
               horizontal
               data={deals}
-              renderItem={({item}) => <ItemDeals deals={item} />}
+              renderItem={({item}) => <ItemDeals deals={item} 
+                onPress = {() => {
+                  navigation.navigate('CartDetail')
+                
+                }}
+              />}
               keyExtractor={eachDeal => eachDeal.name}
             />
           </View>

@@ -3,13 +3,11 @@ import React, { useState } from 'react'
 import {COLOR} from '../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-const ItemFavorites = (props) => {
-    const {favorites} = props
-    const {name,  price, image} = favorites
-    const {onPress} = props
+const ItemCard = (props) => {
+    const {card} = props
+    const {name, number, price, image} = card
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View
+    <View
         style={{
           flexDirection: 'row',
           marginTop: 10,
@@ -24,7 +22,7 @@ const ItemFavorites = (props) => {
           elevation: 5,
         }}>
         <View style={{flexDirection: 'row'}}>
-          <Image source={image} style={{width: 70, resizeMode: 'stretch'}} />
+          <Image source={image} style = {{width: 70, height:70, alignSelf:'center', resizeMode: 'stretch'}}/>
 
           <View style={{justifyContent: 'space-around', marginLeft: 20}}>
             <Text
@@ -37,45 +35,38 @@ const ItemFavorites = (props) => {
               {name}
             </Text>
 
-            <TouchableOpacity>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image
-                  source={require('../assets/icon/icons8-shopping-cart-50.png')}
-                  style={{width: 20, height: 20, tintColor: COLOR.primary}}
-                />
+            
+              
                 <Text
                   style={{
                     fontSize: 14,
                     fontWeight: '400',
                     lineHeight: 16.8,
-                    color: COLOR.primary,
-                    marginLeft: 5,
+                    color: COLOR.title,
+                    
                   }}>
-                  Add to cart
+                  {number}
                 </Text>
-              </View>
-            </TouchableOpacity>
+              
+            
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
-          <Text
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <Image source={require('../assets/icon/IconArrowRoghtBrown.png')}
             style={{
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: '400',
               lineHeight: 21.6,
               color: COLOR.title,
-              position: 'absolute',
-              right: 0,
-              bottom: 0,
             }}>
-            {price}
-          </Text>
+            
+          </Image>
+          
         </View>
       </View>
-    </TouchableOpacity>
-  );
+  )
 }
 
-export default ItemFavorites
+export default ItemCard
 
 const styles = StyleSheet.create({})

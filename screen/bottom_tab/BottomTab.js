@@ -22,7 +22,11 @@ import CartDetail from './CartDetail'
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Oders from './Oders';
-import Fruit from './Fruit'
+import Fruit from '../DealsCategoryTab/Fruit'
+import DealCategoryTab from '../DealsCategoryTab/DealCategoryTab';
+import ChangePassword from './ChangePassword';
+import MyCard from './MyCard';
+import NewCard from './NewCard';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +51,9 @@ const AccountTabs = () => {
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
-      
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="MyCard" component={MyCard} />
+      <Stack.Screen name="NewCard" component={NewCard} />
     </Stack.Navigator>
   )
 }
@@ -57,8 +63,18 @@ const StackExplore = () => {
   return (
     <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Explore1" component={Explore} />
-      <Stack.Screen name="Fruit" component={Fruit} />
-      
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
+    </Stack.Navigator>
+  )
+}
+
+const StackCart = () => {
+  return (
+    <Stack.Navigator initialRouteName="Cart1" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Cart1" component={Cart} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }
@@ -71,7 +87,8 @@ const StackShop = () => {
   return (
     <Stack.Navigator initialRouteName="Shop1" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Shop1" component={Shop} />
-      <Stack.Screen name="Fruit" component={Fruit} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }
@@ -129,7 +146,7 @@ export default BottomTab = () => {
     >
       <Tab.Screen name="Shop" component={StackShop} />
       <Tab.Screen name="Explore" component={StackExplore} />
-      <Tab.Screen name="Cart" component={CartDetail} />
+      <Tab.Screen name="Cart" component={StackCart} />
       <Tab.Screen name="StackFavorites" component={StackFavorites} />
       <Tab.Screen name="AccountTabs" component={AccountTabs} />
     </Tab.Navigator>

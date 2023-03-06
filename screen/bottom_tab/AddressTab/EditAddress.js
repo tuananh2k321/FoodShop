@@ -163,19 +163,20 @@ export default EditAddress
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    backgroundColor: 'white'
+    
+    backgroundColor: 'white',
+    height: windowHeight
   },
   container: {
-
-    bacgroundColor: "#fff",
+    
+    backgroundColor: "white",
     marginHorizontal: 16,
-
+    height: '85%'
   },
   header: {
     justifyContent: 'space-between',
     marginTop: 10,
-
+    
   },
   title: {
     justifyContent: 'center',
@@ -197,7 +198,8 @@ const styles = StyleSheet.create({
     color: "black"
   },
   btnAdd: {
-    marginTop: 180,
+    position: 'absolute',
+    bottom: 10,
     backgroundColor: '#FF5E00',
     width: windowWIdth - 40,
     height: 50,
