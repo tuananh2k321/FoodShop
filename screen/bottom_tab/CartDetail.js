@@ -3,17 +3,18 @@ import ItemDeals from '../../components/ItemDeals'
 import React, { useState } from 'react'
 
 
-const CartDetail = ({navigation}) => {
-  const [first, setfirst] = useState(0)
+const CartDetail = ({ navigation }) => {
+  const [first, setfirst] = useState(0);
+  const [addToFavorite, setaddToFavorite] = useState('')
   const tru = () => {
-    
-    if (first>0) {
-      setfirst(first-1)
+
+    if (first > 0) {
+      setfirst(first - 1)
       console.log('tru', first);
     }
   }
   const cong = () => {
-    setfirst(first+1)
+    setfirst(first + 1)
     console.log('cong', first);
   }
   const [deals, setDeals] = useState([
@@ -72,25 +73,41 @@ const CartDetail = ({navigation}) => {
           <TouchableOpacity style={magosheet.ipsl} onPress={tru}>
             <Text style={magosheet.ttru}>-</Text>
           </TouchableOpacity>
-          <Text style={{fontSize: 24, top: 8, left: 135, position: 'absolute'}}>
+          <Text style={{ fontSize: 24, top: 8, left: 135, position: 'absolute' }}>
             {first}
           </Text>
 
           <TouchableOpacity
-            style={[magosheet.ipsl, {top: 5, left: 205}]}
+            style={[magosheet.ipsl, { top: 5, left: 205 }]}
             onPress={cong}>
             <Text style={magosheet.ttru}>+</Text>
           </TouchableOpacity>
         </View>
-        <Image
-          style={magosheet.favorite}
-          source={require('../../assets/img/favorit.png')}
-        />
+
+
+      
+          <TouchableOpacity onPress={() => {
+            setaddToFavorite(!addToFavorite);
+          }}>
+            {addToFavorite ? (
+              <Image
+                style={[magosheet.favorite,{ }]}
+                source={require('../../assets/icon/IconHeart.png')}
+              />
+            ) : (
+              <Image
+                style={[magosheet.favorite,{ }]}
+                source={require('../../assets/img/favorit.png')}
+              />
+            )}
+          </TouchableOpacity>
+       
+
       </View>
 
-      <Pressable style={magosheet.press}>
+      <TouchableOpacity style={magosheet.press}>
         <Text style={magosheet.add}>Add To cart</Text>
-      </Pressable>
+      </TouchableOpacity>
       <Text style={magosheet.need}>You may also need</Text>
 
       <View>
@@ -103,7 +120,7 @@ const CartDetail = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             horizontal
             data={deals}
-            renderItem={({item}) => <ItemDeals deals={item} />}
+            renderItem={({ item }) => <ItemDeals deals={item} />}
             keyExtractor={eachDeal => eachDeal.name}
           />
         </View>
@@ -216,13 +233,14 @@ const magosheet = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around'
 
-
   },
   favorite: {
     marginTop: 10,
     marginRight: 20,
     width: 30,
-    height: 30
+    height: 30,
+
+
   },
   imtru: {
     width: 286,

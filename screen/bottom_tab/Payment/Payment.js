@@ -16,9 +16,13 @@ const Payment = (props) => {
         navigation.pop(1)
     }
     const [pickUpShow, setpickUpShow] = useState(false)
-const [changeIcon, setchangeIcon] = useState('')
+    const [changeIcon, setchangeIcon] = useState('')
+    const [dateDelivery, setdateDelivery] = useState('')
     const goTPEditAddress = () => {
         navigation.navigate('EditAddress')
+    }
+    const goToCart = () => {
+        navigation.navigate("Cart1")
     }
 
 
@@ -68,7 +72,8 @@ const [changeIcon, setchangeIcon] = useState('')
                                             <View style={styles.DateTimeBox}>
                                                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                                     <Image source={require('../../../assets/icon/IconCalendar2.png')} />
-                                                    <Text style={{ fontSize: 16, color: '#6D3805A3', marginLeft: 18, }} placeholder='Select Date' >Select Date</Text>
+                                                    <Text style={{ fontSize: 16, color: '#6D3805A3', 
+                                                    marginLeft: 18, }} placeholder='Select Date' >{dateDelivery}</Text>
                                                 </View>
 
                                                 <Image source={require('../../../assets/icon/IconArrowDown.png')} />
@@ -82,6 +87,13 @@ const [changeIcon, setchangeIcon] = useState('')
                                             onConfirm={(date) => {
                                                 setOpen(false)
                                                 setDate(date)
+                                                 
+                                                //console.log(typeof(date+''))
+                                                let dateNe = (date+'').substring(4,15);
+                                                console.log(dateNe)
+                                                setdateDelivery(dateNe)
+
+
                                             }}
                                             onCancel={() => {
                                                 setOpen(false)
@@ -128,18 +140,14 @@ const [changeIcon, setchangeIcon] = useState('')
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12, alignItems: 'center' }}>
                                 <Text style={[styles.tilte2, { fontWeight: '400' }]}>Some Stores May Be Temporarily {'\n'}
                                     Unavalable.</Text>
-                                <TouchableOpacity onPress={() => [setpickUpShow(!pickUpShow) ,setchangeIcon (!changeIcon)]}>
-                                   
-                                        {
-                                            changeIcon?(
-                                                <Image source={require('../../../assets/icon/IconArrowDownBrown.png')} />
-
-                                            ):(
-                                                <Image source={require('../../../assets/icon/IconArrowRoghtBrown.png')} />
-                                            )
-                                        }
-
-                       
+                                <TouchableOpacity onPress={() => [setpickUpShow(!pickUpShow), setchangeIcon(!changeIcon)]}>
+                                    {
+                                        changeIcon ? (
+                                            <Image source={require('../../../assets/icon/IconArrowDownBrown.png')} />
+                                        ) : (
+                                            <Image source={require('../../../assets/icon/IconArrowRoghtBrown.png')} />
+                                        )
+                                    }
                                 </TouchableOpacity>
                             </View>
 
@@ -186,16 +194,20 @@ const [changeIcon, setchangeIcon] = useState('')
 
                         </View>
                         {/* Basket */}
-                        <View style={styles.Basket}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image source={require('../../../assets/icon/IconBrownBasket.png')} />
-                                <Text style={[styles.tilte2, { marginLeft: 10 }]}>See Itemes</Text>
-                            </View>
-                            <TouchableOpacity >
-                                <Image source={require('../../../assets/icon/IconArrowRoghtBrown.png')} />
-                            </TouchableOpacity>
+                        <TouchableOpacity onPress={goToCart}>
 
-                        </View>
+                            <View style={styles.Basket}>
+
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Image source={require('../../../assets/icon/IconBrownBasket.png')} />
+                                    <Text style={[styles.tilte2, { marginLeft: 10 }]}>See Itemes</Text>
+                                </View>
+                                <TouchableOpacity >
+                                    <Image source={require('../../../assets/icon/IconArrowRoghtBrown.png')} />
+                                </TouchableOpacity>
+
+                            </View>
+                        </TouchableOpacity>
 
 
                         {/* Payment Method */}

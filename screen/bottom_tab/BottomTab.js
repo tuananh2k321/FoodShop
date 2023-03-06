@@ -75,6 +75,10 @@ const StackCart = () => {
       <Stack.Screen name="Cart1" component={Cart} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="CartDetail" component={CartDetail} />
+      <Stack.Screen name="Explore1" component={Explore} />
+      <Stack.Screen name="EditAddress" component={EditAddress} />
+
+
     </Stack.Navigator>
   )
 }

@@ -17,7 +17,9 @@ const Profile = (props) => {
   const goToAcount = () =>{
     navigation.navigate("Account")
   }
-
+  const goTohangePassword = () =>{
+    navigation.navigate("ChangePassword")
+  }
   const [valueLanguge, setValueLanguge] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);

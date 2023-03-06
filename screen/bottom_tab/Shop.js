@@ -1,14 +1,14 @@
 import { View, Text, Image, TextInput, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import {COLOR, ICON} from '../../contants/Themes'
+import { COLOR, ICON } from '../../contants/Themes'
 import ItemCategories from '../../components/ItemCategories'
 import ItemDeals from '../../components/ItemDeals'
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import UserReducer from '../../redux/reducer/UserReducer'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 import ItemDemo from '../../components/ItemDemo'
-const Shop = ({navigation}) => {
+const Shop = ({ navigation }) => {
   const list = useSelector(state => state.UserReducer.listUser)
   const disPatch = useDispatch()
   const [category, setCategory] = useState([
@@ -58,11 +58,11 @@ const Shop = ({navigation}) => {
       weight: "1kg,priceg",
       price: '$3,99'
     },
-    
+
   ])
   return (
     <ScrollView>
-      <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
+      <SafeAreaView style={{ flex: 1, padding: 15, backgroundColor: 'white' }}>
         {/* HEADER 1*/}
         <View
           style={{
@@ -137,15 +137,18 @@ const Shop = ({navigation}) => {
             }}>
             Categories
           </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: '400',
-              lineHeight: 28.8,
-              color: COLOR.primary,
-            }}>
-            See All
-          </Text>
+          <TouchableOpacity onPress={()=>{navigation.navigate("Explore")}}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                lineHeight: 28.8,
+                color: COLOR.primary,
+              }}>
+              See All
+            </Text>
+          </TouchableOpacity>
+
         </View>
         {/* LIST 4 */}
         <View
@@ -156,11 +159,11 @@ const Shop = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             horizontal
             data={category}
-            renderItem={({item}) => <ItemCategories category={item} 
-                onPress = {() => {
-                  navigation.navigate('DealCategoryTab')
-                
-                }}
+            renderItem={({ item }) => <ItemCategories category={item}
+              onPress={() => {
+                navigation.navigate('DealCategoryTab')
+
+              }}
             />}
             keyExtractor={eachCategory => eachCategory.name}
           />
@@ -199,14 +202,14 @@ const Shop = ({navigation}) => {
               marginBottom: 20,
             }}>
             <FlatList
-            
+
               showsHorizontalScrollIndicator={false}
               horizontal
               data={deals}
-              renderItem={({item}) => <ItemDeals deals={item} 
-                onPress = {() => {
+              renderItem={({ item }) => <ItemDeals deals={item}
+                onPress={() => {
                   navigation.navigate('CartDetail')
-                
+
                 }}
               />}
               keyExtractor={eachDeal => eachDeal.name}
@@ -214,7 +217,7 @@ const Shop = ({navigation}) => {
           </View>
         </View>
         <UIBtnPrimary
-          onPress={() => disPatch({type: 'GET_LIST_USER'})}
+          onPress={() => disPatch({ type: 'GET_LIST_USER' })}
           title="Get List"
         />
 
@@ -227,7 +230,7 @@ const Shop = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             horizontal
             data={list}
-            renderItem={({item}) => <ItemDemo deals={item} />}
+            renderItem={({ item }) => <ItemDemo deals={item} />}
             keyExtractor={eachDeal => eachDeal.name}
           />
         </View>
