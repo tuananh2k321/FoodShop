@@ -69,6 +69,16 @@ const StackExplore = () => {
   )
 }
 
+const StackCart = () => {
+  return (
+    <Stack.Navigator initialRouteName="Cart1" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Cart1" component={Cart} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
+    </Stack.Navigator>
+  )
+}
+
       
 
 
@@ -136,7 +146,7 @@ export default BottomTab = () => {
     >
       <Tab.Screen name="Shop" component={StackShop} />
       <Tab.Screen name="Explore" component={StackExplore} />
-      <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen name="Cart" component={StackCart} />
       <Tab.Screen name="StackFavorites" component={StackFavorites} />
       <Tab.Screen name="AccountTabs" component={AccountTabs} />
     </Tab.Navigator>

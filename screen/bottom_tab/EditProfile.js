@@ -1,111 +1,233 @@
-import { View, Text, Image, StyleSheet, TextInput, Pressable, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import {COLOR} from '../../contants/Themes.js'
+import UIBtnPrimary from '../../components/UIBtnPrimary'
+const windowWIdth = Dimensions.get('window').width;
+const windowHeigh = Dimensions.get('window').height
+import { SelectCountry } from 'react-native-element-dropdown'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {isValidEmpty, isValidPhone} from '../../components/Isvalidation'
+const local_data = [
+    {
+      value: '1',
+      
+      image: {
+        uri: 'https://st.quantrimang.com/photos/image/2021/09/05/Co-Vietnam.png',
+      },
+    },
+    {
+      value: '2',
+      
+      image: {
+        uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/285px-Flag_of_the_United_States_%28Pantone%29.svg.png',
+      },
+    },
+    {
+      value: '3',
+      
+      image: {
+        uri: 'https://toidi.net/wp-content/uploads/2021/08/Flag_of_Russia.svg_.png',
+      },
+    },
+    {
+      value: '4',
+      
+      image: {
+        uri: 'https://chinese.edu.vn/wp-content/uploads/2022/01/Co-Trung-Quoc.jpg',
+      },
+    },
+    {
+      value: '5',
+      
+      image: {
+        uri: 'https://duhocchd.edu.vn/files/editor/images/co1.png',
+      },
+    },
+    {
+      value: '6',
+      
+      image: {
+        uri: 'https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg',
+      },
+    },
+    {
+      value: '7',
+      
+      image: {
+        uri: 'https://i1-dulich.vnecdn.net/2013/10/03/mexico-flag-1380785949.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=8enbzFMTa1HlDWaopKOrxw',
+      },
+    },
+  ];
 
-const EditProfile = (props) => {
-    const { navigation } = props
+const SignUp = (props) => {
+  const {navigation} = props
+  const [country, setCountry] = useState('1');
 
+  const [errorPass1, setErrorPass1] = useState('')
+  const [errorPass2, setErrorPass2] = useState('')
 
-    return (
-        <KeyboardAwareScrollView>
+  const [validatePass1, setValidatePass1] = useState ('') 
+  const [validatePass2, setValidatePass2] = useState ('') 
+  const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
+  
 
-            <View style={styles.container}>
-                <TouchableOpacity onPress={() => { navigation.pop(1) }}>
-                    <Image style={styles.prnev}
-                        source={require('../../assets/img/prnev.png')}
-                    />
-                </TouchableOpacity>
+  const bothValidate = () => {
+      if (validatePass1 == false && validatePass2 == false) {
+        setValidatePass3(false)
+      } else {
+        setValidatePass3(true)
+      }
+  }
 
-                <Text style={styles.title}> Edit Profile</Text>
-                <TextInput style={styles.textiput} placeholder='Iput'></TextInput>
-                <View style={styles.dropdown}>
+  return (
+    <KeyboardAwareScrollView showsVerticalScrollIndicator = {false}>
+      <SafeAreaView
+        style={{
+          padding: 15,
+          backgroundColor: 'white',
+          height: windowHeigh - 90
+        }}>
+        <View
+          style={{
+            height: '100%',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{alignSelf: 'flex-start'}}>
+            <Image source={require('../../assets/img/IconArrow.png')} />
+          </TouchableOpacity>
 
-                    <Image style={styles.imco}
-                        source={require('../../assets/img/co.png')}
-                    />
-                    <Image style={styles.imdown}
-                        source={require('../../assets/img/down.png')}
-                    />
-                    <TextInput style={styles.iputdown} placeholder='+46 888 86 99'></TextInput>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: '700',
+              color: COLOR.primary,
+              lineHeight: 28.8,
+              alignSelf: 'center',
+              marginBottom: 60
+            }}>
+            Edit Profile
+          </Text>
+          
 
-                </View>
-                <Pressable style={styles.update}>
-                    <Text style={styles.textupdate}>Update Profile</Text>
+          <View style={{width: '100%', marginBottom: 10}}>
+            <TextInput
+              style={{
+                height: 48,
+                backgroundColor: '#F3F3F3',
+                width: '100%',
+                paddingLeft: 30,
+                marginBottom: 5,
+              }}
+              placeholder="Name Surname"
+              placeholderTextColor="#AC8E71"
+              onChangeText={text => {
+                setValidatePass1(text);
+                if (isValidEmpty(text) == false) {
+                  setErrorPass1('không được để trống');
+                } else {
+                    setErrorPass1('');
+                }
+              }}></TextInput>
 
-                </Pressable>
+            
+              <Text style={{color: 'red', textAlign: 'left'}}>
+                {errorPass1}
+              </Text>
+            
+          </View>
+
+          <View style={{width: '100%'}}>
+            <View style={{position: 'absolute', zIndex: 1, top: 5}}>
+              <SelectCountry
+                style={styles.dropdown}
+                selectedTextStyle={styles.selectedTextStyle}
+                placeholderStyle={styles.placeholderStyle}
+                imageStyle={styles.imageStyle}
+                iconStyle={styles.iconStyle}
+                maxHeight={200}
+                value={country}
+                data={local_data}
+                valueField="value"
+                labelField="lable"
+                imageField="image"
+                placeholder="Select country"
+                searchPlaceholder="Search..."
+                onChange={e => {
+                  setCountry(e.value);
+                }}
+              />
             </View>
-        </KeyboardAwareScrollView>
 
-    )
+            <View style={{width: '100%'}}>
+              <TextInput
+                style={{
+                  height: 48,
+                  backgroundColor: '#F3F3F3',
+                  width: '100%',
+                  paddingLeft: 90,
+                }}
+                placeholder="Phone Number"
+                placeholderTextColor="#AC8E71"
+                keyboardType="numeric"
+                onChangeText={text => {
+                    setValidatePass2(text);
+                    if (isValidPhone(text) == false) {
+                      setErrorPass2('phải đủ 10 số');
+                    } else {
+                        setErrorPass2('');
+                    }
+                }}
+              />
+            </View>
+            
+              <Text style={{color: 'red'}}>{errorPass2}</Text>
+            
+          </View>
+
+          
+
+          <View style={{position: 'absolute', bottom: 0}}>
+          <UIBtnPrimary
+            title="Update Profile "
+            disable={isValidationOK() == false}
+          />
+          </View>
+
+          
+        </View>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
+  );
 }
 
-export default EditProfile
+export default SignUp
+
 const styles = StyleSheet.create({
-    textupdate: {
-        fontWeight: '700',
-        fontSize: 18,
-        lineHeight: 45,
-        color: '#FFFFFF',
-        textAlign: 'center',
-        alignItems: 'center'
-    },
-    update: {
-        width: 343,
-        height: 50,
-        right: 17,
-        marginTop: 300,
-        backgroundColor: '#FF5E00',
-        borderRadius: 30,
-        marginLeft: 40
-    },
-    imdown: {
-        width: 9.67,
-        marginLeft: 12,
+    // DROPDOWN
+  dropdown: {
+    height: 40,
+    width: 45,
+    paddingHorizontal: 8,
+  },
+  imageStyle: {
+    width: 30,
+    height: 30,
+    alignSelf: 'center',
+    
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
 
-    },
-    imco: {
-        width: 23,
-        height: 26,
-        marginLeft: 12
-    },
-    dropdown: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 90,
-        width: 343,
-        height: 48,
-        backgroundColor: '#F3F3F3',
-        marginLeft: 16,
-    },
-    textiput: {
-        width: 343,
-        height: 48,
-        left: 16,
-        top: 64,
-        borderRadius: 5,
-        backgroundColor: '#F3F3F3',
-        paddingLeft: 21
-    },
-
-    title: {
-        fontSize: 24,
-        lineHeight: 29,
-        fontWeight: '700',
-        color: '#FF5E00',
-        marginTop: 5,
-        textAlign: 'center'
-
-
-    },
-    prnev: {
-        marginLeft: 20,
-        width: 8.49,
-        height: 14,
-        color: '#FF5E00',
-        marginTop: 20
-    },
-    container: {
-        flex: 1,
-        backgroundColor: "white"
-    }
 })
+

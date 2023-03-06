@@ -70,7 +70,9 @@ const Favorites2 = (props) => {
       <View style={{backgroundColor: 'white'}}>
         <SwipeListView
           data={deals}
-          renderItem={({item}) => <ItemFavorites favorites={item} />}
+          renderItem={({item}) => <ItemFavorites favorites={item} 
+              onPress={() => navigation.navigate('CartDetail')}
+          />}
           renderHiddenItem={(data, rowMap) => (
             <TouchableOpacity
               onPress={showDialog}

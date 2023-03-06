@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import {COLOR} from '../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-const ItemFavorites = (props) => {
-    const {favorites} = props
-    const {name,  price, image} = favorites
-    const {onPress} = props
+const ItemCart = (props) => {
+    const {cart} = props
+    const {name, number, price, image} = cart
+    const {onPressMinus, onPressPlus, onPress} = props
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -37,24 +37,38 @@ const ItemFavorites = (props) => {
               {name}
             </Text>
 
-            <TouchableOpacity>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#F4F4F4',
+                width: 98,
+                justifyContent: 'space-between',
+                borderRadius: 30,
+              }}>
+              <TouchableOpacity onPress={onPressMinus}>
                 <Image
-                  source={require('../assets/icon/icons8-shopping-cart-50.png')}
-                  style={{width: 20, height: 20, tintColor: COLOR.primary}}
+                  source={require('../assets/icon/icons8-minus-sign-50.png')}
+                  style={{width: 35, height: 35, tintColor: COLOR.title}}
                 />
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: '400',
-                    lineHeight: 16.8,
-                    color: COLOR.primary,
-                    marginLeft: 5,
-                  }}>
-                  Add to cart
-                </Text>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '400',
+                  lineHeight: 21.6,
+                  color: COLOR.title,
+                  marginHorizontal: 5,
+                }}>
+                {number}
+              </Text>
+              <TouchableOpacity onPress={onPressPlus}>
+                <Image
+                  source={require('../assets/icon/icons8-add-50.png')}
+                  style={{width: 35, height: 35, tintColor: COLOR.title}}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={{alignItems: 'center'}}>
@@ -76,6 +90,6 @@ const ItemFavorites = (props) => {
   );
 }
 
-export default ItemFavorites
+export default ItemCart
 
 const styles = StyleSheet.create({})
