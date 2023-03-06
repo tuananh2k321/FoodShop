@@ -14,10 +14,10 @@ const Profile = (props) => {
   const goToEditProfile = () => {
     navigation.navigate("EditProfile")
   }
-  const goToAcount = () =>{
+  const goToAcount = () => {
     navigation.navigate("Account")
   }
-  const goTohangePassword = () =>{
+  const goTohangePassword = () => {
     navigation.navigate("ChangePassword")
   }
   const [valueLanguge, setValueLanguge] = useState(null);
@@ -34,7 +34,7 @@ const Profile = (props) => {
     }
     return null;
   };
-  
+
 
   return (
     <View style={styles.container}>
@@ -82,9 +82,8 @@ const Profile = (props) => {
           />
         </View>
       </View>
-
-      <View style={styles.profile}>
-        <TouchableOpacity onPress={() => navigation.navigate('MyCard')}>
+      <TouchableOpacity onPress={() => navigation.navigate('MyCard')}>
+        <View style={styles.profile}>
           <View style={styles.pro}>
             <Image
               style={styles.imuser}
@@ -92,14 +91,15 @@ const Profile = (props) => {
             />
             <Text style={styles.edit}>My Cards</Text>
           </View>
-        </TouchableOpacity>
-        <View style={styles.next}>
-          <Image
-            style={styles.imnext}
-            source={require('../../assets/img/next.png')}
-          />
+          <View style={styles.next}>
+            <Image
+              style={styles.imnext}
+              source={require('../../assets/img/next.png')}
+            />
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+
       <Text style={styles.appseting}>App Settings</Text>
 
       <View style={styles.profile}>
@@ -112,8 +112,8 @@ const Profile = (props) => {
         </View>
         <View style={styles.next1}>
           <Switch
-            style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
-            trackColor={{false: '#804F1E', true: '#FF5E00'}}
+            style={{ transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+            trackColor={{ false: '#804F1E', true: '#FF5E00' }}
             thumbColor={isEnabled ? '#FFFFFF' : '#FFFFFF'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}

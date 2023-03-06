@@ -54,6 +54,12 @@ const AccountTabs = () => {
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="MyCard" component={MyCard} />
       <Stack.Screen name="NewCard" component={NewCard} />
+      <Stack.Screen name="Cart1" component={Cart} />
+      <Stack.Screen name="Explore1" component={Explore} />
+      <Stack.Screen name="Shop1" component={Shop} />
+
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }
@@ -62,6 +68,22 @@ const AccountTabs = () => {
 const StackExplore = () => {
   return (
     <Stack.Navigator initialRouteName="Explore1" screenOptions={{ headerShown: false }}>
+     <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Order" component={Order} />
+      <Stack.Screen name="OnGoing" component={OnGoing} />
+      <Stack.Screen name="HistoryOrder" component={HistoryOrder} />
+      <Stack.Screen name="Address" component={Address} />
+      <Stack.Screen name="NewAddress" component={NewAddress} />
+      <Stack.Screen name="EditAddress" component={EditAddress} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="MyCard" component={MyCard} />
+      <Stack.Screen name="NewCard" component={NewCard} />
+      <Stack.Screen name="Cart1" component={Cart} />
+      <Stack.Screen name="Shop1" component={Shop} />
+
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
       <Stack.Screen name="CartDetail" component={CartDetail} />
@@ -72,13 +94,25 @@ const StackExplore = () => {
 const StackCart = () => {
   return (
     <Stack.Navigator initialRouteName="Cart1" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Cart1" component={Cart} />
-      <Stack.Screen name="Payment" component={Payment} />
-      <Stack.Screen name="CartDetail" component={CartDetail} />
-      <Stack.Screen name="Explore1" component={Explore} />
+    <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Order" component={Order} />
+      <Stack.Screen name="OnGoing" component={OnGoing} />
+      <Stack.Screen name="HistoryOrder" component={HistoryOrder} />
+      <Stack.Screen name="Address" component={Address} />
+      <Stack.Screen name="NewAddress" component={NewAddress} />
       <Stack.Screen name="EditAddress" component={EditAddress} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="MyCard" component={MyCard} />
+      <Stack.Screen name="NewCard" component={NewCard} />
+      <Stack.Screen name="Cart1" component={Cart} />
+      <Stack.Screen name="Shop1" component={Shop} />
 
-
+      <Stack.Screen name="Explore1" component={Explore} />
+      <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
+      <Stack.Screen name="CartDetail" component={CartDetail} />
     </Stack.Navigator>
   )
 }

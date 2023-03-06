@@ -1,17 +1,78 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, {useState, useRef} from 'react';
 
-const Test = () => {
+import { View, Text, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+
+import PhoneInput from 'react-native-phone-number-input';
+
+
+export default function App() {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const phoneInput = useRef(null);
+
+  const getPhoneNumber = () => {
+    Alert.alert(phoneNumber);
+  };
+
   return (
-    <View>
-      <Text>Test</Text>
+    <View style={styleSheet.MainContainer2}>
+
+    
+
+      <PhoneInput
+        ref={phoneInput}
+        defaultValue={phoneNumber}
+        defaultCode="VN"
+        layout="first"
+        withShadow
+        autoFocus
+        containerStyle={styleSheet.phoneNumberView}
+        textContainerStyle={{ paddingVertical: 0 }}
+        onChangeFormattedText={text => {
+          setPhoneNumber(text);
+        }}
+      />
+
+   
     </View>
-  )
+  );
 }
 
-export default Test
+const styleSheet = StyleSheet.create({
 
-const styles = StyleSheet.create({})
+  MainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  heading:{
+    fontSize: 24,
+    textAlign: 'center',
+    paddingBottom: 20,
+    color: 'black'
+  },
+
+  phoneNumberView: {
+    width: '80%',
+    height: 50,
+    backgroundColor: 'white'
+  },
+
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
+    width: '80%',
+    padding: 8,
+    backgroundColor: '#00B8D4',
+  },
+
+  buttonText:{
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'white'
+  }
+});
 
 
 

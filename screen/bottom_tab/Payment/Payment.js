@@ -18,13 +18,18 @@ const Payment = (props) => {
     const [pickUpShow, setpickUpShow] = useState(false)
     const [changeIcon, setchangeIcon] = useState('')
     const [dateDelivery, setdateDelivery] = useState('')
+    const [timeDelivery, settimeDelivery] = useState('')
     const goTPEditAddress = () => {
         navigation.navigate('EditAddress')
     }
     const goToCart = () => {
         navigation.navigate("Cart1")
     }
-
+    const pickTime = () => {
+        let time = "8AM - 11AM";
+        settimeDelivery(time);
+        console.log(time)
+    }
 
     return (
         <KeyboardAwareScrollView>
@@ -72,8 +77,10 @@ const Payment = (props) => {
                                             <View style={styles.DateTimeBox}>
                                                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                                     <Image source={require('../../../assets/icon/IconCalendar2.png')} />
-                                                    <Text style={{ fontSize: 16, color: '#6D3805A3', 
-                                                    marginLeft: 18, }} placeholder='Select Date' >{dateDelivery}</Text>
+                                                    <Text style={{
+                                                        fontSize: 16, color: '#6D3805A3',
+                                                        marginLeft: 18,
+                                                    }} placeholder='Select Date' >{dateDelivery}</Text>
                                                 </View>
 
                                                 <Image source={require('../../../assets/icon/IconArrowDown.png')} />
@@ -87,9 +94,9 @@ const Payment = (props) => {
                                             onConfirm={(date) => {
                                                 setOpen(false)
                                                 setDate(date)
-                                                 
+
                                                 //console.log(typeof(date+''))
-                                                let dateNe = (date+'').substring(4,15);
+                                                let dateNe = (date + '').substring(4, 15);
                                                 console.log(dateNe)
                                                 setdateDelivery(dateNe)
 
@@ -104,7 +111,9 @@ const Payment = (props) => {
                                         {/* Time */}
                                         <View style={styles.boxTimeExpected}>
                                             <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity style={styles.itemTime}>
+                                                <TouchableOpacity
+                                                    onPress={pickTime}
+                                                    style={styles.itemTime}>
                                                     <Text style={styles.TextTime}>8 AM - 11 AM</Text>
                                                 </TouchableOpacity>
 

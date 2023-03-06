@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from './screen/Welcome'
@@ -15,21 +15,32 @@ import Redux from './redux/Store';
 import Payment from './screen/bottom_tab/Payment/Payment';
 import ItemOrderHistory from './components/ItemOrderHistory';
 import HistoryOrder from './screen/bottom_tab/AccountTabs/HistoryOrder';
+import EditProfile from './screen/bottom_tab/EditProfile'
 import SignCode from './screen/SignCode'
 const Stack = createNativeStackNavigator();
+const StackBegin = () => {
+  return (
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Signpass" component={Signpass} />
+      <Stack.Screen name="SignCode" component={SignCode} />
+      <Stack.Screen name="Login" component={Login} />
+    </Stack.Navigator>
+  )
+}
 
 const App = () => {
+
   return (
     <Provider store={Redux.store}>
-
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Signpass" component={Signpass} />
-          <Stack.Screen name="SignCode" component={SignCode} />
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTab" component={BottomTab} />
+          <Stack.Screen name="EditProfile" component={EditProfile} />
+
+
           <Stack.Screen name="Test" component={Test} />
         </Stack.Navigator>
       </NavigationContainer>
