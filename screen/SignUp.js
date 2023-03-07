@@ -2,12 +2,12 @@ import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, Tex
 import React, { useRef, useState } from 'react'
 import { COLOR } from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
-const windowWIdth = Dimensions.get('window').width;
 import { SelectCountry } from 'react-native-element-dropdown'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
-
+const windowHeight = Dimensions.get('window').height
+const windowWIdth = Dimensions.get('window').width;
 const local_data = [
   {
     value: '1',
@@ -92,6 +92,7 @@ const SignUp = (props) => {
       <SafeAreaView
         style={{
           flex: 1,
+          height: windowHeight,
           padding: 15,
           backgroundColor: 'white',
         }}>
@@ -189,17 +190,19 @@ const SignUp = (props) => {
               color: COLOR.title,
               lineHeight: 19.8,
               marginTop: 20,
-              marginBottom: 10,
+              marginBottom: 40,
             }}>
             We need to verify you. We will send you a one time verification
             code.
           </Text>
 
+          <View style={{}}>
           <UIBtnPrimary
             title="Next"
             disable={isValidationOK() == false}
             onPress={startSignpass}
           />
+          </View>
 
           <View style={{ flexDirection: 'row' }}>
             <Text
