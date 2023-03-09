@@ -9,62 +9,11 @@ import PhoneInput from 'react-native-phone-number-input';
 import auth from '@react-native-firebase/auth';
 const windowHeight = Dimensions.get('window').height
 const windowWIdth = Dimensions.get('window').width;
-const local_data = [
-  {
-    value: '1',
 
-    image: {
-      uri: 'https://st.quantrimang.com/photos/image/2021/09/05/Co-Vietnam.png',
-    },
-  },
-  {
-    value: '2',
-
-    image: {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/285px-Flag_of_the_United_States_%28Pantone%29.svg.png',
-    },
-  },
-  {
-    value: '3',
-
-    image: {
-      uri: 'https://toidi.net/wp-content/uploads/2021/08/Flag_of_Russia.svg_.png',
-    },
-  },
-  {
-    value: '4',
-
-    image: {
-      uri: 'https://chinese.edu.vn/wp-content/uploads/2022/01/Co-Trung-Quoc.jpg',
-    },
-  },
-  {
-    value: '5',
-
-    image: {
-      uri: 'https://duhocchd.edu.vn/files/editor/images/co1.png',
-    },
-  },
-  {
-    value: '6',
-
-    image: {
-      uri: 'https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg',
-    },
-  },
-  {
-    value: '7',
-
-    image: {
-      uri: 'https://i1-dulich.vnecdn.net/2013/10/03/mexico-flag-1380785949.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=8enbzFMTa1HlDWaopKOrxw',
-    },
-  },
-];
 
 const SignUp = (props) => {
   const { navigation } = props
-  const [country, setCountry] = useState('1');
-
+  const [confirm, setConfirm] = useState(null);
    // Handle login
    function onAuthStateChanged(user) {
     if (user) {
@@ -81,8 +30,9 @@ const SignUp = (props) => {
   }, []);
 
   async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber('+84' + phoneNumber);
+    const confirmation = await auth().signInWithPhoneNumber('+84'+phoneNumber);
       setConfirm(confirmation);
+      console.log(confirm)
     }
 
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -99,14 +49,6 @@ const SignUp = (props) => {
   const [validatePass2, setValidatePass2] = useState('')
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
 
-
-  const bothValidate = () => {
-    if (validatePass1 == false && validatePass2 == false) {
-      setValidatePass3(false)
-    } else {
-      setValidatePass3(true)
-    }
-  }
 
   return (
     <KeyboardAwareScrollView>
@@ -222,8 +164,9 @@ const SignUp = (props) => {
             title="Next"
             disable={isValidationOK() == false}
             onPress={() => {
+              signInWithPhoneNumber(validatePass2)
+              console.log(validatePass2)
               startSignpass()
-              signInWithPhoneNumber(validatePass1)
             }}
           />
           </View>
