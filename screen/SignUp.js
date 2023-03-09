@@ -6,7 +6,7 @@ import { SelectCountry } from 'react-native-element-dropdown'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
-import auth from '@react-native-firebase/app'
+import auth from '@react-native-firebase/auth';
 const windowHeight = Dimensions.get('window').height
 const windowWIdth = Dimensions.get('window').width;
 const local_data = [
