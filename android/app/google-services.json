@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "774396199993",
+    "project_id": "foodshop-8b2ea",
+    "storage_bucket": "foodshop-8b2ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774396199993:android:308c23c19ad937539bb9e8",
+        "android_client_info": {
+          "package_name": "com.foodshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774396199993-3ui6ark4jjphn9s7fd3tf8md5ottd0co.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXjSuw8E1zhXWMLx1MQMUNEMtT1icEX4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774396199993-3ui6ark4jjphn9s7fd3tf8md5ottd0co.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
