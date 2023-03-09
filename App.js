@@ -35,7 +35,7 @@ const App = () => {
   return (
     <Provider store={Redux.store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTab" component={BottomTab} />

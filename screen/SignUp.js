@@ -64,6 +64,11 @@ const SignUp = (props) => {
   const { navigation } = props
   const [country, setCountry] = useState('1');
 
+  async function signInWithPhoneNumber(phoneNumber) {
+    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setConfirm(confirmation);
+    }
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const phoneInput = useRef(null);
 
@@ -200,7 +205,10 @@ const SignUp = (props) => {
           <UIBtnPrimary
             title="Next"
             disable={isValidationOK() == false}
-            onPress={startSignpass}
+            onPress={() => {
+              startSignpass()
+              signInWithPhoneNumber(validatePass1)
+            }}
           />
           </View>
 
