@@ -1,14 +1,14 @@
-apply plugin: "com.android.application"
-apply plugin: "com.google.gms.google-services"
-// plugins {
-//   id 'com.android.application'
+// apply plugin: "com.android.application"
+// apply plugin: "com.google.gms.google-services"
+plugins {
+  id 'com.android.application'
 
-//   // Add the Google services Gradle plugin
-//   id 'com.google.gms.google-services'
-// }
+  // Add the Google services Gradle plugin
+  id 'com.google.gms.google-services'
+}
 
-// import com.android.build.OutputFile
-// import org.apache.tools.ant.taskdefs.condition.Os
+import com.android.build.OutputFile
+import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
