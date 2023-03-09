@@ -32,7 +32,7 @@ const DealCategoryTab = ({navigation}) => {
             <TextInput style={styles.textSearch} placeholder="Search" />
           </View>
           <TopTab.Navigator
-            initialRouteName="Fruit"
+            initialRouteName="Fruit" 
             screenOptions={{
               tabBarActiveTintColor: COLOR.primary,
               tabBarInactiveTintColor: COLOR.title,
