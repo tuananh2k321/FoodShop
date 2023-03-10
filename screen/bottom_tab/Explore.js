@@ -71,7 +71,7 @@ const Explore = ({navigation}) => {
 
     return (
       
-      <ScrollView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
+      <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
         <View style={styles.selectContainer}>
           <Text style={styles.textCategories}> Categories </Text>
         </View>
@@ -98,7 +98,7 @@ const Explore = ({navigation}) => {
             keyExtractor={eachCategory => eachCategory.name}
           />
         </View>
-      </ScrollView>
+      </SafeAreaView>
     
     );
 }
