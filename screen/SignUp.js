@@ -1,39 +1,68 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, TextInput, TouchableOpacity } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { COLOR } from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
+const windowWIdth = Dimensions.get('window').width;
 import { SelectCountry } from 'react-native-element-dropdown'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
-import auth from '@react-native-firebase/auth';
-const windowHeight = Dimensions.get('window').height
-const windowWIdth = Dimensions.get('window').width;
 
+const local_data = [
+  {
+    value: '1',
+
+    image: {
+      uri: 'https://st.quantrimang.com/photos/image/2021/09/05/Co-Vietnam.png',
+    },
+  },
+  {
+    value: '2',
+
+    image: {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/285px-Flag_of_the_United_States_%28Pantone%29.svg.png',
+    },
+  },
+  {
+    value: '3',
+
+    image: {
+      uri: 'https://toidi.net/wp-content/uploads/2021/08/Flag_of_Russia.svg_.png',
+    },
+  },
+  {
+    value: '4',
+
+    image: {
+      uri: 'https://chinese.edu.vn/wp-content/uploads/2022/01/Co-Trung-Quoc.jpg',
+    },
+  },
+  {
+    value: '5',
+
+    image: {
+      uri: 'https://duhocchd.edu.vn/files/editor/images/co1.png',
+    },
+  },
+  {
+    value: '6',
+
+    image: {
+      uri: 'https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg',
+    },
+  },
+  {
+    value: '7',
+
+    image: {
+      uri: 'https://i1-dulich.vnecdn.net/2013/10/03/mexico-flag-1380785949.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=8enbzFMTa1HlDWaopKOrxw',
+    },
+  },
+];
 
 const SignUp = (props) => {
   const { navigation } = props
-  const [confirm, setConfirm] = useState(null);
-   // Handle login
-   function onAuthStateChanged(user) {
-    if (user) {
-      // Some Android devices can automatically process the verification code (OTP) message, and the user would NOT need to enter the code.
-      // Actually, if he/she tries to enter it, he/she will get an error message because the code was already used in the background.
-      // In this function, make sure you hide the component(s) for entering the code and/or navigate away from this screen.
-      // It is also recommended to display a message to the user informing him/her that he/she has successfully logged in.
-    }
-  }
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
-
-  async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber('+84'+phoneNumber);
-      setConfirm(confirmation);
-      console.log(confirm)
-    }
+  const [country, setCountry] = useState('1');
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const phoneInput = useRef(null);
@@ -50,12 +79,19 @@ const SignUp = (props) => {
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
 
 
+  const bothValidate = () => {
+    if (validatePass1 == false && validatePass2 == false) {
+      setValidatePass3(false)
+    } else {
+      setValidatePass3(true)
+    }
+  }
+
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView
         style={{
           flex: 1,
-          height: windowHeight,
           padding: 15,
           backgroundColor: 'white',
         }}>
@@ -153,23 +189,17 @@ const SignUp = (props) => {
               color: COLOR.title,
               lineHeight: 19.8,
               marginTop: 20,
-              marginBottom: 40,
+              marginBottom: 10,
             }}>
             We need to verify you. We will send you a one time verification
             code.
           </Text>
 
-          <View style={{}}>
           <UIBtnPrimary
             title="Next"
             disable={isValidationOK() == false}
-            onPress={() => {
-              signInWithPhoneNumber(validatePass2)
-              console.log(validatePass2)
-              startSignpass()
-            }}
+            onPress={startSignpass}
           />
-          </View>
 
           <View style={{ flexDirection: 'row' }}>
             <Text

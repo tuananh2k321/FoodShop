@@ -21,8 +21,7 @@ import Maps from './screen//bottom_tab/Maps'
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Welcome" component={Welcome} />
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Signpass" component={Signpass} />
       <Stack.Screen name="SignCode" component={SignCode} />
@@ -36,7 +35,7 @@ const App = () => {
   return (
     <Provider store={Redux.store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTab" component={BottomTab} />

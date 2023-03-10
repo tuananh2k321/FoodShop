@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput,ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import ItemCategories from '../../components/ItemCategories'
 import { COLOR } from '../../contants/Themes'
@@ -25,12 +25,53 @@ const Explore = ({navigation}) => {
           image: require('../../assets/img/fish.png'),
           backGround: '#FBC1BD'
         },
+        {
+          name: 'Sea food',
+          image: require('../../assets/img/tom.png'),
+          backGround: '#FFE299'
+        },
+        {
+          name: 'juice',
+          image: require('../../assets/img/juicce.png'),
+          backGround: '#D3E5C4'
+        },
+        {
+          name: 'Egg & Milk',
+          image: require('../../assets/img/egg.png'),
+          backGround: '#DAF2FC'
+        },
+        {
+          name: 'ice Cream',
+          image: require('../../assets/img/icecream.png'),
+          backGround: '#FFDEF6'
+        },
+        {
+          name: 'Cake',
+          image: require('../../assets/img/cakee.png'),
+          backGround: '#FECA97'
+        },
+        {
+          name: 'Egg & Milk',
+          image: require('../../assets/img/egg.png'),
+          backGround: '#DAF2FC'
+        },
+        {
+          name: 'Fruits',
+          image: require('../../assets/img/nho.png'),
+          backGround: '#EDD0FF'
+        },
+        {
+          name: 'Sea food',
+          image: require('../../assets/img/tom.png'),
+          backGround: '#FFE299'
+        },
       ])
 
     
 
     return (
-      <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
+      
+      <ScrollView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
         <View style={styles.selectContainer}>
           <Text style={styles.textCategories}> Categories </Text>
         </View>
@@ -57,7 +98,8 @@ const Explore = ({navigation}) => {
             keyExtractor={eachCategory => eachCategory.name}
           />
         </View>
-      </SafeAreaView>
+      </ScrollView>
+    
     );
 }
 

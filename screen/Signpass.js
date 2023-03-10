@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, Pressable, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPass } from '../components/Isvalidation'
-const windowHeight = Dimensions.get('window').height
 const Signpass = ({navigation}) => {
   //HIDDEN or SHOW
     const [isPass1, setIspass1] = useState (true)
@@ -107,8 +106,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFFFFF',
         padding: 15,
-        alignItems: 'center',
-        height: windowHeight
+        justifyContent: 'center',
+        
     },
 
     selectionContainer: {
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
     btnSignup: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 40,
+        marginTop: 17,
         paddingVertical: 13,
         paddingHorizontal: 24,
         width: '100%',
