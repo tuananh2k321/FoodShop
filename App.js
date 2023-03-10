@@ -21,11 +21,12 @@ import Maps from './screen//bottom_tab/Maps'
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
-    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Signpass" component={Signpass} />
       <Stack.Screen name="SignCode" component={SignCode} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Welcome" component={Welcome} />
     </Stack.Navigator>
   )
 }

@@ -174,7 +174,7 @@ const Login = (props) => {
               <Text
                 style={[
                   styles.text,
-                  { fontSize: 14, color: '#FF5E00', paddingRight: 10, fontWeight: '500' },
+                  { fontSize: 14, color: '#FF5E00', paddingRight: 10, fontWeight: '500', marginBottom: 10 },
                 ]}>
                 Forgot Password
               </Text>
@@ -223,7 +223,7 @@ export default Login
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-
+    height: windowHeight,
     backgroundColor: 'white'
   },
   container: {

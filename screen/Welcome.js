@@ -22,6 +22,7 @@ const Welcome = (props) => {
           style={{
             width: 329.36,
             height: 362,
+            marginBottom: 20
           }}
         />
         <Text
@@ -46,7 +47,7 @@ const Welcome = (props) => {
             width: 257,
             height: 57,
             textAlign: 'center',
-            marginBottom: 20
+            marginBottom: 60
           }}>
                Shop online and get grocories
                 delivered from stores to your home

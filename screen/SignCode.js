@@ -17,7 +17,7 @@ const SignCode = (props) => {
       <SafeAreaView
         style={{
           flex: 1,
-
+          height: windowHeight,
           padding: 15,
           backgroundColor: 'white',
         }}>
@@ -111,7 +111,7 @@ const SignCode = (props) => {
                 {errorCode}
               </Text>
 
-          <View style={{marginTop: 18}}>
+          <View style={{marginTop: 50}}>
             <UIBtnPrimary title="Sign Up" 
               onPress = {() => navigation.navigate('Login')}
               disable = {isValidationOK() == false}
