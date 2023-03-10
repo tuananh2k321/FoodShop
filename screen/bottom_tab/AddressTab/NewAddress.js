@@ -39,6 +39,7 @@ const NewAddress = (props) => {
     };
     return (
         <KeyboardAwareScrollView>
+
             <SafeAreaView style={styles.main}>
                 <View style={styles.container}>
                     <View style={styles.header}>
@@ -51,7 +52,9 @@ const NewAddress = (props) => {
                     <View style={styles.title}>
                         <Text style={styles.title}>New Addresses</Text>
                     </View>
-
+                    <TouchableOpacity style={styles.fab} onPress={()=>{navigation.navigate("Maps")}}>
+                        <Image style={{ width: 30, height: 30 }} source={require("../../../assets/icon/IconGGMaps.png")}></Image>
+                    </TouchableOpacity>
 
                     {/* Input */}
 
@@ -165,5 +168,24 @@ const styles = StyleSheet.create({
         paddingHorizontal: 27,
         backgroundColor: '#F3F3F3',
         width: windowWIdth - 40,
+    },
+    fab: {
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 20,
+        bottom: 80,
+        backgroundColor: 'white',
+        borderRadius: 30,
+        elevation: 8,
+        borderWidth: 2,
+        borderColor: '#fff',
+    },
+    fabText: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
     },
 })

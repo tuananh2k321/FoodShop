@@ -27,6 +27,7 @@ import DealCategoryTab from '../DealsCategoryTab/DealCategoryTab';
 import ChangePassword from './ChangePassword';
 import MyCard from './MyCard';
 import NewCard from './NewCard';
+import Maps from './Maps'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,8 @@ const AccountTabs = () => {
       <Stack.Screen name="Cart1" component={Cart} />
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="Shop1" component={Shop} />
+      <Stack.Screen name="Maps" component={Maps} />
+
 
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
       <Stack.Screen name="CartDetail" component={CartDetail} />
@@ -83,6 +86,7 @@ const StackExplore = () => {
       <Stack.Screen name="NewCard" component={NewCard} />
       <Stack.Screen name="Cart1" component={Cart} />
       <Stack.Screen name="Shop1" component={Shop} />
+      <Stack.Screen name="Maps" component={Maps} />
 
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
@@ -109,6 +113,7 @@ const StackCart = () => {
       <Stack.Screen name="NewCard" component={NewCard} />
       <Stack.Screen name="Cart1" component={Cart} />
       <Stack.Screen name="Shop1" component={Shop} />
+      <Stack.Screen name="Maps" component={Maps} />
 
       <Stack.Screen name="Explore1" component={Explore} />
       <Stack.Screen name="DealCategoryTab" component={DealCategoryTab} />
