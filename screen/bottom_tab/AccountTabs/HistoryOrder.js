@@ -9,6 +9,8 @@ const HistoryOrder = () => {
        <ItemOrderHistory/>
        <ItemOrderHistory/>
        <ItemOrderHistory/>
+     
+
 
       </View>
     </SafeAreaView>

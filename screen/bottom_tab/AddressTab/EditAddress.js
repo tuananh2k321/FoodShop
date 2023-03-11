@@ -146,11 +146,11 @@ const EditAddress = (props) => {
 
         {/* BUTTON  */}
         <TouchableOpacity style={styles.btnAdd}>
-          <Pressable>
+       
             <Text style={[styles.text, { color: 'white', fontWeight: 'bold', fontSize: 20, }]}>
               Update Address
             </Text>
-          </Pressable>
+      
         </TouchableOpacity>
       </View>
     </SafeAreaView>

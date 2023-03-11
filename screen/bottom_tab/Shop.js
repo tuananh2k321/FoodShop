@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
+import { View, Text, Image, TextInput, FlatList,Dimensions,RefreshControl, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { COLOR, ICON } from '../../contants/Themes'
@@ -9,9 +9,14 @@ import UserReducer from '../../redux/reducer/UserReducer'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 import ItemDemo from '../../components/ItemDemo'
 import Dialog from 'react-native-dialog'
+const windowWIdth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Shop = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
+  
+
+  const [refreshControl, setRefreshControl] = useState(false)
   setTimeout(() => {
     setVisible(false)
   }, 3000); 
@@ -72,7 +77,10 @@ const Shop = ({ navigation }) => {
 
   ])
   return (
-    <ScrollView>
+    <ScrollView 
+    
+    showsVerticalScrollIndicator={false}
+    >
       <SafeAreaView style={{ flex: 1, padding: 15, backgroundColor: 'white' }}>
         {/* HEADER 1*/}
         <View
@@ -176,6 +184,7 @@ const Shop = ({ navigation }) => {
 
               }}
             />}
+           
             keyExtractor={eachCategory => eachCategory.name}
           />
         </View>

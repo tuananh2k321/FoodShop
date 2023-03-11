@@ -33,7 +33,8 @@ const Payment = (props) => {
 
     return (
         <KeyboardAwareScrollView>
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={false} >
                 <SafeAreaView style={styles.main}>
                     <View style={styles.container}>
                         {/* Header */}

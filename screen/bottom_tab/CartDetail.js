@@ -1,4 +1,4 @@
-import { View, Image, Text, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import ItemDeals from '../../components/ItemDeals'
 import React, { useState } from 'react'
 
@@ -45,7 +45,9 @@ const CartDetail = ({ navigation }) => {
 
   ])
   return (
-    <ScrollView style={magosheet.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={magosheet.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image
           source={require('../../assets/img/prnev.png')}
@@ -73,9 +75,9 @@ const CartDetail = ({ navigation }) => {
           <TouchableOpacity style={magosheet.ipsl} onPress={tru}>
             <Text style={magosheet.ttru}>-</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 24, top: 8, left: 135, position: 'absolute' }}>
+          <TextInput style={{ fontSize: 24, left: 135, position: 'absolute' }}>
             {first}
-          </Text>
+          </TextInput>
 
           <TouchableOpacity
             style={[magosheet.ipsl, { top: 5, left: 205 }]}
@@ -85,23 +87,23 @@ const CartDetail = ({ navigation }) => {
         </View>
 
 
-      
-          <TouchableOpacity onPress={() => {
-            setaddToFavorite(!addToFavorite);
-          }}>
-            {addToFavorite ? (
-              <Image
-                style={[magosheet.favorite,{ }]}
-                source={require('../../assets/icon/IconHeart.png')}
-              />
-            ) : (
-              <Image
-                style={[magosheet.favorite,{ }]}
-                source={require('../../assets/img/favorit.png')}
-              />
-            )}
-          </TouchableOpacity>
-       
+
+        <TouchableOpacity onPress={() => {
+          setaddToFavorite(!addToFavorite);
+        }}>
+          {addToFavorite ? (
+            <Image
+              style={[magosheet.favorite, {}]}
+              source={require('../../assets/icon/IconHeart.png')}
+            />
+          ) : (
+            <Image
+              style={[magosheet.favorite, {}]}
+              source={require('../../assets/img/favorit.png')}
+            />
+          )}
+        </TouchableOpacity>
+
 
       </View>
 

@@ -1,54 +1,54 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
-import {COLOR} from '../../contants/Themes'
+import { COLOR } from '../../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ItemFavorites from '../../components/ItemFavorites';
 import Dialog from 'react-native-dialog'
 import ItemCard from '../../components/ItemCard';
 const MyCard = (props) => {
-    const{navigation} = props
-    const [card, setCard] = useState([
-        {
-          name: 'MB bank',
-          image: require('../../assets/img/mb-bank.jpg'),
-          number: "5342 **** **** 6745",
-          
-        },
-        {
-          name: 'ACB',
-          image: require('../../assets/img/acb.png'),
-          number: "6589 **** **** 7850",
-          
-        },
-        {
-          name: 'Agribank',
-          image: require('../../assets/img/agribank.png'),
-          number: "5342 **** **** 6745",
-         
-        },
-        
-        
-      ])
+  const { navigation } = props
+  const [card, setCard] = useState([
+    {
+      name: 'MB bank',
+      image: require('../../assets/img/mb-bank.jpg'),
+      number: "5342 **** **** 6745",
 
-      const [visible, setVisible] = useState(false);
+    },
+    {
+      name: 'ACB',
+      image: require('../../assets/img/acb.png'),
+      number: "6589 **** **** 7850",
 
-      const showDialog = () => {
-        setVisible(true);
-      };
+    },
+    {
+      name: 'Agribank',
+      image: require('../../assets/img/agribank.png'),
+      number: "5342 **** **** 6745",
 
-      const handleCancel = () => {
-        setVisible(false);
-      };
+    },
 
-      const handleDelete = () => {
-        // The user has pressed the "Delete" button, so here you can do your own logic.
-        // ...Your logic
-        setVisible(false);
-      };
+
+  ])
+
+  const [visible, setVisible] = useState(false);
+
+  const showDialog = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleDelete = () => {
+    // The user has pressed the "Delete" button, so here you can do your own logic.
+    // ...Your logic
+    setVisible(false);
+  };
 
   return (
-    <SafeAreaView style={{flex: 1, padding: 15, backgroundColor: 'white'}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+    <SafeAreaView style={{ flex: 1, padding: 15, backgroundColor: 'white' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require('../../assets/img/IconArrow.png')} />
         </TouchableOpacity>
@@ -71,8 +71,9 @@ const MyCard = (props) => {
 
       <View style={{}}>
         <SwipeListView
+          showsVerticalScrollIndicator={false}
           data={card}
-          renderItem={({item}) => <ItemCard card={item} />}
+          renderItem={({ item }) => <ItemCard card={item} />}
           renderHiddenItem={(data, rowMap) => (
             <TouchableOpacity
               onPress={showDialog}
@@ -108,12 +109,12 @@ const MyCard = (props) => {
           backgroundColor: 'white',
           paddingHorizontal: 10,
           shadowColor: '#C4C4C4',
-          shadowOffset: {width: 0, height: 6},
+          shadowOffset: { width: 0, height: 6 },
           shadowOpacity: 0.4,
           shadowRadius: 2,
           elevation: 10,
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <Image
             source={require('../../assets/icon/ipay.png')}
             style={{
@@ -124,7 +125,7 @@ const MyCard = (props) => {
             }}
           />
 
-          <View style={{justifyContent: 'space-around', marginLeft: 20}}>
+          <View style={{ justifyContent: 'space-around', marginLeft: 20 }}>
             <Text
               style={{
                 fontSize: 18,
@@ -136,7 +137,7 @@ const MyCard = (props) => {
             </Text>
           </View>
         </View>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Image
             source={require('../../assets/icon/check.png')}
             style={{
