@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, FlatList, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TextInput, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { COLOR, ICON } from '../../contants/Themes'
@@ -8,8 +8,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import UserReducer from '../../redux/reducer/UserReducer'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 import ItemDemo from '../../components/ItemDemo'
+import Dialog from 'react-native-dialog'
+
 const Shop = ({ navigation }) => {
-  const list = useSelector(state => state.UserReducer.listUser)
+  const [visible, setVisible] = useState(true);
+  setTimeout(() => {
+    setVisible(false)
+  }, 3000); 
+  const list = useSelector(state => 
+    state.UserReducer.listUser
+  )
+  const isLoading = useSelector(state => 
+    state.UserReducer.isLoading
+  )
   const disPatch = useDispatch()
   const [category, setCategory] = useState([
     {
@@ -234,6 +245,28 @@ const Shop = ({ navigation }) => {
             keyExtractor={eachDeal => eachDeal.name}
           />
         </View>
+        <Dialog.Container visible={visible} style={{}}>
+            <View
+              style={{
+                height: 150,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <ActivityIndicator size={80} color={COLOR.primary}></ActivityIndicator>
+            </View>
+          </Dialog.Container>
+
+          <Dialog.Container visible={isLoading} style={{}}>
+            <View
+              style={{
+                height: 150,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <ActivityIndicator size={80} color={COLOR.primary}></ActivityIndicator>
+            </View>
+          </Dialog.Container>
+          
       </SafeAreaView>
     </ScrollView>
   );

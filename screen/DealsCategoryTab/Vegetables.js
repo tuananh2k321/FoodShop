@@ -1,11 +1,17 @@
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
 import ItemDealsUri from '../../components/ItemDealsUri';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import { COLOR } from '../../contants/Themes';
 const TopTab = createMaterialTopTabNavigator();
 
 const Vegetables = ({navigation}) => {
+  const [visible, setVisible] = useState(true);
+  setTimeout(() => {
+    setVisible(false)
+  }, 2000); 
     const [deals, setDeals] = useState([
         {
           name: 'Spinach',
@@ -81,6 +87,7 @@ const Vegetables = ({navigation}) => {
             />
           ))} */}
         </View>
+        
       </SafeAreaView>
       </ScrollView>
     );

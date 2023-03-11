@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Dimensions, ProgressBarAndroidBase, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import {COLOR} from '../../contants/Themes'
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -6,6 +6,7 @@ import ItemFavorites from '../../components/ItemFavorites';
 import Dialog from 'react-native-dialog'
 import ItemCart from '../../components/ItemCart';
 import UIBtnPrimary from '../../components/UIBtnPrimary';
+
 const windowHeight = Dimensions.get('window').height
 const Favorites2 = (props) => {
     const{navigation} = props
@@ -164,6 +165,7 @@ const Favorites2 = (props) => {
         <Dialog.Title>Food delete</Dialog.Title>
         <Dialog.Description>
           Do you want to delete this Food? You cannot undo this action.
+          {/* <ActivityIndicator size='large' color='blue'></ActivityIndicator> */}
         </Dialog.Description>
         <Dialog.Button label="Cancel" onPress={handleCancel} />
         <Dialog.Button label="Delete" onPress={handleDelete} />

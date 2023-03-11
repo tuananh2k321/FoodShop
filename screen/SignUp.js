@@ -28,9 +28,9 @@ const SignUp = (props) => {
   }, []);
 
   async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber('+84' +phoneNumber);
+    const confirmation = await auth().signInWithPhoneNumber('+84 '+phoneNumber);
       setConfirm(confirmation);
-      console.log(confirm)
+      console.log(confirmation)
     }
 
   const [phoneNumber, setPhoneNumber] = useState('');

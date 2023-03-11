@@ -1,10 +1,17 @@
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Image, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Dialog from 'react-native-dialog'
+import { COLOR } from '../../contants/Themes';
 const TopTab = createMaterialTopTabNavigator();
 
 const Fruit = ({navigation}) => {
+  const [visible, setVisible] = useState(true);
+  setTimeout(() => {
+    setVisible(false)
+  }, 3000); 
+
     const [deals, setDeals] = useState([
         {
           name: 'Red Apple',
@@ -36,41 +43,42 @@ const Fruit = ({navigation}) => {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-        
-        
-        <View style={styles.container}>
-          <View style = {{}}>
-          {deals.map(eachDeal => (
-            <ItemDeals
-              deals={eachDeal}
-              key={eachDeal.name}
-              onPress={() => {
-                eachDeal.name;
-              }}
-            />
-          ))}
-          </View>
+          <View style={styles.container}>
+            <View style={{}}>
+              {deals.map(eachDeal => (
+                <ItemDeals
+                  deals={eachDeal}
+                  key={eachDeal.name}
+                  onPress={() => {
+                    eachDeal.name;
+                  }}
+                />
+              ))}
+            </View>
 
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Image source={require('../../assets/img/discount-rate.png')} style = {{
-                marginVertical: 15
-            }}/>
-            {deals.map(eachDeal => (
-              <ItemDeals
-                deals={eachDeal}
-                key={eachDeal.name}
-                onPress={() => {
-                  eachDeal.name;
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Image
+                source={require('../../assets/img/discount-rate.png')}
+                style={{
+                  marginVertical: 15,
                 }}
               />
-            ))}
-          </View>
+              {deals.map(eachDeal => (
+                <ItemDeals
+                  deals={eachDeal}
+                  key={eachDeal.name}
+                  onPress={() => {
+                    eachDeal.name;
+                  }}
+                />
+              ))}
+            </View>
 
-          {/* {deals.map(eachDeal => (
+            {/* {deals.map(eachDeal => (
             <ItemDeals
             deals={eachDeal}
               key={eachDeal.name}
@@ -79,8 +87,24 @@ const Fruit = ({navigation}) => {
               }}
             />
           ))} */}
-        </View>
-      </SafeAreaView>
+          </View>
+
+          
+
+          <Dialog.Container visible={visible} style={{}}>
+            <View
+              style={{
+                height: 150,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <ActivityIndicator size={80} color={COLOR.primary}></ActivityIndicator>
+            </View>
+          </Dialog.Container>
+          
+        
+     
+        </SafeAreaView>
       </ScrollView>
     );
 }
