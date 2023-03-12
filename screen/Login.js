@@ -5,62 +5,26 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { SelectCountry } from 'react-native-element-dropdown'
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
-
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
-const local_data = [
-  {
-    value: '1',
-
-    image: {
-      uri: 'https://st.quantrimang.com/photos/image/2021/09/05/Co-Vietnam.png',
-    },
-  },
-  {
-    value: '2',
-
-    image: {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/285px-Flag_of_the_United_States_%28Pantone%29.svg.png',
-    },
-  },
-  {
-    value: '3',
-
-    image: {
-      uri: 'https://toidi.net/wp-content/uploads/2021/08/Flag_of_Russia.svg_.png',
-    },
-  },
-  {
-    value: '4',
-
-    image: {
-      uri: 'https://chinese.edu.vn/wp-content/uploads/2022/01/Co-Trung-Quoc.jpg',
-    },
-  },
-  {
-    value: '5',
-
-    image: {
-      uri: 'https://duhocchd.edu.vn/files/editor/images/co1.png',
-    },
-  },
-  {
-    value: '6',
-
-    image: {
-      uri: 'https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg',
-    },
-  },
-  {
-    value: '7',
-
-    image: {
-      uri: 'https://i1-dulich.vnecdn.net/2013/10/03/mexico-flag-1380785949.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=8enbzFMTa1HlDWaopKOrxw',
-    },
-  },
-];
+GoogleSignin.configure({
+  webClientId: '774396199993-20t7u8gak5j7mpi19p5auil2p2a5g2n8.apps.googleusercontent.com',
+});
 const Login = (props) => {
   const { navigation } = props
+
+  async function signIn() {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+      // TODO: Lưu thông tin người dùng vào state của ứng dụng
+    } catch (error) {
+      console.log('signIn error:', error);
+    }
+  }
+
   const [country, setCountry] = useState('1');
   const [getPasswordVisible, setPasswordVisible] = useState(false)
   const [PasswordUser, setPasswordUser] = useState('');
@@ -108,11 +72,10 @@ const Login = (props) => {
               withShadow
               autoFocus
               containerStyle={styles.phoneNumberView}
-              textContainerStyle={{ paddingVertical: 0 }}
+              textContainerStyle={{paddingVertical: 0}}
               onChangeFormattedText={text => {
                 setPhoneNumber(text);
               }}
-
               onChangeText={text => {
                 setValidatePass1(text);
                 if (isValidPhone(text) == false) {
@@ -122,9 +85,7 @@ const Login = (props) => {
                 }
               }}
             />
-            <Text style={{ color: 'red', textAlign: 'left' }}>
-              {errorPass1}
-            </Text>
+            <Text style={{color: 'red', textAlign: 'left'}}>{errorPass1}</Text>
           </View>
 
           <View>
@@ -140,12 +101,9 @@ const Login = (props) => {
                   setErrorPass2('');
                 }
               }}
-
               placeholder="Password"
             />
-            <Text style={{ color: 'red', textAlign: 'left' }}>
-              {errorPass2}
-            </Text>
+            <Text style={{color: 'red', textAlign: 'left'}}>{errorPass2}</Text>
             <TouchableOpacity
               style={styles.visible}
               onPress={() => {
@@ -164,7 +122,6 @@ const Login = (props) => {
           </View>
           <View
             style={{
-
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -174,27 +131,70 @@ const Login = (props) => {
               <Text
                 style={[
                   styles.text,
-                  { fontSize: 14, color: '#FF5E00', paddingRight: 10, fontWeight: '500', marginBottom: 10 },
+                  {
+                    fontSize: 14,
+                    color: '#FF5E00',
+                    paddingRight: 10,
+                    fontWeight: '500',
+                    marginBottom: 10,
+                  },
                 ]}>
                 Forgot Password
               </Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style={styles.btnLogin}
+            <TouchableOpacity
+              style={styles.btnLogin}
               disabled={isValidationOK() == false}
-              onPress={() => navigation.navigate('BottomTab')}
-            >
-
+              onPress={() => navigation.navigate('BottomTab')}>
               <Text
                 style={[
                   styles.text,
-                  { color: 'white', fontWeight: 'bold', fontSize: 20 },
+                  {color: 'white', fontWeight: 'bold', fontSize: 20},
                 ]}>
                 Sign In
               </Text>
-
             </TouchableOpacity>
+
+            {/*  GOOGLE */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginTop: 20,
+              }}>
+              <TouchableOpacity
+              onPress={() => {
+                signIn()
+                navigation.navigate('BottomTab')
+              }}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Image
+                  source={require('../assets/icon/icons8-google-48.png')}
+                />
+                <Text>Sign in with google</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  shadowColor: '#171717',
+                }}>
+                <Image
+                  source={require('../assets/icon/icons8-facebook-48.png')}
+                />
+                <Text>Sign in with facebook</Text>
+              </TouchableOpacity>
+            </View>
+
             <View
               style={{
                 flexDirection: 'row',
@@ -202,11 +202,11 @@ const Login = (props) => {
                 alignItems: 'center',
                 marginTop: 13,
               }}>
-              <Text style={[styles.text, { fontSize: 16 }]}>
+              <Text style={[styles.text, {fontSize: 16}]}>
                 Don’t have an account?{' '}
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                <Text style={[styles.text, { fontSize: 16, color: '#FF5E00' }]}>
+                <Text style={[styles.text, {fontSize: 16, color: '#FF5E00'}]}>
                   Sign Up
                 </Text>
               </TouchableOpacity>
