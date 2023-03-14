@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { SelectCountry } from 'react-native-element-dropdown'
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
@@ -13,7 +14,30 @@ GoogleSignin.configure({
 });
 const Login = (props) => {
   const { navigation } = props
-
+  
+  // FACEBOOK
+  handleFacebookLogin = () => {
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      (result) => {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log('Login success with permissions: '
+            + result.grantedPermissions.toString());
+          AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              console.log(data.accessToken.toString());
+              
+                // isLoggedIn: true,
+                // accessToken: data
+              
+          })
+        }
+      })
+  }
+            
+          
+  // GOOGLE
   async function signIn() {
     try {
       await GoogleSignin.hasPlayServices();
@@ -182,6 +206,10 @@ const Login = (props) => {
                 <Text>Sign in with google</Text>
               </TouchableOpacity>
               <TouchableOpacity
+              onPress={() => {
+                handleFacebookLogin()
+                // navigation.navigate('BottomTab')
+              }}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
