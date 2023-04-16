@@ -36,11 +36,12 @@ const Meat = ({navigation}) => {
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: 'white', 
+        justifyContent: 'center', alignItems: 'center'}}>
         
-        
+        <View>
         <View style={styles.container}>
-          <View style = {{}}>
+          <View style = {{marginRight: 20}}>
           {deals.map(eachDeal => (
             <ItemDealsUri
               deals={eachDeal}
@@ -81,6 +82,8 @@ const Meat = ({navigation}) => {
             />
           ))} */}
         </View>
+        </View>
+        
       </SafeAreaView>
       </ScrollView>
     );

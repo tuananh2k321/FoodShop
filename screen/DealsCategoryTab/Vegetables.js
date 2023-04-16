@@ -42,11 +42,13 @@ const Vegetables = ({navigation}) => {
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: 'white', 
+        justifyContent: 'center', alignItems: 'center'}}>
         
-        
-        <View style={styles.container}>
-          <View style = {{}}>
+        <View>
+          <View style={styles.container}>
+          <View style = {{marginRight: 20
+              }}>
           {deals.map(eachDeal => (
             <ItemDealsUri
               deals={eachDeal}
@@ -88,6 +90,8 @@ const Vegetables = ({navigation}) => {
           ))} */}
         </View>
         
+        </View>
+        
       </SafeAreaView>
       </ScrollView>
     );
@@ -97,9 +101,8 @@ export default Vegetables
 
 const styles = StyleSheet.create({
     selectContainer: {
-        
+        justifyContent: 'center',
         alignItems: 'center',
-        
     },
     selectContainer: {
         alignItems: 'center',
