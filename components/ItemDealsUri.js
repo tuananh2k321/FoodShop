@@ -61,7 +61,7 @@ const ItemDealsUri = (props) => {
               lineHeight: 24,
               fontWeight: '700',
             }}>
-            {price}
+            $ {price}
           </Text>
         </View>
         <TouchableOpacity

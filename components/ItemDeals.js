@@ -20,7 +20,7 @@ const ItemDeals = (props) => {
           shadowRadius: 3,
           elevation: 13,
           paddingVertical: 15,
-          margin: 15,
+          margin: 18,
         }}>
         <View
           style={{
