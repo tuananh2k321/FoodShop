@@ -89,6 +89,7 @@ const NewAddress = (props) => {
                             onChange={item => {
                                 setValueCity(item.valueCity);
                                 setIsFocus(false);
+                                console.log('data:'+valueCity)
                             }}
                         />
 
