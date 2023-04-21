@@ -4,49 +4,74 @@ import ItemDeals from '../../components/ItemDeals'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Dialog from 'react-native-dialog'
 import { COLOR } from '../../contants/Themes';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import ItemDealsUri from '../../components/ItemDealsUri';
 const TopTab = createMaterialTopTabNavigator();
 
 const Fruit = ({navigation}) => {
-  const [visible, setVisible] = useState(true);
-  setTimeout(() => {
-    setVisible(false)
-  }, 3000); 
+  const [data, setData] = useState([])
 
-    const [deals, setDeals] = useState([
-        {
-          name: 'Red Apple',
-          image: require('../../assets/img/tao.png'),
-          weight: "1kg,priceg",
-          price: '$ 4,99'
-        },
-        {
-          name: 'Orginal Banana',
-          image: require('../../assets/img/chuoi.png'),
-          weight: "1kg",
-          price: '$5,99'
-        }, 
-        {
-          name: 'strawberry',
-          image: require('../../assets/img/dau.png'),
-          weight: "1kg",
-          price: '$ 6'
-        },
-        {
-          name: 'Avocado Bowl',
-          image: require('../../assets/img/bo.png'),
-          weight: "1kg,priceg",
-          price: '$3,99'
-        },
+  const listFood = useSelector(state => 
+    state.FoodReducer.listFood
+  )
+  const isLoading = useSelector(state => 
+    state.FoodReducer.isLoading
+  )
+
+  const disPatch = useDispatch()
+
+  useEffect(()  => {
+    const getListFoodFruit = async () => {
+      await disPatch({ type: 'GET_LIST_FOOD' })
+      if (listFood.result) {
+        setData(listFood.products)
+        console.log('useEffect')
+        console.log("data ", listFood)
+        console.log("Fruit ", isLoading)
+      }
+    };
+
+    getListFoodFruit()
+  }, [listFood.result])
+  
+
+    // const [deals, setDeals] = useState([
+    //     {
+    //       name: 'Red Apple',
+    //       image: require('../../assets/img/tao.png'),
+    //       weight: "1kg,priceg",
+    //       price: '$ 4,99'
+    //     },
+    //     {
+    //       name: 'Orginal Banana',
+    //       image: require('../../assets/img/chuoi.png'),
+    //       weight: "1kg",
+    //       price: '$5,99'
+    //     }, 
+    //     {
+    //       name: 'strawberry',
+    //       image: require('../../assets/img/dau.png'),
+    //       weight: "1kg",
+    //       price: '$ 6'
+    //     },
+    //     {
+    //       name: 'Avocado Bowl',
+    //       image: require('../../assets/img/bo.png'),
+    //       weight: "1kg,priceg",
+    //       price: '$3,99'
+    //     },
         
-      ])
+    //   ])
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+          <View>
           <View style={styles.container}>
-            <View style={{}}>
-              {deals.map(eachDeal => (
-                <ItemDeals
+            <View style={{marginRight: 20}}>
+              {data.map(eachDeal => (
+                <ItemDealsUri
                   deals={eachDeal}
                   key={eachDeal.name}
                   onPress={() => {
@@ -67,8 +92,8 @@ const Fruit = ({navigation}) => {
                   marginVertical: 15,
                 }}
               />
-              {deals.map(eachDeal => (
-                <ItemDeals
+              {data.map(eachDeal => (
+                <ItemDealsUri
                   deals={eachDeal}
                   key={eachDeal.name}
                   onPress={() => {
@@ -88,10 +113,11 @@ const Fruit = ({navigation}) => {
             />
           ))} */}
           </View>
+          </View>
 
           
 
-          <Dialog.Container visible={visible} style={{}}>
+          <Dialog.Container visible={isLoading} style={{}}>
             <View
               style={{
                 height: 150,

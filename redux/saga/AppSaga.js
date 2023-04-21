@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { call, put } from "redux-saga/effects"
 
+
 import { getList } from '../../contants/Axios'
+
+import {getList} from '../../contants/CallAPI'
+
 
 /*reate Saga :Sagas là các hàm Generator trong JavaScript 
 và chúng giúp xử lý các side effect như gọi API hoặc xử lý async.

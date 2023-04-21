@@ -20,7 +20,7 @@ const ItemDealsUri = (props) => {
           shadowRadius: 3,
           elevation: 13,
           paddingVertical: 15,
-          margin: 15,
+          marginBottom: 18
         }}>
         <View
           style={{
@@ -61,7 +61,7 @@ const ItemDealsUri = (props) => {
               lineHeight: 24,
               fontWeight: '700',
             }}>
-            {price}
+            $ {price}
           </Text>
         </View>
         <TouchableOpacity
