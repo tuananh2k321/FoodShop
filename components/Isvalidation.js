@@ -6,7 +6,7 @@ export const isValidEmpty = (stringUsername)  => {
 
 export const isValidPhone = (stringUsername)  => {
     return (
-        stringUsername.length == 10
+        stringUsername.length >= 9
     )
 }
 

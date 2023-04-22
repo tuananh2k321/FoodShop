@@ -8,6 +8,7 @@ import { SelectCountry } from 'react-native-element-dropdown'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPhone } from '../../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const local_data = [
   {
@@ -113,7 +114,31 @@ const SignUp = (props) => {
             }}>
             Edit Profile
           </Text>
-
+          <View style={[styles.checkBox,{justifyContent:'flex-start'}]}>
+            <View style={styles.checkBox}>
+              <BouncyCheckbox
+                size={20}
+                unfillColor="#FFFFFF"
+                isChecked={true}
+                fillColor='#f7941e'
+                style={{ borderRadius: 0 }} />
+              <Text style={styles.textNormal}>
+                Male
+              </Text>
+            </View>
+            <View style={[styles.checkBox,{marginLeft:50}]}>
+              <BouncyCheckbox
+                size={20}
+                unfillColor="#FFFFFF"
+                isChecked={false}
+               
+                fillColor='#f7941e'
+                style={{ borderRadius: 0 }} />
+              <Text style={styles.textNormal}>
+                Female
+              </Text>
+            </View>
+          </View>
 
           <View style={{ width: '100%', marginBottom: 10 }}>
             <TextInput
@@ -129,11 +154,13 @@ const SignUp = (props) => {
               onChangeText={text => {
                 setValidatePass1(text);
                 if (isValidEmpty(text) == false) {
-                  setErrorPass1('không được để trống');
+                  setErrorPass1('Please fill the field');
                 } else {
                   setErrorPass1('');
                 }
-              }}></TextInput>
+              }} />
+
+
 
 
             <Text style={{ color: 'red', textAlign: 'left' }}>
@@ -170,7 +197,44 @@ const SignUp = (props) => {
 
           </View>
 
-
+          <TextInput
+            style={{
+              height: 48,
+              backgroundColor: '#F3F3F3',
+              width: '100%',
+              paddingLeft: 30,
+              marginBottom: 5,
+              marginTop: 20,
+            }}
+            placeholder="Email"
+            placeholderTextColor="#AC8E71"
+            onChangeText={text => {
+              setValidatePass1(text);
+              if (isValidEmpty(text) == false) {
+                setErrorPass1('Please fill the field');
+              } else {
+                setErrorPass1('');
+              }
+            }} />
+          <TextInput
+            style={{
+              height: 48,
+              backgroundColor: '#F3F3F3',
+              width: '100%',
+              paddingLeft: 30,
+              marginTop: 20,
+              marginBottom: 5,
+            }}
+            placeholder="Address"
+            placeholderTextColor="#AC8E71"
+            onChangeText={text => {
+              setValidatePass1(text);
+              if (isValidEmpty(text) == false) {
+                setErrorPass1('Please fill the field');
+              } else {
+                setErrorPass1('');
+              }
+            }} />
 
           <View style={{ position: 'absolute', bottom: 0 }}>
             <UIBtnPrimary
@@ -217,5 +281,10 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'white'
   },
+  checkBox: {
+    flexDirection: 'row',
+    borderColor:'black',
+    borderWidth:1
+},
 })
 

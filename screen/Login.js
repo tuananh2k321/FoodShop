@@ -1,4 +1,4 @@
-import { View, Text, TextInput, SafeAreaView, Image, Dimensions, CheckBox, Button, Pressable, Touchable, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, SafeAreaView, Image, Dimensions, ToastAndroid, CheckBox, Button, Pressable, Touchable, TouchableOpacity } from 'react-native'
 import { StyleSheet, } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -7,6 +7,7 @@ import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
+import AxiosInstance from '../contants/AxiosIntance';
 const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
 GoogleSignin.configure({
@@ -14,7 +15,17 @@ GoogleSignin.configure({
 });
 const Login = (props) => {
   const { navigation } = props
-  
+  const [getPasswordVisible, setPasswordVisible] = useState(false)
+  const [errorPass1, setErrorPass1] = useState('')
+  const [errorPass2, setErrorPass2] = useState('')
+
+  const [validatePass1, setValidatePass1] = useState('')
+  const [validatePass2, setValidatePass2] = useState('')
+  const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
+
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('')
+  const phoneInput = useRef(null);
   // FACEBOOK
   handleFacebookLogin = () => {
     LoginManager.logInWithPermissions(['public_profile']).then(
@@ -27,16 +38,15 @@ const Login = (props) => {
           AccessToken.getCurrentAccessToken().then(
             (data) => {
               console.log(data.accessToken.toString());
-              
-                // isLoggedIn: true,
-                // accessToken: data
-              
-          })
+
+              // isLoggedIn: true,
+              // accessToken: data
+
+            })
         }
       })
   }
-            
-          
+
   // GOOGLE
   async function signIn() {
     try {
@@ -49,19 +59,25 @@ const Login = (props) => {
     }
   }
 
-  const [country, setCountry] = useState('1');
-  const [getPasswordVisible, setPasswordVisible] = useState(false)
-  const [PasswordUser, setPasswordUser] = useState('');
+  //Login
+  const onLogin = async () => {
+    try {
+      let CorrectNumber = phoneNumber.substring(3)
+      const response = await AxiosInstance().post("user/api/login",
+        { phoneNumber: CorrectNumber, password: password });
+      if (response.result) {
+        // await AsyncStorage.setItem("token", response.token);
+        ToastAndroid.show("Login Success", ToastAndroid.SHORT);
+        navigation.navigate("BottomTab")
 
-  const [errorPass1, setErrorPass1] = useState('')
-  const [errorPass2, setErrorPass2] = useState('')
+      } else {
+        ToastAndroid.show("Login Failed !!! \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      }
+    } catch (error) {
+      ToastAndroid.show("Login Failed \n Please check your email and password", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+    }
+  }
 
-  const [validatePass1, setValidatePass1] = useState('')
-  const [validatePass2, setValidatePass2] = useState('')
-  const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
-
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const phoneInput = useRef(null);
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView style={styles.main}>
@@ -96,38 +112,44 @@ const Login = (props) => {
               withShadow
               autoFocus
               containerStyle={styles.phoneNumberView}
-              textContainerStyle={{paddingVertical: 0}}
+              textContainerStyle={{ paddingVertical: 0 }}
               onChangeFormattedText={text => {
                 setPhoneNumber(text);
               }}
               onChangeText={text => {
+                setPhoneNumber(text)
                 setValidatePass1(text);
                 if (isValidPhone(text) == false) {
-                  setErrorPass1('phải đủ 10 số');
+                  setErrorPass1('Phone number invalid');
                 } else {
                   setErrorPass1('');
                 }
               }}
             />
-            <Text style={{color: 'red', textAlign: 'left'}}>{errorPass1}</Text>
+            <Text style={{ color: 'red', textAlign: 'left' }}>{errorPass1}</Text>
           </View>
 
           <View>
             <TextInput
               style={styles.input}
               autoCapitalize={false}
+              autoCorrect={false}
               secureTextEntry={getPasswordVisible ? false : true}
               onChangeText={text => {
+                setPassword(text)
                 setValidatePass2(text);
                 if (isValidEmpty(text) == false) {
-                  setErrorPass2('không được để trống');
+                  setErrorPass2('Please fill it out completely');
                 } else {
                   setErrorPass2('');
                 }
               }}
-              placeholder="Password"
+              placeholder={"••••••••"}
+
+              value={password}
+
             />
-            <Text style={{color: 'red', textAlign: 'left'}}>{errorPass2}</Text>
+            <Text style={{ color: 'red', textAlign: 'left' }}>{errorPass2}</Text>
             <TouchableOpacity
               style={styles.visible}
               onPress={() => {
@@ -171,11 +193,13 @@ const Login = (props) => {
             <TouchableOpacity
               style={styles.btnLogin}
               disabled={isValidationOK() == false}
-              onPress={() => navigation.navigate('BottomTab')}>
+              // onPress={() => navigation.navigate('BottomTab')}
+              onPress={onLogin}
+            >
               <Text
                 style={[
                   styles.text,
-                  {color: 'white', fontWeight: 'bold', fontSize: 20},
+                  { color: 'white', fontWeight: 'bold', fontSize: 20 },
                 ]}>
                 Sign In
               </Text>
@@ -191,10 +215,10 @@ const Login = (props) => {
                 marginTop: 20,
               }}>
               <TouchableOpacity
-              onPress={() => {
-                signIn()
-                navigation.navigate('BottomTab')
-              }}
+                onPress={() => {
+                  signIn()
+                  navigation.navigate('BottomTab')
+                }}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -206,10 +230,10 @@ const Login = (props) => {
                 <Text>Sign in with google</Text>
               </TouchableOpacity>
               <TouchableOpacity
-              onPress={() => {
-                handleFacebookLogin()
-                // navigation.navigate('BottomTab')
-              }}
+                onPress={() => {
+                  handleFacebookLogin()
+                  // navigation.navigate('BottomTab')
+                }}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -230,11 +254,11 @@ const Login = (props) => {
                 alignItems: 'center',
                 marginTop: 13,
               }}>
-              <Text style={[styles.text, {fontSize: 16}]}>
+              <Text style={[styles.text, { fontSize: 16 }]}>
                 Don’t have an account?{' '}
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                <Text style={[styles.text, {fontSize: 16, color: '#FF5E00'}]}>
+                <Text style={[styles.text, { fontSize: 16, color: '#FF5E00' }]}>
                   Sign Up
                 </Text>
               </TouchableOpacity>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { call, put } from "redux-saga/effects"
 
 
-import { getList } from '../../contants/Axios'
+//import { getList } from '../../contants/Axios'
 
 import {getList} from '../../contants/CallAPI'
 

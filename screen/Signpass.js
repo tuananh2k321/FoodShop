@@ -16,6 +16,26 @@ const Signpass = ({navigation}) => {
     const [validatePass2, setValidatePass2] = useState ('')  
     
     const isValidationOK = () => isValidEmpty(validatePass1) && isValidEmpty(validatePass2)
+
+    const onRegister = async ()=>{
+      if (isValidEmail && password != "") {
+        try {
+            const response = await AxiosInstance().post("/user/api/register",
+                { phoneNumer: phoneNumer, password: password ,name :name});//variable(mail password) chuyen len API
+            console.log(response);
+            if (response.result == true) {
+                ToastAndroid.show("Register Success", ToastAndroid.SHORT);
+                navigation.navigate('Login');
+            } else {
+                ToastAndroid.show("Register Failed", ToastAndroid.SHORT);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    } else {
+        ToastAndroid.show("Please check email and password", ToastAndroid.SHORT);
+    }
+    }
     return (
         
       <KeyboardAwareScrollView>

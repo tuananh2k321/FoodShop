@@ -52,6 +52,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.2",
+    "textflow.js": "^0.1.4",
     "toggle-switch-react-native": "^3.3.0",
     "yarn": "^1.22.19"
   },
