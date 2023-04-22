@@ -1,5 +1,8 @@
 const data = {
-    listFood: [],
+    listFoodFish: [],
+    listFoodVegetable: [],
+    listFoodFruit: [],
+    listFoodMeat: [],
     isLoading: false
 }
 
@@ -10,10 +13,28 @@ export default FoodReducer = (state = data, {type, payLoad}) => {
                 ...state,
                 isLoading: true
             }
-        case 'GET_LIST_FOOD_SUCCESS':
+        case 'GET_LIST_FOOD_FRUIT_SUCCESS':
             return {
                 ...state,
-                listFood: payLoad,
+                listFoodFruit: payLoad,
+                isLoading: false
+            }
+        case 'GET_LIST_FOOD_MEAT_SUCCESS':
+            return {
+                ...state,
+                listFoodMeat: payLoad,
+                isLoading: false
+            }
+        case 'GET_LIST_FOOD_FISH_SUCCESS':
+            return {
+                ...state,
+                listFoodFish: payLoad,
+                isLoading: false
+            }
+        case 'GET_LIST_FOOD_VEGETABLE_SUCCESS':
+            return {
+                ...state,
+                listFoodVegetable: payLoad,
                 isLoading: false
             }
     

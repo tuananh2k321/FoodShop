@@ -3,37 +3,65 @@ import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ItemDealsUri from '../../components/ItemDealsUri';
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react';
 const TopTab = createMaterialTopTabNavigator();
 
 
 const Fish = ({navigation}) => {
-    const [deals, setDeals] = useState([
-        {
-          name: 'Anchovy',
-          image: 'https://www.supremelobster.com/wp-content/uploads/Anchovy-1.png',
-          weight: "1kg,priceg",
-          price: '$ 4,99'
-        },
-        {
-          name: 'Barracuda',
-          image: 'http://www.lorpexfish.com/68-large_01oslo/great-barracuda.jpg',
-          weight: "1kg",
-          price: '$5,99'
-        }, 
-        {
-          name: 'Betta',
-          image: 'https://shopheo.com/wp-content/uploads/2021/12/koi-nemo-galaxy-vay-nhuyen-dep.png',
-          weight: "1kg",
-          price: '$ 6'
-        },
-        {
-          name: 'Blue tang',
-          image: 'https://hieutre.com/images/2021/06/ca-blue-tang-2.png',
-          weight: "1kg,priceg",
-          price: '$3,99'
-        },
+    // const [deals, setDeals] = useState([
+    //     {
+    //       name: 'Anchovy',
+    //       image: 'https://www.supremelobster.com/wp-content/uploads/Anchovy-1.png',
+    //       weight: "1kg,priceg",
+    //       price: '$ 4,99'
+    //     },
+    //     {
+    //       name: 'Barracuda',
+    //       image: 'http://www.lorpexfish.com/68-large_01oslo/great-barracuda.jpg',
+    //       weight: "1kg",
+    //       price: '$5,99'
+    //     }, 
+    //     {
+    //       name: 'Betta',
+    //       image: 'https://shopheo.com/wp-content/uploads/2021/12/koi-nemo-galaxy-vay-nhuyen-dep.png',
+    //       weight: "1kg",
+    //       price: '$ 6'
+    //     },
+    //     {
+    //       name: 'Blue tang',
+    //       image: 'https://hieutre.com/images/2021/06/ca-blue-tang-2.png',
+    //       weight: "1kg,priceg",
+    //       price: '$3,99'
+    //     },
         
-      ])
+    //   ])
+
+    const [data, setData] = useState([])
+
+  const listFoodFish = useSelector(state => 
+    state.FoodReducer.listFoodFish
+  )
+  const isLoading = useSelector(state => 
+    state.FoodReducer.isLoading
+  )
+
+  const disPatch = useDispatch()
+
+  useEffect(()  => {
+    const getListFoodFish = async () => {
+      
+      // console.log("Fish ", listFoodFish)
+      if (listFoodFish.result) {
+        setData(listFoodFish.products)
+        // console.log('useEffect')
+        // console.log("Fish ", isLoading)
+      }
+    };
+
+    getListFoodFish()
+  }, [listFoodFish.result])
+
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,7 +71,7 @@ const Fish = ({navigation}) => {
         <View>
         <View style={styles.container}>
           <View style = {{marginRight: 20}}>
-          {deals.map(eachDeal => (
+          {data.map(eachDeal => (
             <ItemDealsUri
               deals={eachDeal}
               key={eachDeal.name}
@@ -62,7 +90,7 @@ const Fish = ({navigation}) => {
             <Image source={require('../../assets/img/discount-rate.png')} style = {{
                 marginVertical: 15
             }}/>
-            {deals.map(eachDeal => (
+            {data.map(eachDeal => (
               <ItemDealsUri
                 deals={eachDeal}
                 key={eachDeal.name}
