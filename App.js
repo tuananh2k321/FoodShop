@@ -18,7 +18,7 @@ import EditProfile from './screen/bottom_tab/EditProfile'
 import SignCode from './screen/SignCode'
 import Maps from './screen//bottom_tab/Maps'
 import Test from './screen/Test'
-import TestNo2 from './screen/TestNo2'
+
 
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
@@ -29,6 +29,8 @@ const StackBegin = () => {
       <Stack.Screen name="SignCode" component={SignCode} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Welcome" component={Welcome} />
+      <Stack.Screen name="BottomTab" component={BottomTab} />
+
     </Stack.Navigator>
   )
 }
@@ -38,15 +40,13 @@ const App = () => {
   return (
     <Provider store={Redux.store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTab" component={BottomTab} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
-
-
           <Stack.Screen name="Test" component={Test} />
-          <Stack.Screen name="TestNo2" component={TestNo2} />
+      
 
         </Stack.Navigator>
       </NavigationContainer>

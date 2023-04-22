@@ -36,19 +36,32 @@ const SignUp = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const phoneInput = useRef(null);
 
-  const startSignpass = () => {
-    navigation.navigate('Signpass')
-  }
-
   const [errorPass1, setErrorPass1] = useState('')
   const [errorPass2, setErrorPass2] = useState('')
-
   const [validatePass1, setValidatePass1] = useState('')
   const [validatePass2, setValidatePass2] = useState('')
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
+  const onSendOTP = async () => {
+    try {
+      console.log("phoneNumber  Ne0330", phoneNumber)
 
-
-
+      const response = await AxiosInstance().post("user/api/verify-phone", { phoneNumber: phoneNumber });
+      console.log("response", response)
+      if (response.result) {
+        //setIsLoading(false);
+        if (code == response.result.data.verification_code) {
+          Alert.alert("Success", "Sign Up Success");
+          navigation.navigate("Signpass")
+        } else {
+          Alert.alert("Error !", "Wrong code");
+        }
+      } else {
+        Alert.alert("Error", "Could not sign up");
+      }
+    } catch (error) {
+      ToastAndroid.show("Verify Failed \n Please check your code", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+    }
+  }
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView
@@ -162,9 +175,10 @@ const SignUp = (props) => {
             title="Next"
             disable={isValidationOK() == false}
             onPress={ () => {
-              signInWithPhoneNumber(validatePass2)
-              console.log(validatePass2)
-              startSignpass()
+              // signInWithPhoneNumber(validatePass2)
+              console.log("number",validatePass2)
+              navigation.navigate('SignCode',{phoneNumber:validatePass2})
+
             }}
           />
 
