@@ -55,9 +55,9 @@ const Vegetables = ({navigation}) => {
     const getListFoodVegetable = async () => {
       if (listFoodVegetable.result) {
         setData(listFoodVegetable.products)
-        console.log('useEffect')
-        console.log("vegetable ", listFoodVegetable)
-        console.log("vegetable ", isLoading)
+        // console.log('useEffect')
+        // console.log("vegetable ", listFoodVegetable)
+        // console.log("vegetable ", isLoading)
       }
     };
 
