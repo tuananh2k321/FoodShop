@@ -20,7 +20,7 @@ const Favorites2 = (props) => {
       name: 'Red Apple',
       image: require('../../assets/img/tao.png'),
       number: 2,
-      price: '$ 4,99'
+      price: 4
     },
     {
       name: 'Orginal Banana',
@@ -34,28 +34,7 @@ const Favorites2 = (props) => {
       number: 3,
       price: '$ 6'
     },
-    {
-      name: 'Avocado Bowl',
-      image: require('../../assets/img/bo.png'),
-      number: 1,
-      price: '$3,99'
-    },
-    {
-      name: 'Avocado Bowl',
-      image: require('../../assets/img/bo.png'),
-      number: 1,
-      price: '$3,99'
-    },{
-      name: 'Avocado Bowl',
-      image: require('../../assets/img/bo.png'),
-      number: 1,
-      price: '$3,99'
-    },{
-      name: 'Avocado Bowl',
-      image: require('../../assets/img/bo.png'),
-      number: 1,
-      price: '$3,99'
-    }
+ 
 
   ])
 
@@ -159,33 +138,33 @@ const Favorites2 = (props) => {
             }
 
 
-            ListFooterComponent={() => (
-              isLoading ? //  a==b ? b : a
-                <View style={{
-                  marginTop: 10,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  padding: 10,
-                  // width : WIDTH,
-                  // height : 50 ,
-                  flexDirection: 'column'
-                }} >
-                  <Text > Tải Thêm </Text>
-                  <ActivityIndicator size="small" color='black' fontWeight='bold' />
-                </View> : null
-            )}
-            onEndReached={() => {
-              setIsLoading(true)
-              console.log("Load More")
-              // setData(mang_du_lieu)
+            // ListFooterComponent={() => (
+            //   isLoading ? //  a==b ? b : a
+            //     <View style={{
+            //       marginTop: 10,
+            //       alignItems: 'center',
+            //       justifyContent: 'center',
+            //       flexDirection: 'row',
+            //       justifyContent: 'space-around',
+            //       padding: 10,
+            //       // width : WIDTH,
+            //       // height : 50 ,
+            //       flexDirection: 'column'
+            //     }} >
+            //       <Text > Tải Thêm </Text>
+            //       <ActivityIndicator size="small" color='black' fontWeight='bold' />
+            //     </View> : null
+            // )}
+            // onEndReached={() => {
+            //   setIsLoading(true)
+            //   console.log("Load More")
+            //   // setData(mang_du_lieu)
     
-              setTimeout(() => {
-                //   setData(data.concat([ { title : "moi a nha"} ]))
-                setIsLoading(false)
-              }, 5000);
-            }}
+            //   setTimeout(() => {
+            //     //   setData(data.concat([ { title : "moi a nha"} ]))
+            //     setIsLoading(false)
+            //   }, 5000);
+            // }}
             onEndReachedThreshold={0.1}
             renderHiddenItem={(data, rowMap) => (
               <TouchableOpacity

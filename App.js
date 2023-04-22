@@ -7,7 +7,6 @@ import BottomTab from './screen/bottom_tab/BottomTab';
 import Login from './screen/Login';
 import NewAddress from './screen/bottom_tab/AddressTab/NewAddress';
 import Signpass from './screen/Signpass';
-import Test from './screen/Test'
 import EditAddress from './screen/bottom_tab/AddressTab/EditAddress'
 import SignUp from './screen/SignUp'
 import { Provider } from 'react-redux'
@@ -18,6 +17,9 @@ import HistoryOrder from './screen/bottom_tab/AccountTabs/HistoryOrder';
 import EditProfile from './screen/bottom_tab/EditProfile'
 import SignCode from './screen/SignCode'
 import Maps from './screen//bottom_tab/Maps'
+import Test from './screen/Test'
+import TestNo2 from './screen/TestNo2'
+
 const Stack = createNativeStackNavigator();
 const StackBegin = () => {
   return (
@@ -36,7 +38,7 @@ const App = () => {
   return (
     <Provider store={Redux.store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
           
           <Stack.Screen name="StackBegin" component={StackBegin} />
           <Stack.Screen name="BottomTab" component={BottomTab} />
@@ -44,6 +46,8 @@ const App = () => {
 
 
           <Stack.Screen name="Test" component={Test} />
+          <Stack.Screen name="TestNo2" component={TestNo2} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
