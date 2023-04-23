@@ -3,36 +3,62 @@ import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
 import ItemDealsUri from '../../components/ItemDealsUri';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react';
 const TopTab = createMaterialTopTabNavigator();
 
 const Meat = ({navigation}) => {
-    const [deals, setDeals] = useState([
-        {
-          name: 'Turkey',
-          image: 'https://product.hstatic.net/1000104489/product/chim_bo_cau_ab532a833bae4fcf97a0b666fd1ff0a7.jpeg',
-          weight: "1kg,priceg",
-          price: '$ 4,99'
-        },
-        {
-          name: 'Pork',
-          image: 'https://barefeetinthekitchen.com/wp-content/uploads/2018/10/visual-for-pork-cooking-temps.png',
-          weight: "1kg",
-          price: '$5,99'
-        }, 
-        {
-          name: 'Beef',
-          image: 'https://cdn.shopify.com/s/files/1/0096/3162/9359/collections/beef-image.png?v=1657175044',
-          weight: "1kg",
-          price: '$ 6'
-        },
-        {
-          name: 'Chicken',
-          image: 'https://fujimart.vn/image/cache/catalog/sanpham-tuoisong/thit%20uc%20ga%20nhat-502x502.png',
-          weight: "1kg,priceg",
-          price: '$3,99'
-        },
+    // const [deals, setDeals] = useState([
+    //     {
+    //       name: 'Turkey',
+    //       image: 'https://product.hstatic.net/1000104489/product/chim_bo_cau_ab532a833bae4fcf97a0b666fd1ff0a7.jpeg',
+    //       weight: "1kg,priceg",
+    //       price: '$ 4,99'
+    //     },
+    //     {
+    //       name: 'Pork',
+    //       image: 'https://barefeetinthekitchen.com/wp-content/uploads/2018/10/visual-for-pork-cooking-temps.png',
+    //       weight: "1kg",
+    //       price: '$5,99'
+    //     }, 
+    //     {
+    //       name: 'Beef',
+    //       image: 'https://cdn.shopify.com/s/files/1/0096/3162/9359/collections/beef-image.png?v=1657175044',
+    //       weight: "1kg",
+    //       price: '$ 6'
+    //     },
+    //     {
+    //       name: 'Chicken',
+    //       image: 'https://fujimart.vn/image/cache/catalog/sanpham-tuoisong/thit%20uc%20ga%20nhat-502x502.png',
+    //       weight: "1kg,priceg",
+    //       price: '$3,99'
+    //     },
         
-      ])
+    //   ])
+
+    const [data, setData] = useState([])
+
+  const listFoodMeat = useSelector(state => 
+    state.FoodReducer.listFoodMeat
+  )
+  const isLoading = useSelector(state => 
+    state.FoodReducer.isLoading
+  )
+
+  const disPatch = useDispatch()
+
+  useEffect(()  => {
+    const getListFoodMeat = async () => {
+      if (listFoodMeat.result) {
+        setData(listFoodMeat.products)
+        // console.log('useEffect')
+        // console.log("Meat ", listFoodMeat)
+        // console.log("Meat ", isLoading)
+      }
+    };
+
+    getListFoodMeat()
+  }, [listFoodMeat.result])
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -42,7 +68,7 @@ const Meat = ({navigation}) => {
         <View>
         <View style={styles.container}>
           <View style = {{marginRight: 20}}>
-          {deals.map(eachDeal => (
+          {data.map(eachDeal => (
             <ItemDealsUri
               deals={eachDeal}
               key={eachDeal.name}
@@ -61,7 +87,7 @@ const Meat = ({navigation}) => {
             <Image source={require('../../assets/img/discount-rate.png')} style = {{
                 marginVertical: 15
             }}/>
-            {deals.map(eachDeal => (
+            {data.map(eachDeal => (
               <ItemDealsUri
                 deals={eachDeal}
                 key={eachDeal.name}

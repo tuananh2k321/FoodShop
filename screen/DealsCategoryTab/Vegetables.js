@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import ItemDeals from '../../components/ItemDeals'
 import ItemDealsUri from '../../components/ItemDealsUri';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 import { COLOR } from '../../contants/Themes';
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react';
 const TopTab = createMaterialTopTabNavigator();
 
 const Vegetables = ({navigation}) => {
@@ -12,33 +13,56 @@ const Vegetables = ({navigation}) => {
   setTimeout(() => {
     setVisible(false)
   }, 2000); 
-    const [deals, setDeals] = useState([
-        {
-          name: 'Spinach',
-          image: 'https://organiclivestockandcrops.org/wp-content/uploads/2018/09/organic-spinach.png',
-          weight: "1kg,priceg",
-          price: '$ 4,99'
-        },
-        {
-          name: 'cauliflower',
-          image: 'https://images.squarespace-cdn.com/content/v1/5a8212f5e9bfdff7bedd9efb/1646687068109-B8VNKL2NHEFXAUK7PXEP/Pacific+Cauliflower+naked.png',
-          weight: "1kg",
-          price: '$5,99'
-        }, 
-        {
-          name: 'Cabbage',
-          image: 'https://i0.wp.com/kidsgardening.org/wp-content/uploads/2019/03/cabbage.png?fit=720%2C720&ssl=1',
-          weight: "1kg",
-          price: '$ 6'
-        },
-        {
-          name: 'Broccoli.',
-          image: 'https://images.squarespace-cdn.com/content/v1/5a8212f5e9bfdff7bedd9efb/1633565782837-B8847PL2GWSD76LBQY64/broccoli+crowns.png',
-          weight: "1kg,priceg",
-          price: '$3,99'
-        },
+    // const [deals, setDeals] = useState([
+    //     {
+    //       name: 'Spinach',
+    //       image: 'https://organiclivestockandcrops.org/wp-content/uploads/2018/09/organic-spinach.png',
+    //       weight: "1kg,priceg",
+    //       price: '$ 4,99'
+    //     },
+    //     {
+    //       name: 'cauliflower',
+    //       image: 'https://images.squarespace-cdn.com/content/v1/5a8212f5e9bfdff7bedd9efb/1646687068109-B8VNKL2NHEFXAUK7PXEP/Pacific+Cauliflower+naked.png',
+    //       weight: "1kg",
+    //       price: '$5,99'
+    //     }, 
+    //     {
+    //       name: 'Cabbage',
+    //       image: 'https://i0.wp.com/kidsgardening.org/wp-content/uploads/2019/03/cabbage.png?fit=720%2C720&ssl=1',
+    //       weight: "1kg",
+    //       price: '$ 6'
+    //     },
+    //     {
+    //       name: 'Broccoli.',
+    //       image: 'https://images.squarespace-cdn.com/content/v1/5a8212f5e9bfdff7bedd9efb/1633565782837-B8847PL2GWSD76LBQY64/broccoli+crowns.png',
+    //       weight: "1kg,priceg",
+    //       price: '$3,99'
+    //     },
         
-      ])
+    //   ])
+    const [data, setData] = useState([])
+
+  const listFoodVegetable = useSelector(state => 
+    state.FoodReducer.listFoodVegetable
+  )
+  const isLoading = useSelector(state => 
+    state.FoodReducer.isLoading
+  )
+
+  const disPatch = useDispatch()
+
+  useEffect(()  => {
+    const getListFoodVegetable = async () => {
+      if (listFoodVegetable.result) {
+        setData(listFoodVegetable.products)
+        // console.log('useEffect')
+        // console.log("vegetable ", listFoodVegetable)
+        // console.log("vegetable ", isLoading)
+      }
+    };
+
+    getListFoodVegetable()
+  }, [listFoodVegetable.result])
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -49,7 +73,7 @@ const Vegetables = ({navigation}) => {
           <View style={styles.container}>
           <View style = {{marginRight: 20
               }}>
-          {deals.map(eachDeal => (
+          {data.map(eachDeal => (
             <ItemDealsUri
               deals={eachDeal}
               key={eachDeal.name}
@@ -68,7 +92,7 @@ const Vegetables = ({navigation}) => {
             <Image source={require('../../assets/img/discount-rate.png')} style = {{
                 marginVertical: 15
             }}/>
-            {deals.map(eachDeal => (
+            {data.map(eachDeal => (
               <ItemDealsUri
                 deals={eachDeal}
                 key={eachDeal.name}

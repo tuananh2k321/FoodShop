@@ -13,7 +13,7 @@ const Fruit = ({navigation}) => {
   const [data, setData] = useState([])
 
   const listFood = useSelector(state => 
-    state.FoodReducer.listFood
+    state.FoodReducer.listFoodFruit
   )
   const isLoading = useSelector(state => 
     state.FoodReducer.isLoading
@@ -26,9 +26,9 @@ const Fruit = ({navigation}) => {
       await disPatch({ type: 'GET_LIST_FOOD' })
       if (listFood.result) {
         setData(listFood.products)
-        console.log('useEffect')
-        console.log("data ", listFood)
-        console.log("Fruit ", isLoading)
+        // console.log('useEffect')
+        // console.log("Fruit ", listFood)
+        // console.log("Fruit ", isLoading)
       }
     };
 
