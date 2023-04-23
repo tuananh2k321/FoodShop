@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ToastAndroid,Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ToastAndroid, Dimensions, TextInput, TouchableOpacity } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { COLOR } from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
@@ -50,11 +50,11 @@ const SignUp = (props) => {
       const response = await AxiosInstance().post("user/api/sendOTP", { phoneNumber: phoneNumber });
       console.log("response", response)
       if (response.result) {
-        
-        navigation.navigate("SignCode",{phoneNumber:phoneNumber,name:name})
-       
+        ToastAndroid.show("Verification code sent", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+        navigation.navigate("SignCode", { phoneNumber: phoneNumber, name: name })
+
       } else {
-        Alert.alert("Error", "Could not sign up");
+        ToastAndroid.show("Could not sign up", ToastAndroid.SHORT, ToastAndroid.CENTER,);
       }
     } catch (error) {
       ToastAndroid.show("Login Failed", ToastAndroid.SHORT, ToastAndroid.CENTER,);
