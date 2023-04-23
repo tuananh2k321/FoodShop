@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import ItemDealsUri from '../../components/ItemDealsUri';
 const TopTab = createMaterialTopTabNavigator();
 
-const Fruit = ({navigation}) => {
+const Fruit = (props) => {
+  const {navigation} = props
   const [data, setData] = useState([])
 
   const listFood = useSelector(state => 
@@ -23,7 +24,7 @@ const Fruit = ({navigation}) => {
 
   useEffect(()  => {
     const getListFoodFruit = async () => {
-      await disPatch({ type: 'GET_LIST_FOOD' })
+      
       if (listFood.result) {
         setData(listFood.products)
         // console.log('useEffect')
@@ -74,9 +75,8 @@ const Fruit = ({navigation}) => {
                 <ItemDealsUri
                   deals={eachDeal}
                   key={eachDeal.name}
-                  onPress={() => {
-                    eachDeal.name;
-                  }}
+                  navigation = {navigation}
+                  
                 />
               ))}
             </View>
@@ -95,10 +95,8 @@ const Fruit = ({navigation}) => {
               {data.map(eachDeal => (
                 <ItemDealsUri
                   deals={eachDeal}
-                  key={eachDeal.name}
-                  onPress={() => {
-                    eachDeal.name;
-                  }}
+                  navigation = {navigation}
+                  key={eachDeal._id}
                 />
               ))}
             </View>

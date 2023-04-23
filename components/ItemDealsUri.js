@@ -3,11 +3,14 @@ import React from 'react'
 import {COLOR, ICON} from '../contants/Themes'
 
 const ItemDealsUri = (props) => {
-    const {deals} = props
+    const {deals, navigation, isMarginRight} = props
     const {name, weight, price, image,} = deals
     const {onPress} = props
+    const startCartDetail = () => {
+      navigation.navigate('CartDetail', {id: deals._id})
+    }
   return (
-    <TouchableOpacity onPress={() => console.log('abcd')}>
+    <TouchableOpacity onPress={() => startCartDetail()}>
       <View
         style={{
           width: 164,
@@ -20,7 +23,8 @@ const ItemDealsUri = (props) => {
           shadowRadius: 3,
           elevation: 13,
           paddingVertical: 15,
-          marginBottom: 18
+          marginBottom: 18,
+          marginRight: isMarginRight ? 20 : 0
         }}>
         <View
           style={{
