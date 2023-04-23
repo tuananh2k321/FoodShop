@@ -1,31 +1,48 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ToastAndroid, TouchableOpacity, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { isValidEmpty, isValidPass } from '../components/Isvalidation'
-const windowHeight = Dimensions.get('window').height
-const Signpass = ({ navigation }) => {
+import AxiosInstance from '../contants/AxiosIntance.js'
+
+const windowHeight = Dimensions.get('window').height;
+const Signpass = (props) => {
+  const { route, navigation } = props;
+  const [password, setPassword] = useState("");
+  const rawPhoneNumber = route.params.phoneNumber.substr(3);
+  const phoneNumber =  rawPhoneNumber;
+  const name = route.params.name;
+  console.log("phoneNumber", phoneNumber);
+  console.log("name", name);
+
   //HIDDEN or SHOW
-  const [isPass1, setIspass1] = useState(true)
-  const [isPass2, setIspass2] = useState(true)
-
+  const [isPass1, setIspass1] = useState(true);
+  const [isPass2, setIspass2] = useState(true);
   // VALIDATE
-  const [errorPass1, setErrorPass1] = useState('')
-  const [errorPass2, setErrorPass2] = useState('')
-  const [validatePass1, setValidatePass1] = useState('')
-  const [validatePass2, setValidatePass2] = useState('')
+  const [errorPass1, setErrorPass1] = useState('');
+  const [errorPass2, setErrorPass2] = useState('');
+  const [validatePass1, setValidatePass1] = useState('');
+  const [validatePass2, setValidatePass2] = useState('');
 
-  const isValidationOK = () => isValidEmpty(validatePass1) && isValidEmpty(validatePass2)
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState('');
+  const [gender, setGender] = useState(true);
+  const [dob, setdob] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [role, setRole] = useState('');
+  const [createAt, setCreateAt] = useState('');
+
+  const isValidationOK = () => isValidEmpty(validatePass1) && isValidEmpty(validatePass2);
 
   const onRegister = async () => {
     try {
       const response = await AxiosInstance().post("/user/api/register",
-        { phoneNumer: phoneNumer, password: password, name: name });//variable(mail password) chuyen len API
+        { phoneNumber: phoneNumber, password: password, name: name , email, address, gender, dob, avatar, role, createAt});//variable(mail password) chuyen len API
       console.log(response);
       if (response.result == true) {
-        ToastAndroid.show("Register Success", ToastAndroid.SHORT);
+        ToastAndroid.show("Register Success", ToastAndroid.SHORT, ToastAndroid.CENTER,);
         navigation.navigate('Login');
       } else {
-        ToastAndroid.show("Register Failed", ToastAndroid.SHORT);
+        ToastAndroid.show("Register Failed", ToastAndroid.SHORT, ToastAndroid.CENTER,);
       }
     } catch (e) {
       console.log(e)
@@ -64,8 +81,13 @@ const Signpass = ({ navigation }) => {
             style={styles.lock}
             source={require('../assets/img/iconLock.png')}
           />
-          <TextInput style={styles.namsurname} placeholder="Password" secureTextEntry={isPass1}
+          <TextInput
+            value={password}
+            style={styles.namsurname}
+            placeholder="Password"
+            secureTextEntry={isPass1}
             onChangeText={(text) => {
+              setPassword(text)
               setValidatePass1(text)
               if (isValidPass(text) == false) {
                 setErrorPass1('Mật khẩu phải lớn hơn 7 kí tự')
