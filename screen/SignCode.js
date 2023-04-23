@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, ToastAndroid, Pressable, Dimensions, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { COLOR } from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
@@ -10,36 +10,24 @@ const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const SignCode = (props) => {
   const { route, navigation } = props;
-
-
-  const rawPhoneNumber = route.params.phoneNumber.substr(1, 10)
+  const rawPhoneNumber = route.params.phoneNumber.substr(4);
   const phoneNumber = "+84" + rawPhoneNumber;
-  console.log("phoneNumber", phoneNumber)
+  const name = route.params.name;
+  const [errorCode, setErrorCode] = useState('');
+  const [otpCode, setOtpCode] = useState('');
+  const isValidationOK = () => isValidEmpty(otpCode);
 
-  const [errorCode, setErrorCode] = useState('')
-  const [code, setCode] = useState('')
-  const isValidationOK = () => isValidEmpty(code)
-
-
-  const onVerifyPhone = async () => {
+  const onVerifyOTP = async () => {
     try {
-      console.log("phoneNumber  Ne0330", phoneNumber)
-
-      const response = await AxiosInstance().post("user/api/verify-phone", { phoneNumber: phoneNumber });
-      console.log("response", response)
+      const response = await AxiosInstance().post("user/api/verifyOTP", { phoneNumber: phoneNumber, otpCode: otpCode });
       if (response.result) {
-        //setIsLoading(false);
-        if (code == response.result.data.verification_code) {
-          Alert.alert("Success", "Sign Up Success");
-          navigation.navigate("Signpass")
-        } else {
-          Alert.alert("Error !", "Wrong code");
-        }
+        ToastAndroid.show("Verify Success ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+        navigation.navigate("Signpass", { phoneNumber: phoneNumber, name: name })
       } else {
-        Alert.alert("Error", "Could not sign up");
+        ToastAndroid.show("Verify Failed ! \n Please check your code", ToastAndroid.SHORT, ToastAndroid.CENTER);
       }
     } catch (error) {
-      ToastAndroid.show("Verify Failed \n Please check your code", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      ToastAndroid.show("ERROR VERIFY !!!", ToastAndroid.SHORT, ToastAndroid.CENTER);
     }
   }
 
@@ -109,7 +97,7 @@ const SignCode = (props) => {
 
           <OTPInputView
             style={{ width: '80%', height: 50 }}
-            pinCount={5}
+            pinCount={6}
             // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
             // onCodeChanged = {code => { this.setState({code})}}
             autoFocusOnLoad
@@ -128,10 +116,10 @@ const SignCode = (props) => {
               borderBottomWidth: 3,
             }}
             placeholderTextColor={{ backgroundColor: 'red' }}
-            onCodeFilled={(code) => {
-              console.log(`Code is ${code}, you are good to go!`);
-              setCode(code)
-              if (isValidEmpty(code) == false) {
+            onCodeFilled={(otpCode) => {
+              console.log(`Code is ${otpCode}, you are good to go!`);
+              setOtpCode(otpCode)
+              if (isValidEmpty(otpCode) == false) {
                 setErrorCode('Không được để trống')
               } else {
                 setErrorCode('')
@@ -145,7 +133,7 @@ const SignCode = (props) => {
           <View style={{ marginTop: 50 }}>
             <UIBtnPrimary title="Sign Up"
               // onPress={() => navigation.navigate('Login')}
-              onPress={onVerifyPhone}
+              onPress={onVerifyOTP}
               disable={isValidationOK() == false}
             />
           </View>

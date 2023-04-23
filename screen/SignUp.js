@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ToastAndroid,Dimensions, TextInput, TouchableOpacity } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { COLOR } from '../contants/Themes.js'
 import UIBtnPrimary from '../components/UIBtnPrimary'
@@ -9,6 +9,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { isValidEmpty, isValidPhone } from '../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
 import auth from '@react-native-firebase/auth'
+import AxiosInstance from '../contants/AxiosIntance';
 
 const SignUp = (props) => {
   const { navigation } = props
@@ -28,12 +29,13 @@ const SignUp = (props) => {
   }, []);
 
   async function signInWithPhoneNumber(phoneNumber) {
-    const confirmation = await auth().signInWithPhoneNumber('+84 '+phoneNumber);
-      setConfirm(confirmation);
-      console.log(confirmation)
-    }
+    const confirmation = await auth().signInWithPhoneNumber('+84 ' + phoneNumber);
+    setConfirm(confirmation);
+    console.log(confirmation)
+  }
 
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [name, setName] = useState('')
   const phoneInput = useRef(null);
 
   const [errorPass1, setErrorPass1] = useState('')
@@ -43,23 +45,19 @@ const SignUp = (props) => {
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
   const onSendOTP = async () => {
     try {
-      console.log("phoneNumber  Ne0330", phoneNumber)
+      console.log("phoneNumberrrrrrrrrrr", phoneNumber)
 
-      const response = await AxiosInstance().post("user/api/verify-phone", { phoneNumber: phoneNumber });
+      const response = await AxiosInstance().post("user/api/sendOTP", { phoneNumber: phoneNumber });
       console.log("response", response)
       if (response.result) {
-        //setIsLoading(false);
-        if (code == response.result.data.verification_code) {
-          Alert.alert("Success", "Sign Up Success");
-          navigation.navigate("Signpass")
-        } else {
-          Alert.alert("Error !", "Wrong code");
-        }
+        
+        navigation.navigate("SignCode",{phoneNumber:phoneNumber,name:name})
+       
       } else {
         Alert.alert("Error", "Could not sign up");
       }
     } catch (error) {
-      ToastAndroid.show("Verify Failed \n Please check your code", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      ToastAndroid.show("Login Failed", ToastAndroid.SHORT, ToastAndroid.CENTER,);
     }
   }
   return (
@@ -109,9 +107,11 @@ const SignUp = (props) => {
                 paddingLeft: 30,
                 marginBottom: 5,
               }}
+              value={name}
               placeholder="Name Surname"
               placeholderTextColor="#AC8E71"
               onChangeText={text => {
+                setName(text)
                 setValidatePass1(text);
                 if (isValidEmpty(text) == false) {
                   setErrorPass1('không được để trống');
@@ -119,9 +119,6 @@ const SignUp = (props) => {
                   setErrorPass1('');
                 }
               }}></TextInput>
-
-
-
             <Text style={{ color: 'red', textAlign: 'left' }}>
               {errorPass1}
             </Text>
@@ -129,34 +126,34 @@ const SignUp = (props) => {
           </View>
 
 
-            <View style={{ width: '100%' }}>
-              <PhoneInput
-                ref={phoneInput}
-                defaultValue={phoneNumber}
-                defaultCode="VN"
-                layout="first"
-                withShadow
-                autoFocus
-                containerStyle={styles.phoneNumberView}
-                placeholderTextColor="#AC8E71"
+          <View style={{ width: '100%' }}>
+            <PhoneInput
+              ref={phoneInput}
+              defaultValue={phoneNumber}
+              defaultCode="VN"
+              layout="first"
+              withShadow
+              autoFocus
+              containerStyle={styles.phoneNumberView}
+              placeholderTextColor="#AC8E71"
 
-                textContainerStyle={{ paddingVertical: 0 }}
-                onChangeFormattedText={text => {
-                  setPhoneNumber(text);
-                }}
-                onChangeText={text => {
-                  setValidatePass2(text);
-                  if (isValidPhone(text) == false) {
-                    setErrorPass2('phải đủ 10 số');
-                  } else {
-                    setErrorPass2('');
-                  }
-                }}
-              />
-            </View>
-            <Text style={{ color: 'red' }}>{errorPass2}</Text>
+              textContainerStyle={{ paddingVertical: 0 }}
+              onChangeFormattedText={text => {
+                setPhoneNumber(text);
+              }}
+              onChangeText={text => {
+                setValidatePass2(text);
+                if (isValidPhone(text) == false) {
+                  setErrorPass2('phải đủ 10 số');
+                } else {
+                  setErrorPass2('');
+                }
+              }}
+            />
+          </View>
+          <Text style={{ color: 'red' }}>{errorPass2}</Text>
 
- 
+
 
           <Text
             style={{
@@ -174,12 +171,10 @@ const SignUp = (props) => {
           <UIBtnPrimary
             title="Next"
             disable={isValidationOK() == false}
-            onPress={ () => {
+            onPress={
               // signInWithPhoneNumber(validatePass2)
-              console.log("number",validatePass2)
-              navigation.navigate('SignCode',{phoneNumber:validatePass2})
-
-            }}
+              onSendOTP
+            }
           />
 
           <View style={{ flexDirection: 'row' }}>
