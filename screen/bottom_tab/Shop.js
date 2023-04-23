@@ -9,24 +9,12 @@ import UserReducer from '../../redux/reducer/UserReducer'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 import ItemDemo from '../../components/ItemDemo'
 import Dialog from 'react-native-dialog'
+import { useEffect } from 'react'
+import ItemDealsUri from '../../components/ItemDealsUri'
 const windowWIdth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Shop = ({ navigation }) => {
-  const [visible, setVisible] = useState(true);
-  
-
-  const [refreshControl, setRefreshControl] = useState(false)
-  setTimeout(() => {
-    setVisible(false)
-  }, 3000); 
-  const list = useSelector(state => 
-    state.UserReducer.listUser
-  )
-  const isLoading = useSelector(state => 
-    state.UserReducer.isLoading
-  )
-  const disPatch = useDispatch()
   const [category, setCategory] = useState([
     {
       name: 'Fruits',
@@ -49,39 +37,69 @@ const Shop = ({ navigation }) => {
       backGround: '#FBC1BD'
     },
   ])
-  const [deals, setDeals] = useState([
-    {
-      name: 'Red Apple',
-      image: require('../../assets/img/tao.png'),
-      weight: "1kg,priceg",
-      price: '$ 4,99'
-    },
-    {
-      name: 'Orginal Banana',
-      image: require('../../assets/img/chuoi.png'),
-      weight: "1kg",
-      price: '$5,99'
-    },
-    {
-      name: 'strawberry',
-      image: require('../../assets/img/dau.png'),
-      weight: "1kg",
-      price: '$ 6'
-    },
-    {
-      name: 'Avocado Bowl',
-      image: require('../../assets/img/bo.png'),
-      weight: "1kg,priceg",
-      price: '$3,99'
-    },
 
-  ])
+  const [data, setData] = useState([])
+
+  const listFood = useSelector(state => 
+    state.FoodReducer.listFoodFruit
+  )
+  const isLoading = useSelector(state => 
+    state.FoodReducer.isLoading
+  )
+
+  const disPatch = useDispatch()
+  
+  useEffect(()  => {
+    const getListFoodFruit = async () => {
+      await disPatch({ type: 'GET_LIST_FOOD' })
+      if (listFood.result) {
+        setData(listFood.products)
+        // console.log('useEffect')
+        // console.log("Fruit ", listFood)
+        // console.log("Fruit ", isLoading)
+      }
+    };
+
+    getListFoodFruit()
+  }, [listFood.result])
+
+  const [refreshControl, setRefreshControl] = useState(false)
+
+
+ 
+  // const [deals, setDeals] = useState([
+  //   {
+  //     name: 'Red Apple',
+  //     image: require('../../assets/img/tao.png'),
+  //     weight: "1kg,priceg",
+  //     price: '$ 4,99'
+  //   },
+  //   {
+  //     name: 'Orginal Banana',
+  //     image: require('../../assets/img/chuoi.png'),
+  //     weight: "1kg",
+  //     price: '$5,99'
+  //   },
+  //   {
+  //     name: 'strawberry',
+  //     image: require('../../assets/img/dau.png'),
+  //     weight: "1kg",
+  //     price: '$ 6'
+  //   },
+  //   {
+  //     name: 'Avocado Bowl',
+  //     image: require('../../assets/img/bo.png'),
+  //     weight: "1kg,priceg",
+  //     price: '$3,99'
+  //   },
+
+  // ])
   return (
     <ScrollView 
     
     showsVerticalScrollIndicator={false}
     >
-      <SafeAreaView style={{ flex: 1, padding: 15, backgroundColor: 'white' }}>
+      <SafeAreaView style={{ flex: 1, padding: 15, backgroundColor: 'white', height: windowHeight }}>
         {/* HEADER 1*/}
         <View
           style={{
@@ -225,45 +243,20 @@ const Shop = ({ navigation }) => {
 
               showsHorizontalScrollIndicator={false}
               horizontal
-              data={deals}
-              renderItem={({ item }) => <ItemDeals deals={item}
-                onPress={() => {
-                  navigation.navigate('CartDetail')
-
-                }}
+              data={data}
+              renderItem={({ item }) => <ItemDealsUri 
+                deals={item}
+                navigation = {navigation}
+                isMarginRight={true}
               />}
-              keyExtractor={eachDeal => eachDeal.name}
+              keyExtractor={eachDeal => eachDeal._id}
             />
           </View>
         </View>
-        <UIBtnPrimary
-          onPress={() => disPatch({ type: 'GET_LIST_USER' })}
-          title="Get List"
-        />
+        
 
-        <View
-          style={{
-            marginTop: 10,
-            marginBottom: 20,
-          }}>
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            data={list}
-            renderItem={({ item }) => <ItemDemo deals={item} />}
-            keyExtractor={eachDeal => eachDeal.name}
-          />
-        </View>
-        <Dialog.Container visible={visible} style={{}}>
-            <View
-              style={{
-                height: 150,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <ActivityIndicator size={80} color={COLOR.primary}></ActivityIndicator>
-            </View>
-          </Dialog.Container>
+        
+        
 
           <Dialog.Container visible={isLoading} style={{}}>
             <View

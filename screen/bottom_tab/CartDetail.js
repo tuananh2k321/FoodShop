@@ -1,11 +1,33 @@
 import { View, Image, Text, FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import ItemDeals from '../../components/ItemDeals'
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import AxiosIntance from '../../contants/AxiosIntance';
+import { COLOR } from '../../contants/Themes';
 
 
-const CartDetail = ({ navigation }) => {
+const CartDetail = (props) => {
   const [first, setfirst] = useState(0);
   const [addToFavorite, setaddToFavorite] = useState('')
+  const {route, navigation} = props
+  const {params} = route;
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    console.log(params.id)
+    const getDetail = async () => {
+      
+      const res = await AxiosIntance().get("product/api/"+params.id)
+      if (res.result) {
+        setData(res.products)
+        console.log(data)
+      }
+      
+     } 
+    getDetail()
+  }, [data.result])
+  
+
   const tru = () => {
 
     if (first > 0) {
@@ -55,22 +77,32 @@ const CartDetail = ({ navigation }) => {
         />
       </TouchableOpacity>
 
-      <Image
-        source={require('../../assets/img/ticon.png')}
-        style={magosheet.anh}
-      />
+      
+      
 
+      
       <Image
-        source={require('../../assets/img/twoaplo.png')}
-        style={magosheet.anh1}
-      />
+        source={{uri: data.image}}
+        style={{width: '100%', height: 300, resizeMode: 'cover', marginTop: 20}}
+        />
+      
+      <Text style={{
+        marginLeft: 20, 
+        fontSize: 25,
+        color: COLOR.primary,
+        marginBottom: 5,
+        marginTop: 20
+      }}>{data.name}</Text>
 
-      <Image
-        source={require('../../assets/img/omango.png')}
-        style={magosheet.anh3}
-      />
+      <Text style={{
+        marginLeft: 20, 
+        fontSize: 18,
+        color: COLOR.title,
+        marginBottom: 20
+      }}>{data.description}</Text>
 
       <View style={magosheet.iputcontainer}>
+      
         <View style={magosheet.soluong}>
           <TouchableOpacity style={magosheet.ipsl} onPress={tru}>
             <Text style={magosheet.ttru}>-</Text>
