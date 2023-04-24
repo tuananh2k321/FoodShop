@@ -1,66 +1,125 @@
-// import React from "react";
-// import {
-//   SafeAreaView,
-//   StyleSheet,
-//   Text,
-//   TouchableOpacity,
-//   View,
-// } from "react-native";
-// import BouncyCheckbox from "./lib/BouncyCheckbox";
-// import RNBounceable from "@freakycoder/react-native-bounceable";
 
-// const App = () => {
-//   let bouncyCheckboxRef: BouncyCheckbox | null = null;
-//   const [checkboxState, setCheckboxState] = React.useState(false);
+
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+const App = () => {
+  const [date, setDate] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const handleDateSelection = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setDate(formatDate(selectedDate));
+    }
+  };
+
+  const showDatepicker = () => {
+    setShowDatePicker(true);
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+      <View
+        style={{
+          height: 48,
+          backgroundColor: 'pink',
+          width: '100%',
+          paddingLeft: 30,
+          marginBottom: 5,
+          marginTop: 20,
+          borderWidth: 2,
+          borderColor: 'black',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          alignContent: 'center',
+          padding: 10,
+          flexDirection: 'row'
+        }}>
+        <TouchableOpacity
+          onPress={showDatePicker}
+        >
+          <Image source={require('../assets/icon/IconCalendar2.png')} />
+
+        </TouchableOpacity>
+       
+      </View>
+      <Text>
+          {date === null ? 'Date of birth' : date}
+        </Text>
+      <TouchableOpacity onPress={showDatepicker}>
+        <Text style={{ marginTop: 20 }}>Chọn ngày sinh</Text>
+      </TouchableOpacity>
+      {showDatePicker && (
+        <DateTimePicker
+          value={date ? new Date(date) : new Date()}
+          mode="date"
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          onChange={handleDateSelection}
+        />
+      )}
+    </View>
+  );
+};
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { View } from 'react-native';
+// import BouncyCheckbox from 'react-native-bouncy-checkbox';
+
+// const Example = () => {
+//   const [checkbox1, setCheckbox1] = useState(false);
+//   const [checkbox2, setCheckbox2] = useState(true);
+
+//   const handleCheckbox1 = () => {
+//     setCheckbox1(true);
+//     console.log("checkbox1",checkbox1)
+//     setCheckbox2(false);
+//     console.log("checkbox2",checkbox2)
+
+//   };
+
+//   const handleCheckbox2 = () => {
+//     setCheckbox1(false);
+//     console.log("checkbox11",checkbox1)
+//     setCheckbox2(true);
+//     console.log("checkbox22",checkbox2)
+
+//   };
 
 //   return (
-//     <SafeAreaView
-//       style={{
-//         flex: 1,
-//         alignItems: "center",
-//         justifyContent: "center",
-//       }}
-//     >
-//       <View
-//         style={{
-//           height: 30,
-//           width: 150,
-//           alignItems: "center",
-//           justifyContent: "center",
-//           borderRadius: 12,
-//           backgroundColor: checkboxState ? "#34eb83" : "#eb4034",
-//         }}
-//       >
-//         <Text
-//           style={{ color: "#fff" }}
-//         >{`Check Status: ${checkboxState.toString()}`}</Text>
-//       </View>
+//     <View>
 //       <BouncyCheckbox
-//         style={{ marginTop: 16 }}
-//         ref={(ref: any) => (bouncyCheckboxRef = ref)}
-//         isChecked={checkboxState}
-//         text="Synthetic Checkbox"
-//         disableBuiltInState
-//         onPress={() => setCheckboxState(!checkboxState)}
+//         isChecked={checkbox1}
+//         onPress={handleCheckbox1}
+//         text="Checkbox 1"
 //       />
-//       <RNBounceable
-//         style={{
-//           marginTop: 16,
-//           height: 50,
-//           width: "90%",
-//           backgroundColor: "#ffc484",
-//           borderRadius: 12,
-//           alignItems: "center",
-//           justifyContent: "center",
-//         }}
-//         onPress={() => bouncyCheckboxRef?.onPress()}
-//       >
-//         <Text style={{ color: "#fff" }}>Synthetic Checkbox Press</Text>
-//       </RNBounceable>
-//     </SafeAreaView>
+//       <BouncyCheckbox
+//         isChecked={checkbox2}
+//         onPress={handleCheckbox2}
+//         text="Checkbox 2"
+//       />
+//     </View>
 //   );
 // };
 
-// const styles = StyleSheet.create({});
-
-// export default App;
+// export default Example;

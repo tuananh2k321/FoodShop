@@ -57,7 +57,29 @@ const SignUp = (props) => {
         ToastAndroid.show("Could not sign up", ToastAndroid.SHORT, ToastAndroid.CENTER,);
       }
     } catch (error) {
-      ToastAndroid.show("Login Failed", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      ToastAndroid.show("Sign Up Failed", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+    }
+  }
+  const checkSignUp = async () => {
+    try {
+      console.log(phoneNumber)
+      let rawNumber =phoneNumber.substring(3)
+      console.log(rawNumber)
+      setPhoneNumber(rawNumber)
+      console.log(phoneNumber)
+
+      const response = await AxiosInstance().get("user/api/search",{phoneNumber:phoneNumber})
+      console.log(response)
+      console.log(response.result)
+
+      if(response.result){
+      ToastAndroid.show("Phone number has been registered ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+      }else{
+        onSendOTP();
+      }
+    } catch (error) {
+      ToastAndroid.show("Error Register ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+
     }
   }
   return (

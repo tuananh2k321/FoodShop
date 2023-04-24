@@ -9,9 +9,10 @@ const windowHeight = Dimensions.get('window').height;
 const windowWIdth = Dimensions.get('window').width;
 
 const Payment = (props) => {
+
+    const { navigation } = props;
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
-    const { navigation } = props;
     const Back = () => {
         navigation.pop(1)
     }

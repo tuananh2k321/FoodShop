@@ -17,7 +17,7 @@ import HistoryOrder from './screen/bottom_tab/AccountTabs/HistoryOrder';
 import EditProfile from './screen/bottom_tab/EditProfile'
 import SignCode from './screen/SignCode'
 import Maps from './screen//bottom_tab/Maps'
-import Test from './screen/Test'
+import Test from './screen/TestNo3'
 
 
 const Stack = createNativeStackNavigator();
@@ -38,19 +38,20 @@ const StackBegin = () => {
 const App = () => {
 
   return (
-    <Provider store={Redux.store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="StackBegin" screenOptions={{ headerShown: false }}>
+    <EditProfile></EditProfile>
+    // <Provider store={Redux.store}>
+    //   <NavigationContainer>
+    //     <Stack.Navigator initialRouteName="BottomTab" screenOptions={{ headerShown: false }}>
           
-          <Stack.Screen name="StackBegin" component={StackBegin} />
-          <Stack.Screen name="BottomTab" component={BottomTab} />
-          <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="Test" component={Test} />
+    //       <Stack.Screen name="StackBegin" component={StackBegin} />
+    //       <Stack.Screen name="BottomTab" component={BottomTab} />
+    //       <Stack.Screen name="EditProfile" component={EditProfile} />
+    //       <Stack.Screen name="Test" component={Test} />
       
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+    // </Provider>
 
 
   )

@@ -145,9 +145,7 @@ const Login = (props) => {
                 }
               }}
               placeholder={"••••••••"}
-
               value={password}
-
             />
             <Text style={{ color: 'red', textAlign: 'left' }}>{errorPass2}</Text>
             <TouchableOpacity
@@ -182,7 +180,7 @@ const Login = (props) => {
                     color: '#FF5E00',
                     paddingRight: 10,
                     fontWeight: '500',
-                    marginBottom: 10,
+                    marginBottom: 5,
                   },
                 ]}>
                 Forgot Password
@@ -206,13 +204,12 @@ const Login = (props) => {
             </TouchableOpacity>
 
             {/*  GOOGLE */}
-
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginTop: 20,
+                marginTop: 10,
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -224,7 +221,7 @@ const Login = (props) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Image
+                <Image style={styles.iconSocial}
                   source={require('../assets/icon/icons8-google-48.png')}
                 />
                 <Text>Sign in with google</Text>
@@ -241,6 +238,7 @@ const Login = (props) => {
                   shadowColor: '#171717',
                 }}>
                 <Image
+                  style={styles.iconSocial}
                   source={require('../assets/icon/icons8-facebook-48.png')}
                 />
                 <Text>Sign in with facebook</Text>
@@ -297,7 +295,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 340,
-    height: 340,
+    height: 320,
     top: -50,
     marginBottom: -40
 
@@ -314,7 +312,7 @@ const styles = StyleSheet.create({
     width: windowWIdth - 40,
     height: 48,
     borderRadius: 5,
-    marginTop: 13,
+    marginTop: 10,
     paddingLeft: 27
   },
   visible: {
@@ -334,7 +332,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 5,
   },
 
   // DROPDOWN
@@ -368,6 +366,9 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'white'
   },
-
+  iconSocial: {
+    height: 30,
+    width: 30,
+  }
 
 })

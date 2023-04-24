@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions, TextInput, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, DatePickerIOS, Text, View, Image, Platform, Pressable, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { COLOR } from '../../contants/Themes.js'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
@@ -9,62 +9,17 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { isValidEmpty, isValidPhone } from '../../components/Isvalidation'
 import PhoneInput from 'react-native-phone-number-input';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import AxiosInstance from '../../contants/AxiosIntance.js';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
-const local_data = [
-  {
-    value: '1',
 
-    image: {
-      uri: 'https://st.quantrimang.com/photos/image/2021/09/05/Co-Vietnam.png',
-    },
-  },
-  {
-    value: '2',
-
-    image: {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/285px-Flag_of_the_United_States_%28Pantone%29.svg.png',
-    },
-  },
-  {
-    value: '3',
-
-    image: {
-      uri: 'https://toidi.net/wp-content/uploads/2021/08/Flag_of_Russia.svg_.png',
-    },
-  },
-  {
-    value: '4',
-
-    image: {
-      uri: 'https://chinese.edu.vn/wp-content/uploads/2022/01/Co-Trung-Quoc.jpg',
-    },
-  },
-  {
-    value: '5',
-
-    image: {
-      uri: 'https://duhocchd.edu.vn/files/editor/images/co1.png',
-    },
-  },
-  {
-    value: '6',
-
-    image: {
-      uri: 'https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg',
-    },
-  },
-  {
-    value: '7',
-
-    image: {
-      uri: 'https://i1-dulich.vnecdn.net/2013/10/03/mexico-flag-1380785949.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=8enbzFMTa1HlDWaopKOrxw',
-    },
-  },
-];
 
 const SignUp = (props) => {
   const { navigation } = props
-  const [country, setCountry] = useState('1');
+  const [date, setDate] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [avatar, setAvatar] = useState(null)
 
   const [errorPass1, setErrorPass1] = useState('')
   const [errorPass2, setErrorPass2] = useState('')
@@ -76,6 +31,23 @@ const SignUp = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const phoneInput = useRef(null);
 
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const handleDateSelection = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setDate(formatDate(selectedDate));
+    }
+  };
+
+  const showDatepickerDialog = () => {
+    setShowDatePicker(true);
+  };
   const bothValidate = () => {
     if (validatePass1 == false && validatePass2 == false) {
       setValidatePass3(false)
@@ -83,7 +55,69 @@ const SignUp = (props) => {
       setValidatePass3(true)
     }
   }
+  const dialogImageChoose = () => {
+    return Alert.alert(
+      "Thông báo",
+      "Chọn phương thức lấy ảnh",
+      [
+        {
+          text: "Chụp ảnh ",
+          onPress: () => {
+            capture()
+          },
+        },
 
+        {
+          text: "Tải ảnh lên",
+          onPress: () => {
+            getImageLibrary()
+          },
+        },
+        {
+          text: "Hủy",
+        },
+      ]
+    );
+  };
+  const capture = async () => {
+    const result = await launchCamera();
+    console.log(result.assets[0].uri);
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'image/jpeg',
+      name: 'image.jpg',
+    });
+
+    const response = await AxiosInstance("multipart/form-data").post('/product/upload-image', formdata);
+    console.log(response.link);
+    if (response.result == true) {
+      setAvatar(response.link);
+      ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+    }
+  }
+  const getImageLibrary = async () => {
+    const result = await launchImageLibrary();
+    console.log(result.assets[0].uri);
+    const formdata = new FormData();
+    formdata.append('image', {
+      uri: result.assets[0].uri,
+      type: 'image/jpeg',
+      name: 'image.jpg',
+    });
+    const response = await AxiosInstance("multipart/form-data").post('/product/upload-image', formdata);
+    console.log(response.link);
+    if (response.result == true) {
+      setAvatar(response.link);
+      ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+    }
+    else {
+      ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+    }
+  }
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <SafeAreaView
@@ -110,46 +144,68 @@ const SignUp = (props) => {
               color: COLOR.primary,
               lineHeight: 28.8,
               alignSelf: 'center',
-              marginBottom: 60
+              marginBottom: 15
             }}>
             Edit Profile
           </Text>
-          <View style={[styles.checkBox,{justifyContent:'flex-start'}]}>
-            <View style={styles.checkBox}>
+
+          <View style={[styles.itemGender, { justifyContent: 'flex-start', alignItems: 'center', marginBottom: 10 }]}>
+            <TouchableOpacity onPress={dialogImageChoose}>
+              {
+                !avatar
+                  ?
+                  (<Image style={styles.avatar} source={require('../../assets/img/Time_To_Shine.jpg')} />)
+                  :
+                  (<Image style={styles.avatar} source={{ uri: avatar }} />)
+              }
+            </TouchableOpacity>
+            <Text style={[styles.text, { marginLeft: 1, fontWeight: 'bold', marginLeft: 35 }]}>Gender :</Text>
+            <View style={[styles.checkBox, { marginLeft: 20 }]}>
               <BouncyCheckbox
                 size={20}
                 unfillColor="#FFFFFF"
                 isChecked={true}
                 fillColor='#f7941e'
                 style={{ borderRadius: 0 }} />
-              <Text style={styles.textNormal}>
+              <Text style={[styles.text, { marginLeft: 1 }]}>
                 Male
               </Text>
             </View>
-            <View style={[styles.checkBox,{marginLeft:50}]}>
+            <View style={[styles.checkBox, { marginLeft: 20 }]}>
               <BouncyCheckbox
                 size={20}
                 unfillColor="#FFFFFF"
                 isChecked={false}
-               
+
                 fillColor='#f7941e'
                 style={{ borderRadius: 0 }} />
-              <Text style={styles.textNormal}>
+              <Text style={[styles.text, { marginLeft: 1 }]}>
                 Female
               </Text>
             </View>
           </View>
 
+          <View style={[styles.item, { justifyContent: 'flex-start', alignItems: 'center' }]}
+          >
+            <TouchableOpacity onPress={showDatepickerDialog}>
+              <Image source={require('../../assets/icon/IconCalendar2.png')} />
+            </TouchableOpacity>
+            <Text style={styles.text}>
+              {date === null ? 'Date of birth' : date}
+            </Text>
+            {showDatePicker && (
+              <DateTimePicker
+                value={date ? new Date(date) : new Date()}
+                mode="date"
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                onChange={handleDateSelection}
+              />
+            )}
+          </View>
           <View style={{ width: '100%', marginBottom: 10 }}>
             <TextInput
-              style={{
-                height: 48,
-                backgroundColor: '#F3F3F3',
-                width: '100%',
-                paddingLeft: 30,
-                marginBottom: 5,
-              }}
-              placeholder="Name Surname"
+              style={styles.item}
+              placeholder="Full Name"
               placeholderTextColor="#AC8E71"
               onChangeText={text => {
                 setValidatePass1(text);
@@ -159,10 +215,6 @@ const SignUp = (props) => {
                   setErrorPass1('');
                 }
               }} />
-
-
-
-
             <Text style={{ color: 'red', textAlign: 'left' }}>
               {errorPass1}
             </Text>
@@ -197,43 +249,23 @@ const SignUp = (props) => {
 
           </View>
 
+
           <TextInput
-            style={{
-              height: 48,
-              backgroundColor: '#F3F3F3',
-              width: '100%',
-              paddingLeft: 30,
-              marginBottom: 5,
-              marginTop: 20,
-            }}
+            style={styles.item}
             placeholder="Email"
             placeholderTextColor="#AC8E71"
             onChangeText={text => {
               setValidatePass1(text);
-              if (isValidEmpty(text) == false) {
-                setErrorPass1('Please fill the field');
-              } else {
-                setErrorPass1('');
-              }
+
             }} />
+
           <TextInput
-            style={{
-              height: 48,
-              backgroundColor: '#F3F3F3',
-              width: '100%',
-              paddingLeft: 30,
-              marginTop: 20,
-              marginBottom: 5,
-            }}
+            style={styles.item}
             placeholder="Address"
             placeholderTextColor="#AC8E71"
             onChangeText={text => {
               setValidatePass1(text);
-              if (isValidEmpty(text) == false) {
-                setErrorPass1('Please fill the field');
-              } else {
-                setErrorPass1('');
-              }
+
             }} />
 
           <View style={{ position: 'absolute', bottom: 0 }}>
@@ -242,8 +274,6 @@ const SignUp = (props) => {
               disable={isValidationOK() == false}
             />
           </View>
-
-
         </View>
       </SafeAreaView>
     </KeyboardAwareScrollView>
@@ -281,10 +311,41 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'white'
   },
-  checkBox: {
+
+  item: {
+    height: 48,
+    backgroundColor: '#F3F3F3',
+    width: '100%',
+    paddingLeft: 30,
+    marginBottom: 5,
+    marginTop: 18,
     flexDirection: 'row',
-    borderColor:'black',
-    borderWidth:1
-},
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  text: {
+    color: '#AC8E71',
+    marginLeft: 20,
+  },
+  checkBox: {
+    flexDirection: 'row'
+  },
+  avatar: {
+    borderRadius: 100,
+    height: 70, width: 70,
+  },
+  itemGender: {
+    flexDirection: 'row',
+
+    width: '100%',
+
+  },
 })
 
