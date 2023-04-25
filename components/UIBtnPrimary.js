@@ -12,6 +12,8 @@ const UIBtnPrimary = (props) => {
       borderRadius: 30,
       backgroundColor: COLOR.primary,
       justifyContent: 'center',
+      borderWidth:2,
+      borderColor:'black'
     }}
       onPress={onPress}
       disabled={disable}>

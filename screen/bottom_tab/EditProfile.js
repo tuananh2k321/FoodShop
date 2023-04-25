@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, DatePickerIOS, Text, View, Image, Platform, Pressable, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, Platform, ToastAndroid, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { COLOR } from '../../contants/Themes.js'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
@@ -16,10 +16,21 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
 const SignUp = (props) => {
-  const { navigation } = props
-  const [date, setDate] = useState(null);
+  const [dob, setdob] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const { navigation } = props
   const [avatar, setAvatar] = useState(null)
+
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+
+  const [address, setAddress] = useState('')
+  const [gender, setGender] = useState(true);
+  const [role, setRole] = useState('');
+  const phoneInput = useRef(null);
 
   const [errorPass1, setErrorPass1] = useState('')
   const [errorPass2, setErrorPass2] = useState('')
@@ -28,8 +39,7 @@ const SignUp = (props) => {
   const [validatePass2, setValidatePass2] = useState('')
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
 
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const phoneInput = useRef(null);
+
 
   const formatDate = (date) => {
     const day = date.getDate();
@@ -41,7 +51,7 @@ const SignUp = (props) => {
   const handleDateSelection = (event, selectedDate) => {
     setShowDatePicker(false);
     if (selectedDate) {
-      setDate(formatDate(selectedDate));
+      setdob(formatDate(selectedDate));
     }
   };
 
@@ -89,14 +99,14 @@ const SignUp = (props) => {
       name: 'image.jpg',
     });
 
-    const response = await AxiosInstance("multipart/form-data").post('/product/upload-image', formdata);
+    const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
     console.log(response.link);
     if (response.result == true) {
       setAvatar(response.link);
-      ToastAndroid.show("Upload ảnh thành công", ToastAndroid.SHORT);
+      ToastAndroid.show("Upload Image Success", ToastAndroid.SHORT);
     }
     else {
-      ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
+      ToastAndroid.show("Upload Image Failed", ToastAndroid.SHORT);
     }
   }
   const getImageLibrary = async () => {
@@ -108,7 +118,7 @@ const SignUp = (props) => {
       type: 'image/jpeg',
       name: 'image.jpg',
     });
-    const response = await AxiosInstance("multipart/form-data").post('/product/upload-image', formdata);
+    const response = await AxiosInstance("multipart/form-data").post('user/api/upload-avatar', formdata);
     console.log(response.link);
     if (response.result == true) {
       setAvatar(response.link);
@@ -117,6 +127,28 @@ const SignUp = (props) => {
     else {
       ToastAndroid.show("Upload ảnh thất bại", ToastAndroid.SHORT);
     }
+  }
+  const updateProfile = async () => {
+    let rawNumber = phoneNumber.substring(3)
+    console.log("----------------->", avatar, dob, name, phoneNumber, email, address)
+    console.log(rawNumber)
+    try {
+      const response = await AxiosInstance().put('user/api/update',
+        {
+          phoneNumber: rawNumber, password: password, name: name,
+          email: email, address: address, gender: gender, dob: dob, avatar: avatar, role: role
+        })
+      console.log(response)
+      if (response.result) {
+        ToastAndroid.show("Update Success", ToastAndroid.SHORT, ToastAndroid.CENTER);
+      } else {
+        ToastAndroid.show("Update Failed", ToastAndroid.SHORT, ToastAndroid.CENTER);
+      }
+    } catch (error) {
+      ToastAndroid.show("Update ERROR SYS", ToastAndroid.SHORT, ToastAndroid.CENTER);
+
+    }
+
   }
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -191,11 +223,11 @@ const SignUp = (props) => {
               <Image source={require('../../assets/icon/IconCalendar2.png')} />
             </TouchableOpacity>
             <Text style={styles.text}>
-              {date === null ? 'Date of birth' : date}
+              {dob === null ? 'Date of birth' : dob}
             </Text>
             {showDatePicker && (
               <DateTimePicker
-                value={date ? new Date(date) : new Date()}
+                value={dob ? new Date(dob) : new Date()}
                 mode="date"
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                 onChange={handleDateSelection}
@@ -204,10 +236,14 @@ const SignUp = (props) => {
           </View>
           <View style={{ width: '100%', marginBottom: 10 }}>
             <TextInput
+              value={name}
               style={styles.item}
+              autoCapitalize={true}
+              autoCorrect={false}
               placeholder="Full Name"
               placeholderTextColor="#AC8E71"
-              onChangeText={text => {
+              onChangeText={(text) => {
+                setName(text)
                 setValidatePass1(text);
                 if (isValidEmpty(text) == false) {
                   setErrorPass1('Please fill the field');
@@ -237,6 +273,7 @@ const SignUp = (props) => {
                 setPhoneNumber(text);
               }}
               onChangeText={text => {
+                setPhoneNumber(text);
                 setValidatePass2(text);
                 if (isValidPhone(text) == false) {
                   setErrorPass2('phải đủ 10 số');
@@ -251,27 +288,32 @@ const SignUp = (props) => {
 
 
           <TextInput
+            value={email}
             style={styles.item}
             placeholder="Email"
             placeholderTextColor="#AC8E71"
             onChangeText={text => {
+              setEmail(text)
               setValidatePass1(text);
 
             }} />
 
           <TextInput
+            value={address}
             style={styles.item}
             placeholder="Address"
             placeholderTextColor="#AC8E71"
             onChangeText={text => {
+              setAddress(text)
               setValidatePass1(text);
 
             }} />
 
           <View style={{ position: 'absolute', bottom: 0 }}>
             <UIBtnPrimary
+              onPress={() => updateProfile()}
               title="Update Profile "
-              disable={isValidationOK() == false}
+            //disable={isValidationOK() == false}
             />
           </View>
         </View>
@@ -347,5 +389,6 @@ const styles = StyleSheet.create({
     width: '100%',
 
   },
+
 })
 
