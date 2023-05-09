@@ -41,7 +41,7 @@ const StackFavorites = () => {
 }
 const AccountTabs = () => {
   return (
-    <Stack.Navigator initialRouteName='EditProfile' screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName='Account' screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Order" component={Order} />
       <Stack.Screen name="OnGoing" component={OnGoing} />

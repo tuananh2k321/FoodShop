@@ -65,6 +65,7 @@ const Login = (props) => {
       let CorrectNumber = phoneNumber.substring(3)
       const response = await AxiosInstance().post("user/api/login",
         { phoneNumber: CorrectNumber, password: password });
+        console.log(response)
       if (response.result) {
         // await AsyncStorage.setItem("token", response.token);
         ToastAndroid.show("Login Success", ToastAndroid.SHORT);

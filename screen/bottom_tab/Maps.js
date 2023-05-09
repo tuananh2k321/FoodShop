@@ -4,7 +4,6 @@ import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'reac
 import MapView, { Marker } from 'react-native-maps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapViewDirections from 'react-native-maps-directions';
-
 const GOOGLE_MAPS_APIKEY = 'YOUR_API_KEY';
 import Geolocation from '@react-native-community/geolocation';
 export default function App(props) {

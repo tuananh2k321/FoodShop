@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, Platform, ToastAndroid, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { COLOR } from '../../contants/Themes.js'
 import UIBtnPrimary from '../../components/UIBtnPrimary'
 const windowWIdth = Dimensions.get('window').width;
@@ -16,11 +16,14 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
 const SignUp = (props) => {
+  const { route, navigation } = props;
+
+
   const [dob, setdob] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const [phoneNumber, setPhoneNumber] = useState('');
-  const { navigation } = props
+
   const [avatar, setAvatar] = useState(null)
 
   const [name, setName] = useState('')
@@ -32,13 +35,14 @@ const SignUp = (props) => {
   const [role, setRole] = useState('');
   const phoneInput = useRef(null);
 
+  const [verifiedEmail, setVerifiedEmail] = useState(true)
+
   const [errorPass1, setErrorPass1] = useState('')
   const [errorPass2, setErrorPass2] = useState('')
 
   const [validatePass1, setValidatePass1] = useState('')
   const [validatePass2, setValidatePass2] = useState('')
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
-
 
 
   const formatDate = (date) => {
@@ -150,6 +154,39 @@ const SignUp = (props) => {
     }
 
   }
+  const handleEmailSubmit = () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter an email address');
+    } else if (!validateEmail(email)) {
+      Alert.alert('Error', 'Please enter a valid email address');
+    } else {
+      onVerifyEmail()
+    }
+  };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const onVerifyEmail = async () => {
+    console.log(verifiedEmail)
+    try {
+      const response = await AxiosInstance().post("user/api/send-verification-code", { email: email });
+      if (response.result) {
+        ToastAndroid.show("Code has sent ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+        navigation.navigate("VerifyCodeEmail", { email: email })
+      } else {
+        ToastAndroid.show("Send Failed!", ToastAndroid.SHORT, ToastAndroid.CENTER);
+      }
+    } catch (error) {
+      ToastAndroid.show("ERROR SEND CODE !!!", ToastAndroid.SHORT, ToastAndroid.CENTER);
+    }
+  }
+
+  const getInfoUser = async () => {
+
+  }
+
+
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <SafeAreaView
@@ -287,17 +324,40 @@ const SignUp = (props) => {
           </View>
 
 
-          <TextInput
-            value={email}
-            style={styles.item}
-            placeholder="Email"
-            placeholderTextColor="#AC8E71"
-            onChangeText={text => {
-              setEmail(text)
-              setValidatePass1(text);
+          <View style={{ flexDirection: 'row' }}>
+            <TextInput
+              value={email}
+              style={[styles.item, { width: '80%' }]}
+              placeholder="Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholderTextColor="#AC8E71"
+              editable={!verifiedEmail}
+              onChangeText={text => {
+                setEmail(text)
+                //setValidatePass1(text);
 
-            }} />
+              }} />
+            <>
 
+              {
+                verifiedEmail == true
+                  ?
+                  (<TouchableOpacity
+                    style={[styles.btnVerifyEmail, { backgroundColor: '#66ff00' }]}>
+                    <Text style={styles.txtVerify}>Verified</Text>
+                  </TouchableOpacity>)
+                  :
+                  (<TouchableOpacity
+                    onPress={handleEmailSubmit}
+                    style={[styles.btnVerifyEmail, {}]}>
+                    <Text style={styles.txtVerify}>Unverified</Text>
+                  </TouchableOpacity>)
+              }
+            </>
+
+          </View>
           <TextInput
             value={address}
             style={styles.item}
@@ -369,6 +429,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    borderRadius: 10,
 
     elevation: 5,
   },
@@ -385,10 +446,36 @@ const styles = StyleSheet.create({
   },
   itemGender: {
     flexDirection: 'row',
-
     width: '100%',
 
   },
+  btnVerifyEmail: {
+    height: 48,
+    backgroundColor: '#ff5d00',
+    width: '20%',
+
+    marginBottom: 5,
+    marginTop: 18,
+    flexDirection: 'row',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+  txtVerify: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: 'black',
+  }
 
 })
 

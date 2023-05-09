@@ -260,7 +260,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics'
 
-    implementation 'com.facebook.android:facebook-android-sdk:11.1.0' 
+    implementation 'com.facebook.android:facebook-android-sdk:11.1.0'
+    implementation fileTree(dir: 'D:\\ZaloPay', include: ['*.aar', '*.jar'], exclude: [])
 
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
