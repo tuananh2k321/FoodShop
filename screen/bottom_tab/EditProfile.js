@@ -12,8 +12,9 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AxiosInstance from '../../contants/AxiosIntance.js';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-
-
+import BouncyCheckboxGroup, {
+  ICheckboxButton,
+} from "react-native-bouncy-checkbox-group";
 
 const SignUp = (props) => {
   const { route, navigation } = props;
@@ -35,7 +36,7 @@ const SignUp = (props) => {
   const [role, setRole] = useState('');
   const phoneInput = useRef(null);
 
-  const [verifiedEmail, setVerifiedEmail] = useState(true)
+  const [verifiedEmail, setVerifiedEmail] = useState(false)
 
   const [errorPass1, setErrorPass1] = useState('')
   const [errorPass2, setErrorPass2] = useState('')
@@ -44,7 +45,9 @@ const SignUp = (props) => {
   const [validatePass2, setValidatePass2] = useState('')
   const isValidationOK = () => isValidEmpty(validatePass1) == true && isValidEmpty(validatePass2) == true
 
-
+  const callBackSetVerified = () => {
+    setVerifiedEmail(true)
+  }
   const formatDate = (date) => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -173,7 +176,7 @@ const SignUp = (props) => {
       const response = await AxiosInstance().post("user/api/send-verification-code", { email: email });
       if (response.result) {
         ToastAndroid.show("Code has sent ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
-        navigation.navigate("VerifyCodeEmail", { email: email })
+        navigation.navigate("VerifyCodeEmail", { email: email, setVerifiedEmail })
       } else {
         ToastAndroid.show("Send Failed!", ToastAndroid.SHORT, ToastAndroid.CENTER);
       }
@@ -186,7 +189,19 @@ const SignUp = (props) => {
 
   }
 
+  const verticalStaticData = [
+    {
+      id: 0,
+      label: "Male"
 
+    },
+    {
+      id: 1,
+      label: "Female"
+
+    },
+
+  ];
   return (
     <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <SafeAreaView
@@ -217,7 +232,7 @@ const SignUp = (props) => {
             }}>
             Edit Profile
           </Text>
-
+ 
           <View style={[styles.itemGender, { justifyContent: 'flex-start', alignItems: 'center', marginBottom: 10 }]}>
             <TouchableOpacity onPress={dialogImageChoose}>
               {
@@ -233,7 +248,11 @@ const SignUp = (props) => {
               <BouncyCheckbox
                 size={20}
                 unfillColor="#FFFFFF"
-                isChecked={true}
+                isChecked={gender}
+                disableBuiltInState
+                onPress={(checked) => {
+                  setGender(!gender)
+                }}
                 fillColor='#f7941e'
                 style={{ borderRadius: 0 }} />
               <Text style={[styles.text, { marginLeft: 1 }]}>
@@ -244,8 +263,12 @@ const SignUp = (props) => {
               <BouncyCheckbox
                 size={20}
                 unfillColor="#FFFFFF"
-                isChecked={false}
-
+                isChecked={!gender}
+                // checked={gender}
+                disableBuiltInState
+                onPress={(checked) => {
+                  setGender(!gender)
+                }}
                 fillColor='#f7941e'
                 style={{ borderRadius: 0 }} />
               <Text style={[styles.text, { marginLeft: 1 }]}>

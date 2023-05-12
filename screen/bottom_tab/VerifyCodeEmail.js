@@ -22,6 +22,7 @@ const SignCode = (props) => {
       const response = await AxiosInstance().post("user/api/verify-email", { email: email, verifyCode: verifyCode });
       if (response.result) {
         ToastAndroid.show("Verify Success ", ToastAndroid.SHORT, ToastAndroid.CENTER,);
+        route.params.callBackSetVerified();
         navigation.navigate("EditProfile", {verifiedEmail :true })
       } else {
         ToastAndroid.show("Verify Failed ! \n Please check your code", ToastAndroid.SHORT, ToastAndroid.CENTER);

@@ -31,6 +31,7 @@
     "react-native": "0.70.6",
     "react-native-axios": "^0.17.1",
     "react-native-bouncy-checkbox": "^3.0.7",
+    "react-native-bouncy-checkbox-group": "^0.1.1",
     "react-native-date-picker": "^4.2.9",
     "react-native-datepicker": "^1.7.2",
     "react-native-dialog": "^9.3.0",
